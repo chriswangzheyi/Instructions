@@ -170,7 +170,7 @@
 	}
 
 
-**注意：@Document(collection="user") 直接对应mongodb的document名。**
+**注意：@Document(collection="user") 直接对应mongodb的collection名。**
 
 ---
 
