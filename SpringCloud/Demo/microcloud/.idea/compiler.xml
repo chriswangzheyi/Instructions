@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="microcloudconsumer80" />
+        <module name="microcloudconsumerfeign" />
+        <module name="microcloudconsumerhystrixdashboard" />
+        <module name="microcloudconsumerturbine" />
+        <module name="microcloudeureka7001" />
+        <module name="microcloudeureka7002" />
+        <module name="microcloudeureka7003" />
+        <module name="microcloudprovidercompany" />
+        <module name="microcloudproviderhystrix8001" />
+        <module name="microcloudsecurity" />
+        <module name="microcloudservice" />
+        <module name="mircocloud-provider-8001" />
+        <module name="mircocloudapi" />
+        <module name="mircocloudproviderdept8002" />
+        <module name="mircocloudproviderdept8003" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mircocloudproviderdept8001" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
