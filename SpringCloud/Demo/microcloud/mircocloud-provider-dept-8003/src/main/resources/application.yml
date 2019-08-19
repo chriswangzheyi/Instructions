@@ -1,0 +1,39 @@
+server:
+  port: 8003
+
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml    # mybatis配置文件所在路径
+  type-aliases-package: com.wzy.vo            # 定义所有操作类的别名所在包
+  mapper-locations:                                     # 所有的mapper映射文件
+  - classpath:mybatis/mapper/**/*.xml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/mldn8003           # 数据库连接地址
+    username: root                                  # 数据库用户名
+    password: root                            # 数据库连接密码
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                   # 数据库连接池的最小维持连接数    
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                  # 最大的连接数
+      max-wait-millis: 200                         # 等待连接获取的最大超时时间
+  application:
+    name:  microcloud-provider-dept
+
+
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://edmin:mldnjava@eureka-7001.com:7001/eureka,http://edmin:mldnjava@eureka-7002.com:7002/eureka,http://edmin:mldnjava@eureka-7003.com:7003/eureka
+  instance:
+    instance-id: dept-8003.com                     #在信息列表显示主机名称
+    prefer-ip-address: true                      # 访问路径变为ip地址
+
+
+info:
+  app.name: mldn-microcloud
+  company.name: www.mldn.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.verson$

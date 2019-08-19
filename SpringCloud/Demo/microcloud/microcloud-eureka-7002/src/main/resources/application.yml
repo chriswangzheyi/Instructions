@@ -1,0 +1,29 @@
+server:
+  port: 7002
+
+
+
+eureka: 
+  instance: # eureak实例定义
+    hostname: eureka-7002.com  # 定义Eureka实例所在的主机名称
+  client:
+    service-url:
+      defaultZone: http://edmin:mldnjava@eureka-7001.com:7001/eureka,http://edmin:mldnjava@eureka-7003.com:7003/eureka
+    fetch-registry: false  # 不注册Eureka自己
+    register-with-eureka: false
+
+
+
+security:
+  basic:
+    enabled: true                    #激活security
+  user:
+    name: edmin                       # 账号
+    password: mldnjava               # 密码
+
+
+spring:
+  application:
+    name: microcloud-eureka-7002
+
+
