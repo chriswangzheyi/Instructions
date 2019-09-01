@@ -8,6 +8,6 @@ import feign.auth.BasicAuthRequestInterceptor;
 public class FeignClientConfig {
 	@Bean
 	public BasicAuthRequestInterceptor getBasicAuthRequestInterceptor() {
-		return new BasicAuthRequestInterceptor("mldnjava", "hello");
+		return new BasicAuthRequestInterceptor("zdmin", "mldnjava");
 	}
 }

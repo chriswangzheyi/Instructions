@@ -24,6 +24,7 @@
         <module>microcloud-consumer-hystrix-dashboard</module>
         <module>microcloud-provider-company</module>
         <module>microcloud-consumer-turbine</module>
+        <module>microcloud-zuul-gateway-9501</module>
     </modules>
 
     <url>http://maven.apache.org</url>
