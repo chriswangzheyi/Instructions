@@ -17,6 +17,7 @@
         <module name="microcloudproviderhystrix8001" />
         <module name="microcloudsecurity" />
         <module name="microcloudservice" />
+        <module name="microcloudzuulgateway9501" />
         <module name="mircocloud-provider-8001" />
         <module name="mircocloudapi" />
         <module name="mircocloudproviderdept8002" />
@@ -24,6 +25,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="microcloudzuulgateway-9501" target="1.8" />
       <module name="mircocloudproviderdept8001" target="1.8" />
     </bytecodeTargetLevel>
   </component>

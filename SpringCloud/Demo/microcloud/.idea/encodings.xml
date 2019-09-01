@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microcloud-security" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microcloud-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mircocloud-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mircocloud-provider-dept-8001" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mircocloud-provider-dept-8002" charset="UTF-8" />
