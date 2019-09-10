@@ -22,6 +22,8 @@
     <ignored path="$PROJECT_DIR$/microcloud-consumer-turbine/target/" />
     <ignored path="$PROJECT_DIR$/microcloud-zuul-gateway/target/" />
     <ignored path="$PROJECT_DIR$/microcloud-zuul-gateway-9501/target/" />
+    <ignored path="$PROJECT_DIR$/microcloud-provider-upload-8201/target/" />
+    <ignored path="$PROJECT_DIR$/microcloud-consumer-upload/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,92 +33,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Eureka_7001_StartSpringCloudApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-eureka-7001/src/main/java/com/wzy/Eureka_7001_StartSpringCloudApplication.java">
+      <file leaf-file-name="ConsumerUploadController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/controller/ConsumerUploadController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Zuul_9501_StartSpringCloudApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/Zuul_9501_StartSpringCloudApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+            <state relative-caret-position="209">
+              <caret line="11" column="57" lean-forward="true" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeignClientConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-service/src/main/java/com/commons/config/FeignClientConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" lean-forward="true" selection-end-line="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeptProviderFallback.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/fallback/DeptProviderFallback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="18" lean-forward="true" selection-end-line="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1531#1592#0" expanded="true" />
+                <element signature="e#1616#1683#0" expanded="true" />
+                <element signature="e#1705#1789#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Consumer_80_StartSpringCloudApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-consumer-feign/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java">
+        <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dept_8001_StartSpringCloudApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mircocloud-provider-dept-8001/src/main/java/com/wzy/Dept_8001_StartSpringCloudApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IDeptClientServiceFallback.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-service/src/main/java/com/wzy/fallback/IDeptClientServiceFallback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IDeptClientService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-service/src/main/java/com/wzy/IDeptClientService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-32">
-              <caret selection-end-line="24" />
+            <state relative-caret-position="285">
+              <caret line="15" lean-forward="true" selection-end-line="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,11 +59,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Company_8101_StartSpringCloudApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcloud-provider-company/src/main/java/com/wzy/Company_8101_StartSpringCloudApplication.java">
+      <file leaf-file-name="upload.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/resources/templates/upload.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="285">
+              <caret line="15" column="7" lean-forward="true" selection-end-line="15" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="UploadRest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/java/com/wzy/rest/UploadRest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,20 +108,15 @@
       <find>getForback</find>
       <find>actu</find>
       <find>mappe</find>
-      <find>api</find>
       <find>turbine</find>
+      <find>api</find>
+      <find>microcloud-api</find>
+      <find>microcloud-service</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/src/main/java/com/wzy/rest/DeptRest.java" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/src/main/java/com/wzy/rest/DeptServiceImpl.java" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/src/main/java/com/wzy/service/impl/DeptServiceImpl.java" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/pom.xml" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/src/main/java/com/wzy/service/IDeptService.java" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8002/src/main/java/com/wzy/Dept_8002_StartSpringCloudApplication.java" />
-        <option value="$PROJECT_DIR$/mircocloud-provider-dept-8003/pom.xml" />
         <option value="$PROJECT_DIR$/mircocloud-provider-dept-8003/src/main/java/com/wzy/Dept_8003_StartSpringCloudApplication.java" />
         <option value="$PROJECT_DIR$/mircocloud-provider-dept-8003/src/main/java/com/wzy/rest/DeptRest.java" />
         <option value="$PROJECT_DIR$/mircocloud-provider-dept-8003/src/main/resources/application.yml" />
@@ -193,7 +137,6 @@
         <option value="$PROJECT_DIR$/microcloud-provider-hystrix-8001/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/microcloud-consumer-feign/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/microcloud-consumer-feign/pom.xml" />
-        <option value="$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/pom.xml" />
         <option value="$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/src/main/java/com/wzy/HystrixDashboardApplication_9001.java" />
         <option value="$PROJECT_DIR$/microcloud-provider-company/pom.xml" />
         <option value="$PROJECT_DIR$/mircocloud-api/src/main/java/com/wzy/vo/Company.java" />
@@ -204,7 +147,6 @@
         <option value="$PROJECT_DIR$/microcloud-consumer-turbine/src/main/java/TurbineApplication_9101.java" />
         <option value="$PROJECT_DIR$/microcloud-consumer-turbine/pom.xml" />
         <option value="$PROJECT_DIR$/microcloud-consumer-turbine/src/main/java/com/wzy/TurbineApplication_9101.java" />
-        <option value="$PROJECT_DIR$/microcloud-security/src/main/java/com/wzy/config/WebSecurityConfig.java" />
         <option value="$PROJECT_DIR$/microcloud-zuul-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/microcloud-provider-hystrix-8001/pom.xml" />
@@ -213,10 +155,19 @@
         <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/filter/AuthorizedRequestFilter.java" />
         <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/config/ZuulConfig.java" />
         <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/pom.xml" />
-        <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/microcloud-service/src/main/java/com/wzy/IDeptClientService.java" />
         <option value="$PROJECT_DIR$/microcloud-service/src/main/java/com/commons/config/FeignClientConfig.java" />
         <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/fallback/DeptProviderFallback.java" />
+        <option value="$PROJECT_DIR$/microcloud-provider-upload-8201/pom.xml" />
+        <option value="$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/java/com/wzy/Upload_8201_StartSpringCloudApplication.java" />
+        <option value="$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/java/com/wzy/rest/UploadRest.java" />
+        <option value="$PROJECT_DIR$/microcloud-security/src/main/java/com/wzy/config/WebSecurityConfig.java" />
+        <option value="$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/pom.xml" />
+        <option value="$PROJECT_DIR$/microcloud-consumer-upload/pom.xml" />
+        <option value="$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/config/RestConfig.java" />
+        <option value="$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/controller/ConsumerUploadController.java" />
+        <option value="$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java" />
       </list>
     </option>
   </component>
@@ -242,9 +193,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="611" />
-    <option name="y" value="187" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="472" />
+    <option name="y" value="146" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -255,8 +206,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,25 +216,25 @@
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -293,7 +242,7 @@
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -302,7 +251,99 @@
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="wzy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="wzy" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-consumer-upload" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -312,18 +353,20 @@
             <path>
               <item name="microcloud" type="b2602c69:ProjectViewProjectNode" />
               <item name="microcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="microcloud-zuul-gateway-9501" type="462c0819:PsiDirectoryNode" />
+              <item name="microcloud-provider-upload-8201" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="wzy" type="462c0819:PsiDirectoryNode" />
-              <item name="fallback" type="462c0819:PsiDirectoryNode" />
+              <item name="rest" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -345,11 +388,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\eclipse-workspace\microcloud\microcloud-zuul-gateway-9501\src\main\java\com\wzy\fallback" />
-      <recent name="E:\eclipse-workspace\microcloud\microcloud-zuul-gateway-9501\src\main\java\com\wzy\config" />
-      <recent name="E:\eclipse-workspace\microcloud\microcloud-zuul-gateway-9501\src\main\java\com\wzy\filter" />
-      <recent name="E:\eclipse-workspace\microcloud\microcloud-zuul-gateway-9501\src\main\java" />
-      <recent name="E:\eclipse-workspace\microcloud\microcloud-zuul-gateway-9501\src\main\resources" />
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-consumer-upload\src\main\java\com\wzy" />
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-consumer-upload\src\main\view" />
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-consumer-upload\src\main\resources" />
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-provider-upload-8201\src\main\java\com\wzy\rest" />
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-provider-upload-8201\src\main\java\com\wzy" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wzy" />
@@ -358,6 +401,7 @@
       <recent name="com.wzy.service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\eclipse-workspace\microcloud\microcloud-consumer-upload\src\main\resources" />
       <recent name="E:\eclipse-workspace\microcloud\microcloud-consumer-hystrix-dashboard\src\main\java" />
     </key>
   </component>
@@ -373,10 +417,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Dept_8001_StartSpringCloudApplication">
-    <configuration name="Company_8101_StartSpringCloudApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wzy.Company_8101_StartSpringCloudApplication" />
-      <module name="microcloudprovidercompany" />
+  <component name="RunManager" selected="Application.Consumer_80_StartSpringCloudApplication (1)">
+    <configuration name="Consumer_80_StartSpringCloudApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wzy.Consumer_80_StartSpringCloudApplication" />
+      <module name="microcloudconsumerupload" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -407,9 +451,9 @@
         </pattern>
       </extension>
     </configuration>
-    <configuration name="TurbineApplication_9101" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wzy.TurbineApplication_9101" />
-      <module name="microcloudconsumerturbine" />
+    <configuration name="Upload_8201_StartSpringCloudApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wzy.Upload_8201_StartSpringCloudApplication" />
+      <module name="microcloudproviderupload8201" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -487,18 +531,18 @@
       <item itemvalue="Spring Boot.Eureka_7003_StartSpringCloudApplication" />
       <item itemvalue="Spring Boot.Eureka_7001_StartSpringCloudApplication" />
       <item itemvalue="Application.Consumer_80_StartSpringCloudApplication" />
-      <item itemvalue="Application.TurbineApplication_9101" />
       <item itemvalue="Application.Zuul_9501_StartSpringCloudApplication" />
-      <item itemvalue="Application.Company_8101_StartSpringCloudApplication" />
       <item itemvalue="Application.Dept_8001_StartSpringCloudApplication" />
+      <item itemvalue="Application.Upload_8201_StartSpringCloudApplication" />
+      <item itemvalue="Application.Consumer_80_StartSpringCloudApplication (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Consumer_80_StartSpringCloudApplication (1)" />
+        <item itemvalue="Application.Zuul_9501_StartSpringCloudApplication" />
+        <item itemvalue="Application.Upload_8201_StartSpringCloudApplication" />
         <item itemvalue="Application.Dept_8001_StartSpringCloudApplication" />
         <item itemvalue="Application.Consumer_80_StartSpringCloudApplication" />
-        <item itemvalue="Application.Zuul_9501_StartSpringCloudApplication" />
-        <item itemvalue="Application.Company_8101_StartSpringCloudApplication" />
-        <item itemvalue="Application.TurbineApplication_9101" />
       </list>
     </recent_temporary>
   </component>
@@ -536,12 +580,15 @@
       <workItem from="1567152858200" duration="749000" />
       <workItem from="1567253645567" duration="4173000" />
       <workItem from="1567304650907" duration="690000" />
-      <workItem from="1567320421844" duration="4690000" />
+      <workItem from="1567320421844" duration="5405000" />
+      <workItem from="1568018237062" duration="5410000" />
+      <workItem from="1568029257986" duration="713000" />
+      <workItem from="1568102096443" duration="6970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88025000" />
+    <option name="totallyTimeSpent" value="101833000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -567,7 +614,7 @@
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3300866" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32900432" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49946696" weight="0.32900432" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25053304" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22707888" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="right" id="BPMNPalette" order="11" />
@@ -594,73 +641,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-feign/src/main/java/com/wzy/config/RestConfig.java" />
-    <entry file="file://$PROJECT_DIR$/microcloud-eureka-7002/src/main/java/com/wzy/Eureka_7002_StartSpringCloudApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mircocloud-provider-dept-8001/src/main/java/com/wzy/service/impl/DeptServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="18" lean-forward="true" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mircocloud-provider-dept-8001/src/main/java/com/wzy/service/IDeptService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mircocloud-provider-dept-8001/src/main/java/com/wzy/dao/IDeptDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-80/src/main/java/com/wzy/config/RestConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="27" selection-start-line="27" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-80/src/main/java/com/wzy/controller/ConsumerDeptController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-209">
-          <caret line="18" selection-start-line="18" selection-end-line="20" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-feign/src/main/java/com/commons/config/MyLoadBalanceConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mircocloud-provider-dept-8001/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" selection-start-line="18" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001/src/main/java/com/wzy/dao/IDeptDAO.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001/src/main/java/com/wzy/service/impl/DeptServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -758,13 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="45" selection-start-line="45" selection-end-line="55" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-consumer-turbine/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -800,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-security/src/main/java/com/wzy/config/WebSecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="36" lean-forward="true" selection-start-line="1" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001/src/main/java/com/wzy/Dept_8001_StartSpringCloudApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -814,31 +780,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/src/main/java/com/wzy/HystrixDashboardApplication_9001.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-turbine/src/main/java/com/wzy/TurbineApplication_9101.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="84" selection-start-line="84" selection-end-line="89" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -853,9 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,36 +805,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
           <caret line="43" lean-forward="true" selection-end-line="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-provider-company/src/main/java/com/wzy/Company_8101_StartSpringCloudApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="133">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-eureka-7001/src/main/java/com/wzy/Eureka_7001_StartSpringCloudApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/Zuul_9501_StartSpringCloudApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -905,28 +824,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-service/src/main/java/com/wzy/IDeptClientService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
+        <state>
           <caret selection-end-line="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/microcloud-service/src/main/java/com/commons/config/FeignClientConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" lean-forward="true" selection-end-line="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-consumer-feign/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        <state relative-caret-position="190">
+          <caret line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
@@ -937,22 +843,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/resources/application.yml">
+    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/fallback/DeptProviderFallback.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        <state relative-caret-position="168">
+          <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/fallback/DeptProviderFallback.java">
+    <entry file="file://$PROJECT_DIR$/microcloud-provider-hystrix-8001/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="18" lean-forward="true" selection-end-line="58" />
+        <state relative-caret-position="575">
+          <caret line="90" selection-start-line="90" selection-end-line="94" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-provider-upload-8201/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1083">
+          <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-security/src/main/java/com/wzy/config/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="29" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/java/com/wzy/Upload_8201_StartSpringCloudApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-eureka-7001/src/main/java/com/wzy/Eureka_7001_StartSpringCloudApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/java/com/wzy/Zuul_9501_StartSpringCloudApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-zuul-gateway-9501/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="45" selection-start-line="45" selection-end-line="55" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-99">
+          <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/resources/static/images/mldn.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/config/RestConfig.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-hystrix-dashboard/src/main/java/com/wzy/HystrixDashboardApplication_9001.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-turbine/src/main/java/com/wzy/TurbineApplication_9101.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-feign/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-provider-upload-8201/src/main/java/com/wzy/rest/UploadRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/controller/ConsumerUploadController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="57" lean-forward="true" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+          <folding>
+            <element signature="e#1531#1592#0" expanded="true" />
+            <element signature="e#1616#1683#0" expanded="true" />
+            <element signature="e#1705#1789#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/java/com/wzy/Consumer_80_StartSpringCloudApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" lean-forward="true" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/resources/templates/upload.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="7" lean-forward="true" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcloud-consumer-upload/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">

@@ -1,13 +1,15 @@
 server:
-  port: 9501
-
-zuul:
-  prefix: /mldn-proxy
-  ignored-services:
-    "*"
-  routes:
-    microcloud-provider-company: /company-proxy/**
-    microcloud-provider-upload: /upload-proxy/**
+  port: 8201
+spring: 
+  http:
+    multipart:
+      enabled: true   # 启用http上传处理
+      max-file-size: 100MB # 设置单个文件的最大长度
+      max-request-size: 100MB # 设置最大的请求文件的大小
+      file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
+      location: /  # 上传的临时目录
+  application: 
+    name: microcloud-provider-upload
 
 eureka:
   client: # 客户端进行Eureka注册的配置
@@ -16,7 +18,7 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
     lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
-    instance-id: gateway-9501.com  # 在信息列表时显示主机名称
+    instance-id: dept-8001.com  # 在信息列表时显示主机名称
     prefer-ip-address: true     # 访问的路径变为IP地址
 
 info:
@@ -25,25 +27,3 @@ info:
   build.artifactId: $project.artifactId$
   build.version: $project.verson$
 
-spring:
-  application:
-    name: microcloud-zuul-gateway
-
-
-security:
-  basic:
-    enabled: true
-  user:
-    name: zdmin
-    password: mldnjava
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 60000

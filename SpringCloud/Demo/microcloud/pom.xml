@@ -25,6 +25,8 @@
         <module>microcloud-provider-company</module>
         <module>microcloud-consumer-turbine</module>
         <module>microcloud-zuul-gateway-9501</module>
+        <module>microcloud-provider-upload-8201</module>
+        <module>microcloud-consumer-upload</module>
     </modules>
 
     <url>http://maven.apache.org</url>
