@@ -7,6 +7,7 @@ zuul:
     "*"
   routes:
     microcloud-provider-company: /company-proxy/**
+    microcloud-provider-upload: /upload-proxy/**
 
 eureka:
   client: # 客户端进行Eureka注册的配置
@@ -35,3 +36,14 @@ security:
   user:
     name: zdmin
     password: mldnjava
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000

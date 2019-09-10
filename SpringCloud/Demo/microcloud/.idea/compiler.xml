@@ -10,11 +10,13 @@
         <module name="microcloudconsumerfeign" />
         <module name="microcloudconsumerhystrixdashboard" />
         <module name="microcloudconsumerturbine" />
+        <module name="microcloudconsumerupload" />
         <module name="microcloudeureka7001" />
         <module name="microcloudeureka7002" />
         <module name="microcloudeureka7003" />
         <module name="microcloudprovidercompany" />
         <module name="microcloudproviderhystrix8001" />
+        <module name="microcloudproviderupload8201" />
         <module name="microcloudsecurity" />
         <module name="microcloudservice" />
         <module name="microcloudzuulgateway9501" />
