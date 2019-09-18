@@ -4,7 +4,7 @@ spring:
   application:
     name: article
   datasource:
-    url: jdbc:mysql://localhost:3306/docker_test?characterEncoding=UTF8&serverTimezone=UTC
+    url: jdbc:mysql://47.112.142.231:3306/docker_test?characterEncoding=UTF8&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
@@ -17,7 +17,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:7000/eureka
+      defaultZone: http://47.112.142.231:7000/eureka
   instance:
     prefer-ip-address: true
     #instance-id: article.com  如果需要在eureka注册多个服务，不能写死instance-id

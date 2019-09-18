@@ -13,7 +13,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:7000/eureka
+      defaultZone: http://47.112.142.231:7000/eureka
   instance:
     prefer-ip-address: true
     instance-id: zuul.com
