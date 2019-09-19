@@ -1,0 +1,47 @@
+**使用Docker搭建微服务**
+
+
+**下载Jenkins**
+
+    sudo docker pull jenkins
+
+
+**创建jenkins文件夹**
+
+    mkdir ~/jenkins
+
+
+**修改jenkins文件夹的权限归属**
+
+    sudo chown -R 1000:1000 jenkins/
+
+在安装jenkins时候，挂在文件夹 ```~/jenkins/``的归属用户id必须是1000，否则会抛出无操作权限异常。
+
+**启动**
+
+    sudo docker run -itd -p 8080:8080 -p 50000:50000 --name jenkins --privileged=true  -v ~/jenkins:/var/jenkins_home jenkins
+
+
+-p 8080:8080 -p 50000:50000 进行端口映射
+
+--privileged=true 在CentOS7中的安全模块selinux把权限禁掉了，参数给容器加特权。
+
+-v ~/jenkins:/var/jenkins_home 磁盘挂载
+
+
+**初次使用**
+
+**获取管理员密码**
+
+    cat ~/jenkins/secrets/initialAdminPassword
+
+**访问jenkins**
+
+{ip}:8080
+
+例如：
+
+    http://47.112.142.231:8080
+
+
+
