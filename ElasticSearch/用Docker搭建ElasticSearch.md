@@ -1,6 +1,6 @@
 **用Docker构建ElasticSearch**
 
-
+lucene_version" : "6.6.1
 
 **1.启动服务**
 
