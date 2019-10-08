@@ -1,5 +1,7 @@
 **用Docker搭建Kibana**
 
+Version: 5.6.12
+
 
 **1.启动服务**
 
