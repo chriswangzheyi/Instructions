@@ -11,9 +11,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class ReadWriteHDFSExample {
-
-    private final String hdfs_url= "hdfs://192.168.195.128:9000";
-
+    
     public static void main(String[] args) throws IOException {
 
 //        在本地运行需要设置Hadoop Home的路径
