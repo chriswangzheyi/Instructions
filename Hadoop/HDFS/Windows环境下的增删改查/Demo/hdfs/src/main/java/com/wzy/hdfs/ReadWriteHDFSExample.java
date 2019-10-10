@@ -12,22 +12,25 @@ import java.nio.charset.StandardCharsets;
 
 public class ReadWriteHDFSExample {
 
+    private final String hdfs_url= "hdfs://192.168.195.128:9000";
+
     public static void main(String[] args) throws IOException {
 
 //        在本地运行需要设置Hadoop Home的路径
         System.setProperty("hadoop.home.dir", "D:\\hadoop-3.2.1");
 
-        ReadWriteHDFSExample.checkExists();
+//        ReadWriteHDFSExample.checkExists();
 //        ReadWriteHDFSExample.createDirectory();
 //        ReadWriteHDFSExample.checkExists();
 //        ReadWriteHDFSExample.writeFileToHDFS();
 //        ReadWriteHDFSExample.appendToHDFSFile();
-//        ReadWriteHDFSExample.readFileFromHDFS();
+        ReadWriteHDFSExample.readFileFromHDFS();
+//        ReadWriteHDFSExample.deleteFile();
     }
 
     public static void readFileFromHDFS() throws IOException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFS", "hdfs://47.112.142.231:9000");
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
         FileSystem fileSystem = FileSystem.get(configuration);
         //Create a path
         String fileName = "read_write_hdfs_example.txt";
@@ -36,15 +39,8 @@ public class ReadWriteHDFSExample {
         FSDataInputStream inputStream = fileSystem.open(hdfsReadPath);
         //Classical input stream usage
         String out= IOUtils.toString(inputStream, "UTF-8");
+        System.out.println("读取的数据：");
         System.out.println(out);
-
-        /*BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-
-        String line = null;
-        while ((line=bufferedReader.readLine())!=null){
-            System.out.println(line);
-        }*/
 
         inputStream.close();
         fileSystem.close();
@@ -52,7 +48,8 @@ public class ReadWriteHDFSExample {
 
     public static void writeFileToHDFS() throws IOException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFS", "hdfs://47.112.142.231:9000");
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
+
         FileSystem fileSystem = FileSystem.get(configuration);
         //Create a path
         String fileName = "read_write_hdfs_example.txt";
@@ -68,7 +65,7 @@ public class ReadWriteHDFSExample {
 
     public static void appendToHDFSFile() throws IOException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFS", "hdfs://47.112.142.231:9000");
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
         FileSystem fileSystem = FileSystem.get(configuration);
         //Create a path
         String fileName = "read_write_hdfs_example.txt";
@@ -84,7 +81,7 @@ public class ReadWriteHDFSExample {
 
     public static void createDirectory() throws IOException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFS", "hdfs://47.112.142.231:9000");
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
         FileSystem fileSystem = FileSystem.get(configuration);
         String directoryName = "javadeveloperzone/javareadwriteexample";
         Path path = new Path(directoryName);
@@ -93,7 +90,7 @@ public class ReadWriteHDFSExample {
 
     public static void checkExists() throws IOException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFS", "hdfs://47.112.142.231:9000");
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
         FileSystem fileSystem = FileSystem.get(configuration);
         String directoryName = "javadeveloperzone/javareadwriteexample";
         Path path = new Path(directoryName);
@@ -103,4 +100,22 @@ public class ReadWriteHDFSExample {
             System.out.println("File/Folder does not Exists : "+path.getName());
         }
     }
+
+
+    public static void deleteFile() throws  IOException{
+
+        Configuration configuration = new Configuration();
+        configuration.set("fs.defaultFS", "hdfs://192.168.195.128:9000");
+        FileSystem fileSystem = FileSystem.get(configuration);
+        String fileName = "read_write_hdfs_example.txt";
+        Path hdfsWritePath = new Path("/user/javadeveloperzone/javareadwriteexample/" + fileName);
+        boolean isDeleted = fileSystem.deleteOnExit(hdfsWritePath);
+        if (isDeleted=true){
+            System.out.println("删除成功");
+        }else {
+            System.out.println("删除失败");
+        }
+
+    }
+
 }
