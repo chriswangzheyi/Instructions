@@ -11,7 +11,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class ReadWriteHDFSExample {
-    
+
     public static void main(String[] args) throws IOException {
 
 //        在本地运行需要设置Hadoop Home的路径
