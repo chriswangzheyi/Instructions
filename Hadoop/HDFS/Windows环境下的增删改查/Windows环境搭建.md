@@ -7,6 +7,10 @@
 ![](../Images/1.png)
 
 
+对应的版本下载：
+
+https://github.com/4ttty/winutils
+
 
 **修改配置Hadoop Home位置**
 
