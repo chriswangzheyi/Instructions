@@ -49,18 +49,18 @@ yum -y install wget
 
 ##安装Hive步骤
 
-将apache-hive-2.3.6-bin.tar.gz安装包上传至服务器 或者通过
+将apache-hive-3.1.2-bin.tar.gz安装包上传至服务器 或者通过
 
 
-	wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.6/apache-hive-2.3.6-bin.tar.gz
+	wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
 
 解压
 
-	tar -xzvf apache-hive-2.3.6-bin.tar.gz
+	tar -xzvf apache-hive-3.1.2-bin.tar.gz
 
 vi /etc/profile
 
-	export HIVE_HOME=/root/apache-hive-2.3.6-bin
+	export HIVE_HOME=/root/apache-hive-3.1.2-bin
 	export PATH=$PATH:$HIVE_HOME/bin
 	export CLASSPATH=$CLASSPATH:$HIVE_HOME/lib
 
@@ -71,7 +71,7 @@ vi /etc/profile
 
 
 
-cd /root/apache-hive-2.3.6-bin/conf
+cd /root/apache-hive-3.1.2-bin/conf
 	
 	cp hive-default.xml.template hive-site.xml
 	cp hive-env.sh.template hive-env.sh
@@ -81,21 +81,21 @@ cd /root/apache-hive-2.3.6-bin/conf
 
 修改配置文件
 
-vi /root/apache-hive-2.3.6-bin/conf/hive-env.sh
+vi /root/apache-hive-3.1.2-bin/conf/hive-env.sh
 
 
 	JAVA_HOME=/root/jdk1.8.0_221    # 你的java文件路径
 	HADOOP_HOME=/root/hadoop-3.2.1    # 你的hadoop路径
-	export HIVE_CONF_DIR=/root/apache-hive-2.3.6-bin/conf
+	export HIVE_CONF_DIR=/root/apache-hive-3.1.2-bin/conf
 
-vi /root/apache-hive-2.3.6-bin/conf/hive-site.xml
+vi /root/apache-hive-3.1.2-bin/conf/hive-site.xml
 
 
 修改以下四个参数（建议下载到本地修改后覆盖原文件）
 
 	<property>
 	<name>javax.jdo.option.ConnectionURL</name>
-	<value>jdbc:mysql://localhost:3306/hive</value>
+	<value>jdbc:mysql://localhost:3306/hive?useSSL=false</value>
 	<description>JDBC connect string for a JDBC metastore</description>
 	</property>
 	 
@@ -121,27 +121,33 @@ vi /root/apache-hive-2.3.6-bin/conf/hive-site.xml
 
 	<property>
 	<name>hive.exec.local.scratchdir</name>
-	<value>/root/apache-hive-2.3.6-bin/<</value>
+	<value>/root/apache-hive-3.1.2-bin/<</value>
 	<description>Local scratch space for Hive jobs</description>
 	</property>
 	 
 	<property>
 	<name>hive.downloaded.resources.dir</name>
-	<value>/root/apache-hive-2.3.6-bin/hive-downloaded-addDir/</value>#自定义目录
+	<value>/root/apache-hive-3.1.2-bin/hive-downloaded-addDir/</value>#自定义目录
 	<description>Temporary local directory for added resources in the remote file system.</description>
 	</property>
 	 
 	<property>
 	<name>hive.querylog.location</name>
-	<value>/root/apache-hive-2.3.6-bin/querylog-location-addDir/</value>#自定义目录
+	<value>/root/apache-hive-3.1.2-bin/querylog-location-addDir/</value>#自定义目录
 	<description>Location of Hive run time structured log file</description>
 	</property>
 	 
 	<property>
 	<name>hive.server2.logging.operation.log.location</name>
-	<value>/root/apache-hive-2.3.6-bin/hive-logging-operation-log-addDir/</value>#自定义目录
+	<value>/root/apache-hive-3.1.2-bin/hive-logging-operation-log-addDir/</value>#自定义目录
 	<description>Top level directory where operation logs are stored if logging functionality is enabled</description>
 	</property>
+
+	 <property>
+	    <name>datanucleus.schema.autoCreateAll</name>
+	    <value>ture</value>
+	    <description>Auto creates necessary schema on a startup if one doesn't exist. Set this to false, after creating it once.To enable auto create also set hive.metastore.schema.verification=false. Auto creation is not recommended for production use cases, run schematool command instead.</description>
+	  </property>
 
 
 ## 替换guava文件 （重要）
@@ -153,9 +159,22 @@ vi /root/apache-hive-2.3.6-bin/conf/hive-site.xml
 
 	/root/hadoop-3.2.1/share/hadoop/common/lib
 
+	/root/apache-hive-3.1.2-bin/lib
 
-	/root/apache-hive-2.3.6-bin/lib
+## 配置数据库驱动
 
+https://dev.mysql.com/downloads/connector/j/5.1.html 下载
+
+
+mysql-connector-java-5.1.48.tar.gz 上传至服务器后解压
+
+	tar -xzvf mysql-connector-java-5.1.48.tar.gz
+
+	cp -p /root/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48-bin.jar /root/apache-hive-3.1.2-bin/lib
+
+## 初始化元数据
+
+	schematool -dbType mysql -initSchema
 	
 ## 验证
 
