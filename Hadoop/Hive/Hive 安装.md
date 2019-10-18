@@ -179,6 +179,6 @@ mysql-connector-java-5.1.48.tar.gz 上传至服务器后解压
 ## 验证
 
 
-在启动hadoop集群后
+在启动hadoop集群后,执行命令：
 
 	hive
