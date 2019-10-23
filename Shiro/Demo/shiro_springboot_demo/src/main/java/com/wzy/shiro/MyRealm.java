@@ -29,9 +29,7 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		
-		//info.addStringPermission("product:add");
-		
+
 		//得到当前用户
 		Subject subject = SecurityUtils.getSubject();
 		User dbUser = (User)subject.getPrincipal();
@@ -44,7 +42,6 @@ public class MyRealm extends AuthorizingRealm {
 				}
 			}
 		}
-		
 		return info;
 	}
 
@@ -54,19 +51,6 @@ public class MyRealm extends AuthorizingRealm {
 		// 1.获取用户输入的账户信息
 		UsernamePasswordToken token = (UsernamePasswordToken) arg0;
 
-		/*// 模拟数据库的密码
-		String name = "jack";
-		String password = "1234";
-
-		if (!token.getUsername().equals(name)) {
-			// 用户不存在
-			return null;
-		}
-		
-		User dbUser = new User();
-		dbUser.setName(name);
-		dbUser.setPassword(password);*/
-		
 		User dbUser = userService.findByName(token.getUsername());
 
 		if(dbUser==null){

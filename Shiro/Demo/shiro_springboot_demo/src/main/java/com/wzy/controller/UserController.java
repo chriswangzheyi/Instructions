@@ -34,14 +34,10 @@ public class UserController {
 				return "login";
 			}
 		}
-		
-		
+
 		//使用shiro进行登录
-		
 		Subject subject = SecurityUtils.getSubject();
-		
-		//AuthenticationToken token = new UsernamePasswordToken(user.getName(), user.getPassword());
-		
+
 		//使用Shiro对密码进行加密
 		Md5Hash hash = new Md5Hash(user.getPassword(), user.getName(), 2);
 
