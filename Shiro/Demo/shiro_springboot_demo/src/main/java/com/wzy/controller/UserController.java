@@ -44,9 +44,9 @@ public class UserController {
 		
 		//使用Shiro对密码进行加密
 		Md5Hash hash = new Md5Hash(user.getPassword(), user.getName(), 2);
-		
+
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), hash.toString());
-		
+
 		//设置remenmberMe的功能
 		if(rememberMe!=null && rememberMe.equals("1")){
 			token.setRememberMe(true);
