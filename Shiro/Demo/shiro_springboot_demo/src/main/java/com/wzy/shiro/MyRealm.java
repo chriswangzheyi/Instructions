@@ -68,6 +68,7 @@ public class MyRealm extends AuthorizingRealm {
 		dbUser.setPassword(password);*/
 		
 		User dbUser = userService.findByName(token.getUsername());
+
 		if(dbUser==null){
 			//用户不存在
 			return null;
