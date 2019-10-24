@@ -22,6 +22,7 @@
 	export HBASE_LOG_DIR=$HBASE_HOME/logs
 	export HBASE_PID_DIR=$HBASE_HOME/pids
 	export HBASE_MANAGES_ZK=false
+	export HBASE_HEAPSIZE=1G
 
 
 修改hbase-site.xml文件
@@ -68,8 +69,27 @@
 	<!--指定zk数据目录，需要与zk集群的dataIdr配置一致-->
 	<property>
 	        <name>hbase.zookeeper.property.dataDir</name>
-	        <value>/root/zookeeper-3.1.14/temp/zookeeper</value>
+	        <value>/root/zookeeper-3.4.14/temp/zookeeper</value>
 	</property>	
+	<property>
+		<!-- 允许节点时间偏差值 -->
+		<name>hbase.master.maxclockskew</name>
+		<value>180000</value>
+	</property>
+	<!-- ZooKeeper 会话超时。Hbase 把这个值传递给 zk 集群，向它推荐一个会话的最大超时时间 -->
+    <property>
+        <name>zookeeper.session.timeout</name>
+        <value>120000</value>
+    </property>
+	<!-- 当 regionserver 遇到 ZooKeeper session expired ， regionserver 将选择 restart 而不是 abort -->
+    <property>
+        <name>hbase.regionserver.restart.on.zk.expire</name>
+        <value>true</value>
+    </property>
+	<property>
+		<name>hbase.unsafe.stream.capability.enforce</name>
+		<value>false</value>
+	</property>
 
 
 修改regionservers文件
@@ -101,6 +121,11 @@
 	mkdir tmp logs pid
 
 
+将Zookeeper节点替换为同一版本
+
+	cp /root/zookeeper-3.4.14.jar /root/hbase-2.2.1/lib/
+	rm  /root/hbase-2.2.1/lib/zookeeper-3.4.10.jar
+
 将HBase配置好的安装文件同步到其他节点
 
 	#复制到Master002
@@ -128,16 +153,54 @@
 
 
 
-在Master上启动Hbase(保证Hadoop启动的情况下)
+**在Master上启动Hbase**
+	
+步骤一：在Slave001, Slave002, Slave003中启动zookeeper
+
+	
+步骤二： 启动Hadoop
+	
+	start-all.sh
+
+	hdfs haadmin -transitionToActive --forcemanual  nn1
+	
+	hdfs dfsadmin -safemode leave
+	
+步骤三： 启动Hbases
 
 	start-hbase.sh
 
 	#停止
 	stop-hbase.sh
 
+	#在Slave001, Slave002, Slave003中
+	hbase-daemon.sh start regionserver
+
+	#在Master001, Master002
+	hbase-daemon.sh start master
+
+
+##删除Hadoop 损坏的文件(非必须)
+
+ hadoop fsck -delete /
+
+
 
 ##验证
 
-执行
+关闭hadoop安全模式
+
+	hadoop dfsadmin -safemode leave
+
+
+访问16010端口
+
+	http://192.168.195.128:16010
+
+
+或者执行
 
 	hbase shell
+
+
+
