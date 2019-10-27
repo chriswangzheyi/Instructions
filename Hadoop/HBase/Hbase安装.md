@@ -92,6 +92,17 @@
 	</property>
 
 
+其中：
+
+	<property>
+		<name>hbase.unsafe.stream.capability.enforce</name>
+		<value>false</value>
+	</property>
+
+这一个配置如果不配会导致HMaster自动关闭
+
+
+
 修改regionservers文件
 
 	vi /root/hbase-2.2.1/conf/regionservers
@@ -165,6 +176,16 @@
 	hdfs haadmin -transitionToActive --forcemanual  nn1
 	
 	hdfs dfsadmin -safemode leave
+
+验证hadoop状态
+
+	http://192.168.195.128:50070/dfshealth.html#tab-overview
+
+
+##删除Hadoop 损坏的文件(非必须)
+
+	hadoop fsck -delete /
+
 	
 步骤三： 启动Hbases
 
@@ -180,17 +201,9 @@
 	hbase-daemon.sh start master
 
 
-##删除Hadoop 损坏的文件(非必须)
-
- hadoop fsck -delete /
-
 
 
 ##验证
-
-关闭hadoop安全模式
-
-	hadoop dfsadmin -safemode leave
 
 
 访问16010端口
