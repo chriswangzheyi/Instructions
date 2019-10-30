@@ -168,7 +168,9 @@ Master002
 
 ![](../Images/3.png)
 
-然后在Alive节点，运行命令 start-spark-all.sh
+然后在Alive节点，运行命令 
+
+	start-spark-all.sh
 
 
 ### 停止Spark集群
