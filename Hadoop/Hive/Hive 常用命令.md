@@ -67,13 +67,16 @@ Hive中：
 
 修改表名
 
-	alter table dept_like rename to dept_like_rename ;
+	alter table dept_like rename to dept_like_rename;
 
 查询表
 
 	select * from student ;
 	select id from student ;
 
+插入数据
+
+	insert into student(id,name) values(1,'jack');
 
 ## 功能函数:
 
