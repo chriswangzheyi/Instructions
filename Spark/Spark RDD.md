@@ -50,6 +50,7 @@ RDD 具有容错机制，并且只读不能修改，可以执行确定的转换�
 
 ### 启动spark
 
+	cd /root/spark-2.4.4-bin-hadoop2.7/bin
 	./spark-shell
 
 ### 命令
@@ -78,3 +79,11 @@ RDD 具有容错机制，并且只读不能修改，可以执行确定的转换�
 
 	#把以上的整合成一行；
 	sc.textFile("hdfs://Master001:9000/input2/test1.txt").flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).collect
+
+	#存入HDFS
+	sc.textFile("hdfs://Master001:9000/input2/test1.txt").flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).saveAsTextFile("/spark/output")
+
+
+验证是否存入HDFS：
+
+hdfs dfs -cat /spark/output/part-00000
