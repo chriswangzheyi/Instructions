@@ -9,14 +9,14 @@
 ### 安装Spark 和 Scala
 
 	tar -zxvf spark-2.4.4-bin-hadoop2.7.tgz
-	tar -zxvf scala-2.13.1.tgz
+	tar -zxvf scala-2.11.12.tgz
 
 ### 配置环境变量
 
 vi /etc/profile
 
 	#插入
-	export SCALA_HOME=/root/scala-2.13.1
+	export SCALA_HOME=/root/scala-2.11.12
 	export SPARK_HOME=/root/spark-2.4.4-bin-hadoop2.7
 	export PATH=$PATH:$SCALA_HOME/bin:$SPARK_HOME/sbin
 
@@ -102,26 +102,26 @@ vi /etc/profile
 ### 复制文件到各节点
 
 	#Master002
-	scp -r /root/scala-2.13.1 root@Master002:/root
+	scp -r /root/scala-2.11.12 root@Master002:/root
 	scp -r /root/spark-2.4.4-bin-hadoop2.7 root@Master002:/root
 
 	#Slave001
-	scp -r /root/scala-2.13.1 root@Slave001:/root
+	scp -r /root/scala-2.11.12 root@Slave001:/root
 	scp -r /root/spark-2.4.4-bin-hadoop2.7 root@Slave001:/root  
 
 	#Slave002
-	scp -r /root/scala-2.13.1 root@Slave002:/root
+	scp -r /root/scala-2.11.12 root@Slave002:/root
 	scp -r /root/spark-2.4.4-bin-hadoop2.7 root@Slave002:/root     
 
 	#Slave003
-	scp -r /root/scala-2.13.1 root@Slave003:/root
+	scp -r /root/scala-2.11.12 root@Slave003:/root
 	scp -r /root/spark-2.4.4-bin-hadoop2.7 root@Slave003:/root
 
 
 ### 修改各节点的 /etc/profile文件
 
 	#插入
-	export SCALA_HOME=/root/scala-2.13.1
+	export SCALA_HOME=/root/scala-2.11.12
 	export SPARK_HOME=/root/spark-2.4.4-bin-hadoop2.7
 	export PATH=$PATH:$SCALA_HOME/bin:$SPARK_HOME/sbin
 
