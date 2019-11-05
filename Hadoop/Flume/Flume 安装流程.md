@@ -193,7 +193,7 @@
 	cd /root/hadoop-3.2.1/testdata
 
 	#执行命令
-	while true; do echo "hello ningbo do" >> testflume.log ; sleep 0.5; done
+	while true; do echo "hello testing do" >> testflume.log ; sleep 0.5; done
 
 	#另外开一个窗口
 	tail -f testflume.log 
@@ -217,9 +217,6 @@
 
 
 ### 启动Flume
-
-
-	flume-ng agent -c ../conf -f log-hdfs.conf  -n a1 -Dflume.root.logger=INFO,console
 
 	flume-ng agent --conf conf/ --name a1 --conf-file /root/apache-flume-1.9.0-bin/example/log-hdfs.conf -Dflume.root.logger==INFO,console
 
