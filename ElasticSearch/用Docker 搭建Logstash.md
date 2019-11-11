@@ -1,12 +1,14 @@
-# Docker 搭建Logstash
+# Docker 搭建Logstash(单机测试)
 
 ## 搭建步骤
 
 ###拉取镜像
-docker pull logstash
+
+	docker pull logstash
 
 ###启动logstash
-docker run -it -d --name logstash logstash
+
+	docker run -it -d --name logstash logstash
 
 ###创建配置文件
 
@@ -25,12 +27,6 @@ docker run -it -d --name logstash logstash
 	  stdout {
 	      codec => json_lines
 	  }
-	  #redis {
-	  #  codec => plain
-	  #  host => ["47.112.142.231:6379"]
-	  #  data_type => list
-	  #  key => logstash
-	  #}
 	}
 
 
