@@ -212,6 +212,13 @@ vi /root/elk/logstash/conf.d/logstash.conf
 	            </plugin>
 	        </plugins>
 	    </build>
+	</project>
 
-</project>
 
+# 测试
+
+启动springboot, 访问8081端口。
+
+进入kibana
+
+	GET /applog/_search 
