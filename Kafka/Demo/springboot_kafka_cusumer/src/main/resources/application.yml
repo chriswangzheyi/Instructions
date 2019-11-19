@@ -1,0 +1,7 @@
+server:
+  port: 8082
+spring:
+  kafka:
+    consumer:
+      group-id: test
+      bootstrap-servers: 47.112.142.231:9092
