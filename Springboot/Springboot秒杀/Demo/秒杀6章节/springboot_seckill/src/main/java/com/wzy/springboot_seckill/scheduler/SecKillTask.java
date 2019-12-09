@@ -1,12 +1,10 @@
 package com.wzy.springboot_seckill.scheduler;
 
-
 import com.wzy.springboot_seckill.dao.PromotionSecKillDAO;
 import com.wzy.springboot_seckill.entity.PromotionSecKill;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -19,6 +17,7 @@ public class SecKillTask {
     private RedisTemplate redisTemplate;
     @Scheduled(cron = "0/5 * * * * ?")
     public void startSecKill(){
+
         List<PromotionSecKill> list  = promotionSecKillDAO.findUnstartSecKill();
         for(PromotionSecKill ps : list){
             System.out.println(ps.getPsId() + "秒杀活动已启动");
@@ -26,7 +25,8 @@ public class SecKillTask {
             redisTemplate.delete("seckill:count:" + ps.getPsId());
             //有几个库存商品，则初始化几个list对象
             for(int i = 0 ; i < ps.getPsCount() ; i++){
-                redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId() , ps.getGoodsId());
+
+                redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId(), ps.getGoodsId().toString());
             }
             ps.setStatus(1);
             promotionSecKillDAO.update(ps);

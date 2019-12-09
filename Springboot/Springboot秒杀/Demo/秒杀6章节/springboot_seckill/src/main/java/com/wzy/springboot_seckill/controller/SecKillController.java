@@ -28,7 +28,7 @@ public class SecKillController {
             String orderNo = promotionSecKillService.sendOrderToQueue(userid);
             Map data = new HashMap();
             data.put("orderNo", orderNo);
-            result.put("code", "0");
+            result.put("code", "0"); //code0表示操作成功
             result.put("message", "success");
             result.put("data", data);
         } catch (SecKillException e) {
