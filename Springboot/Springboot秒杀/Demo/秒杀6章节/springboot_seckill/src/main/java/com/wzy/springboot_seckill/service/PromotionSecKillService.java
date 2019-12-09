@@ -26,6 +26,8 @@ public class PromotionSecKillService {
 
     @Resource
     private OrderDAO orderDAO;
+
+    // psid商品id, userid用户id， 商品库存num
     public void processSecKill(Long psId, String userid, Integer num) throws SecKillException {
         PromotionSecKill ps = promotionSecKillDAO.findById(psId);
         if (ps == null) {
@@ -37,7 +39,10 @@ public class PromotionSecKillService {
         } else if (ps.getStatus() == 2) {
             throw new SecKillException("秒杀活动已经结束");
         }
-        Integer goodsId = (Integer) redisTemplate.opsForList().leftPop("seckill:count:" + ps.getPsId());
+
+        Integer goodsId = Integer.valueOf(redisTemplate.opsForList()
+                .leftPop("seckill:count:" + ps.getPsId()).toString() );
+
         if (goodsId != null) {
             //判断是否已经抢购过
             boolean isExisted = redisTemplate.opsForSet().isMember("seckill:users:" + ps.getPsId(), userid);
@@ -45,7 +50,7 @@ public class PromotionSecKillService {
                 System.out.println("恭喜您，抢到商品啦。快去下单吧");
                 redisTemplate.opsForSet().add("seckill:users:" + ps.getPsId(), userid);
             }else{
-                redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId(), ps.getGoodsId());
+                redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId(), ps.getGoodsId().toString());
                 throw new SecKillException("抱歉，您已经参加过此活动，请勿重复抢购！");
             }
         } else {
