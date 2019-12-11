@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f69812c8-a07d-46a6-b8e2-a614424009e1" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1U6BlYqKYTLqbnANuD9UvDORV7F" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/wzy/springboot_seckill" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Brian\IdeaProjects\springboot_seckill\src\main\java\com\wzy\springboot_seckill" />
+      <recent name="C:\Users\Brian\IdeaProjects\springboot_seckill\src\main\resources\mapper" />
+      <recent name="C:\Users\Brian\IdeaProjects\springboot_seckill\src\main\java\com\wzy\springboot_seckill\entity" />
+      <recent name="C:\Users\Brian\IdeaProjects\springboot_seckill\src\main\java\com\wzy\springboot_seckill\dao" />
+      <recent name="C:\Users\Brian\IdeaProjects\springboot_seckill\src\main\java\com\wzy\springboot_seckill\controller" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="SpringbootSeckillApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="springboot_seckill" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.springboot_seckill.SpringbootSeckillApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f69812c8-a07d-46a6-b8e2-a614424009e1" name="Default Changelist" comment="" />
+      <created>1574667316140</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574667316140</updated>
+      <workItem from="1574667323691" duration="6757000" />
+      <workItem from="1574991784910" duration="6040000" />
+      <workItem from="1575027023322" duration="1258000" />
+      <workItem from="1575076657646" duration="3151000" />
+      <workItem from="1575089233634" duration="11302000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
