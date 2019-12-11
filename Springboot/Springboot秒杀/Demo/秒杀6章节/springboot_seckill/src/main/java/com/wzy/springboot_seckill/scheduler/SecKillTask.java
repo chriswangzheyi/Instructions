@@ -15,19 +15,22 @@ public class SecKillTask {
     //RedisTempldate是Spring封装的Redis操作类，提供了一系列操作redis的模板方法
     @Resource
     private RedisTemplate redisTemplate;
+
+    //每隔5秒执行一次
     @Scheduled(cron = "0/5 * * * * ?")
     public void startSecKill(){
-
+        //根据起始时间及状态码（0为未启动）查询到时间却未启动的任务
         List<PromotionSecKill> list  = promotionSecKillDAO.findUnstartSecKill();
+
         for(PromotionSecKill ps : list){
             System.out.println(ps.getPsId() + "秒杀活动已启动");
             //删掉以前重复的活动任务缓存
             redisTemplate.delete("seckill:count:" + ps.getPsId());
             //有几个库存商品，则初始化几个list对象
             for(int i = 0 ; i < ps.getPsCount() ; i++){
-
                 redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId(), ps.getGoodsId().toString());
             }
+            //将任务状态设置为1（启动）
             ps.setStatus(1);
             promotionSecKillDAO.update(ps);
         }

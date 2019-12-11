@@ -40,16 +40,27 @@ public class PromotionSecKillService {
             throw new SecKillException("秒杀活动已经结束");
         }
 
-        Integer goodsId = Integer.valueOf(redisTemplate.opsForList()
-                .leftPop("seckill:count:" + ps.getPsId()).toString() );
+        //从redis中根据key值取数，判断是否有秒杀活动，并将秒杀的商品减一
 
+        Integer goodsId = null;
+        try {
+            goodsId = Integer.valueOf(redisTemplate.opsForList()
+                    .leftPop("seckill:count:" + ps.getPsId()).toString() );
+        } catch (Exception e) {
+            System.out.println("redis取数出错了或者达到秒杀上限！");
+        }
+
+        //如果有秒杀活动
         if (goodsId != null) {
+
             //判断是否已经抢购过
             boolean isExisted = redisTemplate.opsForSet().isMember("seckill:users:" + ps.getPsId(), userid);
+
             if (!isExisted) {
                 System.out.println("恭喜您，抢到商品啦。快去下单吧");
                 redisTemplate.opsForSet().add("seckill:users:" + ps.getPsId(), userid);
             }else{
+                //将刚刚因为leftpop减一的秒杀商品数量加一
                 redisTemplate.opsForList().rightPush("seckill:count:" + ps.getPsId(), ps.getGoodsId().toString());
                 throw new SecKillException("抱歉，您已经参加过此活动，请勿重复抢购！");
             }
@@ -58,6 +69,7 @@ public class PromotionSecKillService {
         }
     }
 
+    //发送订单到RabbitMQ
     public String sendOrderToQueue(String userid) {
         System.out.println("准备向队列发送信息");
         //订单基本信息
