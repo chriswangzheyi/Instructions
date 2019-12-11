@@ -2,6 +2,7 @@ package com.wzy.springboot_seckill.entity;
 
 import java.util.Date;
 
+//订单类
 public class Order {
     private Long orderId;
     private String orderNo;

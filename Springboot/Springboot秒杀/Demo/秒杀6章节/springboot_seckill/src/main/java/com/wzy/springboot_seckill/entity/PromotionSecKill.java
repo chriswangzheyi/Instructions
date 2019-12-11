@@ -2,6 +2,7 @@ package com.wzy.springboot_seckill.entity;
 
 import java.util.Date;
 
+//秒杀商品类
 public class PromotionSecKill {
     private Long psId;
     private Long goodsId;
