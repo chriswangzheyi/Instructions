@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root
+    data-password: root
+    url: jdbc:mysql://47.112.142.231:3306/test?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    ####### Druid 连接池配置
+    dbType: mysql   # 指定数据库类型 mysql
+    initialSize: 5  # 启动初始化连接数量
+    minIdle: 5      # 最小空闲连接
+    maxActive: 20   # 最大连接数量（包含使用中的和空闲的）
+    maxWait: 60000  # 最大连接等待时间 ，超出时间报错
+    timeBetweenEvictionRunsMillis: 60000  # 设置执行一次连接回收器的时间
+    minEvictableIdleTimeMillis: 300000   # 设置时间： 该时间内没有任何操作的空闲连接会被回收
+    validationQuery: select 'x'         # 验证连接有效性的sql
+    testWhileIdle: true             # 空闲时校验
+    testOnBorrow: false  # 使用中是否校验有效性
+    testOnReturn: false  # 归还连接池时是否校验
+    poolPreparedStatements: false  # mysql 不推荐打开预处理连接池
+    filters: stat,wall,logback  #设置过滤器 stat用于接收状态，wall防止sql注入，logback说明使用logback进行日志输出
+    userGlobalataSourceStat: true  # 统计所有数据源状态
+    connectionProperties: druid.stat.mergSql=true;druid.stat.slowSqlMillis=500  # sql合并统计 设置慢sql时间为500，超过500 会有记录提示
+
+server:
+  port: 8080
