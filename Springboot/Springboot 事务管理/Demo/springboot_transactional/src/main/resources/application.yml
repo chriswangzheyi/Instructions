@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.112.142.231:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+
+mybatis:
+  type-aliases-package: com.wzy.springboot_transactional.pojo
+  mapper-locations: classpath:mapper/*.xml
