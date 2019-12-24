@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.wzy.springboot_transactional.dao.AccountDao">
+
+    <!-- 转入 -->
+    <update id="moveIn" >
+        update tbl_account
+        set balance = balance + #{money }
+        where id= #{id,jdbcType=INTEGER}
+    </update>
+
+    <!-- 转出 -->
+    <update id="moveOut" >
+        update tbl_account
+        set balance = balance - #{money }
+        where id= #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>
