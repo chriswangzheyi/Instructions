@@ -1,0 +1,14 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: eureka6001
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+
