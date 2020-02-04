@@ -31,12 +31,16 @@
 	    "registry-mirrors": ["https://registry.docker-cn.com"],
 	    "live-restore": true
 	}
+
+	
 	
 或者选择DaoCloud镜像站点安装 https://www.daocloud.io/mirror#accelerator-doc
 
 	curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io
 
 	#重启docker服务
+
+	systemctl daemon-reload
 	systemctl restart docker
 
 	
