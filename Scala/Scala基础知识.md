@@ -329,3 +329,43 @@ filter：将符合要求的数据(筛选)放置到新的集合。
 
 	List(ABOUT, BOX, CLEAR)
 	List(A, B, O, U, T, B, O, X, C, L, E, A, R)
+
+
+## 柯里化
+
+柯里化(Currying)指的是将原来接受两个参数的函数变成新的接受一个参数的函数的过程。新的函数返回一个以原有第二个参数为参数的函数。
+
+例子：
+	
+	object test {
+	
+	  def main(args: Array[String]): Unit = {
+	
+	    val str1:String = "Hello, "
+	    val str2:String = "Scala!"
+	    println( "str1 + str2 = " +  strcat(str1)(str2) )
+	  }
+	
+	  def strcat(s1: String)(s2: String) = {
+	    s1 + s2
+	  }
+	}
+
+输出结果
+
+	str1 + str2 = Hello, Scala!
+
+
+## 模式匹配
+
+	object Test {
+	   def main(args: Array[String]) {
+	      println(matchTest(3))
+	
+	   }
+	   def matchTest(x: Int): String = x match {
+	      case 1 => "one"
+	      case 2 => "two"
+	      case _ => "many"
+	   }
+	}
