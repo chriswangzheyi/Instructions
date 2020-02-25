@@ -4,7 +4,7 @@
 
 olympics.csv
 
-## 题目
+## 统计类题目
 
 ### Q1
 
@@ -27,7 +27,7 @@ Which three countries have won the most medals in recent year (1984 to 2008)?
 Display the male gold medal winners for the 100m sprint event over the years. List results starting with the most recent. Show the Olympic City, Edition, Athlete and the country they reresent.
 
 
-## 解答
+### Q1-Q4解答
 
 	import pandas as pd
 	
@@ -42,4 +42,78 @@ Display the male gold medal winners for the 100m sprint event over the years. Li
 	q4 = data [ ['City','Edition','Athlete','NOC'] ][ (data.Event=='100m') & (data.Medal=='Gold') ].sort_values(by='Edition', ascending= False)
 	
 	print(q4)
+
+
+### Q5
+
+Which countries did not win a medal in the 2008 Olympic Games? 
+
+### Q5解答
+
+	import pandas as pd
+	
+	# 导入数据
+	data = pd.read_csv('E://olympics.csv',skiprows=4)
+	country = pd.read_csv('E://countrys.csv')
+	
+	# data表2008年数据
+	bj =data[ data.Edition==2008 ]
+	
+	# 各国
+	madel_2008 = bj.NOC.value_counts()
+	
+	
+	# country表将国家简写作为索引
+	country.set_index('Int Olympic Committee code',inplace=True)
+	
+	# 在country dataframe新增madel2008栏
+	country['madel2008']= madel_2008
+	
+	country_no_madel= country[ country.madel2008.isnull() ]
+	print(country_no_madel)
+
+
+
+## 画图类题目
+
+### Q1：
+
+Plot the number of medals achieved by the Chinese team (men and women) in Beijing 2008？ Using matplotlib and Seaborn
+
+
+### Q1解答
+
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	
+	data = pd.read_csv('E:/olympics.csv',skiprows=4)
+	
+	# matplotlib
+	#data.Gender[ (data.Edition==2008) & (data.NOC=='CHN')].value_counts().plot(kind='bar')
+	
+	# seaborn
+	sns.countplot(x='Gender', data=data, palette='bwr')
+	
+	plt.show()
+
+
+### Q2:
+
+Plot the number of Gold, Silver and Bronze medals for each gender.
+
+
+### Q2解答
+
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns
+	
+	data = pd.read_csv('E:/olympics.csv',skiprows=4)
+	
+	# seaborn
+	sns.countplot(x='Medal', data=data, hue='Gender', palette='bwr')
+	
+	plt.show()
+
 
