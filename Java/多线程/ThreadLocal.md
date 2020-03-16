@@ -34,3 +34,13 @@ ThreadLocal类并不是用来解决多线程环境下的共享变量问题，而
 	        myThreadB.start();
 	    }
 	}
+
+
+输出：
+
+	ThreadA threadLocal.get() = 0
+	ThreadB threadLocal.get() = 0
+	ThreadA threadLocal.get() = 1
+	ThreadB threadLocal.get() = 1
+	ThreadB threadLocal.get() = 2
+	ThreadA threadLocal.get() = 2
