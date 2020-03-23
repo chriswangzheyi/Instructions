@@ -12,7 +12,7 @@ ConcurrentHashMap是一个线程安全并且高效的Hashmap实现。
 
 ## 如何实现线程安全
 
-抛弃了原有的Segment 分段锁，而采用了 CAS + synchronized 来保证并发安全性。至于如何实现，那我继续看一下put方法逻辑
+抛弃了原有的Segment 分段锁，而采用了 CAS + synchronized 来保证并发安全性。
 
 ## HashMap、Hashtable、ConccurentHashMap三者的区别
 
