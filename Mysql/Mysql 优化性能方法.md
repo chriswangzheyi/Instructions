@@ -8,7 +8,7 @@
 
 　　例如，在定义邮政编码这个字段时，如果将其设置为CHAR(255),显然给数据库增加了不必要的空间，甚至使用VARCHAR这种类型也是多余的，因为CHAR(6)就可以很好的完成任务了。同样的，如果可以的话，我们应该使用MEDIUMINT而不是BIGIN来定义整型字段。
 
-　　另外一个提高效率的方法是在可能的情况下，应该尽量把字段设置为NOTNULL，这样在将来执行查询的时候，数据库不用去比较NULL值。
+　　另外一个提高效率的方法是在可能的情况下，应该尽量把字段设置为NOT NULL，这样在将来执行查询的时候，数据库不用去比较NULL值。
 
 　　对于某些文本字段，例如“省份”或者“性别”，我们可以将它们定义为ENUM类型。因为在MySQL中，ENUM类型被当作数值型数据来处理，而数值型数据被处理起来的速度要比文本类型快得多。这样，我们又可以提高数据库的性能。
 
@@ -29,9 +29,9 @@
 
 　如果使用连接（JOIN）..来完成这个查询工作，速度将会快很多。尤其是当salesinfo表中对CustomerID建有索引的话，性能将会更好，查询如下：
 
-SELECT * FROM customerinfo
-LEFTJOIN salesinfo ON customerinfo.CustomerID=salesinfo.CustomerID
-WHERE salesinfo.CustomerID IS NULL
+	SELECT * FROM customerinfo
+	LEFTJOIN salesinfo ON customerinfo.CustomerID=salesinfo.CustomerID
+	WHERE salesinfo.CustomerID IS NULL
  
 
 连接（JOIN）..之所以更有效率一些，是因为MySQL不需要在内存中创建临时表来完成这个逻辑上的需要两个步骤的查询工作。
