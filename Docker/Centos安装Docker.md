@@ -43,4 +43,26 @@
 	systemctl daemon-reload
 	systemctl restart docker
 
+
+## 安装上传下载插件
+
+	yum -y install lrzsz
 	
+
+## 安装Docker compose
+
+从github中下载安装包
+
+	https://github.com/docker/compose/releases
+
+将docker-compose上传至服务器。
+
+	rz
+
+增加权限
+
+	sudo chmod +x /root/docker-compose-Linux-x86_64
+
+验证
+
+	docker-compose --version
