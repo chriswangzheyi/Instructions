@@ -187,7 +187,7 @@
 	  kafka:
 	    consumer:
 	      group-id: test
-	      bootstrap-servers: 47.112.142.231:9092
+	      bootstrap-servers: 47.112.142.231:9092,/47.112.142.231:9093,/47.112.142.231:9094
 
 
 ### pom.xml
@@ -242,7 +242,6 @@
 	            </plugin>
 	        </plugins>
 	    </build>
-	
 	</project>
 
 
