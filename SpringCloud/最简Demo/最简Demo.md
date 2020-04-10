@@ -66,7 +66,7 @@
 
 加上@EnableEurekaServer注解
 
-#### application-dev.yml
+#### application.yml
 
 	server:
 	  port: 6001
@@ -81,7 +81,7 @@
 	    register-with-eureka: false
 	    service-url:
 	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
-
+	  environment: dev #eureka显示信息，这里的内容不影响eureka读取配置相关内容   
 
 
 #### pom
@@ -326,7 +326,7 @@
 	  ignored-services:
 	    "*"
 	  routes:
-	    provider: /p/**
+	    provider: /p/**  #把所有请求provider服务的请求都映射到/p下
 
 
 
@@ -420,6 +420,12 @@
 	  instance:
 	    instance-id: consumer   #在信息列表显示主机名称
 	    prefer-ip-address: true  # 访问路径变为ip地址
+
+## 搭建Hystrix Dashboard
+
+父项目右键--> new -->Module --> Spring spring initializer，
+
+勾选eureka discovery, openfeign, springboot web
 
 
 ## 使用Docker构建容器
