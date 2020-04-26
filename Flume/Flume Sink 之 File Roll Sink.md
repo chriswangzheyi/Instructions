@@ -36,3 +36,7 @@ vi /root/flumeDemo/flume/conf/s_filerole.conf
 ## 启动
 
 	/root/flumeDemo/flume/bin/flume-ng agent -f /root/flumeDemo/flume/conf/s_filerole.conf  -c /root/flumeDemo/flume/conf -n a1
+
+
+
+日志会被存放到 hadoop fs -rmdir /hdfs/d1/d2 目录

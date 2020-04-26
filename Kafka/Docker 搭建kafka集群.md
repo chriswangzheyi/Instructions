@@ -94,16 +94,60 @@ vim /root//kafka_test/docker-compose.yml
 
 配置：
 
-第一步： add cluster
+#### 第一步： add cluster
 
 ![](../Images/1.png)
 
-第二步： 填写zk等其他配置
+#### 第二步： 填写zk等其他配置
 
 ![](../Images/2.png)
 
-第三步：查看集群
+#### 第三步：查看集群
 
 ![](../Images/3.png)
+
+
+
+
+
+## 特殊情况
+
+### kafka3分区2副本当停掉一个节点时无法消费
+
+报错：
+
+[Consumer clientId=consumer-1, groupId=test] 1 partitions have leader brokers without a matching listener, including [test-2]
+
+原因：
+
+因为kafka broker设置了 offsets.topic.replication.factor =1
+
+
+### 解决方案：
+
+进入kafka容器
+
+	vi /opt/kafka_2.12-2.4.1/config/server.properties
+
+设置
+
+	offsets.topic.replication.factor =2
+	transaction.state.log.replication.factor=2
+
+
+### Kafka out of memory
+
+vi /opt/kafka_2.12-2.4.1/bin/kafka-server-start.sh
+
+插入：
+
+	 export KAFKA_HEAP_OPTS="-Xmx1G -Xms128M"
+
+
+vi /opt/kafka_2.12-2.4.1/bin/zookeeper-server-start.sh
+
+插入
+
+	export KAFKA_HEAP_OPTS="-Xmx512M -Xms512M"
 
 
