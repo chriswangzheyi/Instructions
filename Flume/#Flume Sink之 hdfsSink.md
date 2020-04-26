@@ -23,7 +23,7 @@ vi /root/flumeDemo/flume/conf/s_hdfs.conf
 	# define sink
 	a1.sinks.k1.type = hdfs
 	#控制hdfs上的目录
-	a1.sinks.k1.hdfs.path = hdfs://47.112.142.231:8020/test/lwq/%y-%m-%d
+	a1.sinks.k1.hdfs.path = hdfs://47.112.142.231:9000/test/lwq/%y-%m-%d
 	#文件前缀
 	a1.sinks.k1.hdfs.filePrefix = events-
 	#round控制的是目录的滚动
