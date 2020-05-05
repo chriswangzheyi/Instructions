@@ -1,5 +1,6 @@
 # K8S安装流程
 
+参考： https://mp.weixin.qq.com/s/KezmW60LF43jFNETpVH2Ag
 
 ## 集群组成
 
@@ -686,11 +687,12 @@ vi kubeadm-config.yaml
 ![](../Images/3.png)
 
 
-如果初始化失败可以执行
-
 需要将红色部分记录下来。
 
+####　如果初始化失败可以执行
+
 	kubeadm reset
+	rm -rf $HOME/.kube
 
 
 ### 在master1节点执行如下，这样才能有权限操作k8s资源
@@ -792,11 +794,13 @@ cd /root && mkdir -p /etc/kubernetes/pki/etcd &&mkdir -p ~/.kube/
 ### 在master2和master3上操作：
 
 	mkdir -p $HOME/.kube
-	sudo cp -i /etc/kubernetes/admin.conf$HOME/.kube/config
-	sudo chown $(id -u):$(id -g)$HOME/.kube/config
+	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+	sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 ### 验证
+
+在master1上：
 
 	kubectl get nodes 
 
@@ -808,3 +812,101 @@ cd /root && mkdir -p /etc/kubernetes/pki/etcd &&mkdir -p ~/.kube/
 	master1   Ready    master   33m     v1.17.3
 	master2   Ready    master   2m20s   v1.17.3
 	master3   Ready    master   47s     v1.17.3
+
+
+
+## 把node1节点加入到k8s集群，在node节点操作
+
+	kubeadm join 192.168.195.199:6443 --token t804ua.g39ih5r9b0w3ltp5 \
+	--discovery-token-ca-cert-hash sha256:b53d6136c6deb3669527885fa34b269b980b350e05df69d21d1af14ea0a6f65a 
+
+这里的token和discovery-token-ca-cert-hash 都是master1初始化的时候生成的。
+
+### 在master1节点查看集群节点状态
+
+	kubectl get nodes
+
+结果：
+
+	NAME      STATUS   ROLES    AGE    VERSION
+	master1   Ready    master   102m   v1.17.3
+	master2   Ready    master   99m    v1.17.3
+	master3   Ready    master   99m    v1.17.3
+	node1     Ready    <none>   94m    v1.17.3
+
+
+至此集群搭建完毕。
+
+
+## 安装dashboard
+
+### 上传 recommended.yaml 文件到master1中
+
+### 删除之前的dashboard
+
+	kubectl delete ns kubernetes-dashboard
+
+
+### 拉取镜像及修改tag
+
+
+	docker pull registry.cn-hangzhou.aliyuncs.com/rsqlh/kubernetes-dashboard:v1.10.1
+	docker tag registry.cn-hangzhou.aliyuncs.com/rsqlh/kubernetes-dashboard:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+
+
+##### 代理格式：
+
+阿里云代理仓库地址为：registry.aliyuncs.com/google_containers
+
+比如下载
+
+k8s.gcr.io/coredns:1.6.5
+
+可以代理为：
+
+registry.aliyuncs.com/google_containers/coredns:1.6.5
+
+
+
+执行
+
+	kubectl create -f recommended.yaml
+
+
+
+查看是否成功
+
+	kubectl get pods -n kube-system -o wide
+
+
+显示如下就代表成功：
+
+kubernetes-dashboard-7c54d59f66-8wgr9   1/1     Running   0          2m37s   10.244.3.10       node1     <none>           <none>
+
+
+### 登陆dashboard
+
+访问：ip:32000。 推荐firefox。 google chrome打不开
+
+	https://192.168.195.140:32000/
+
+通过token登陆。
+
+
+### 生成token过程
+
+
+
+查看token
+
+	kubectl get secret -n kube-system
+
+找到：
+
+	kubernetes-dashboard-key-holder                  Opaque                                2      31m
+	kubernetes-dashboard-token-s9pj5                 kubernetes.io/service-account-token   3      31m
+
+
+dashboard-admin-token-slfcr 通过上边命令获取到的
+
+	kubectl describe secret kubernetes-dashboard-token-s9pj5 -n kube-system
