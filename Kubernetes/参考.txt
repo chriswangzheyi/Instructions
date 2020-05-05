@@ -1,1 +1,0 @@
-https://github.com/yonyoucloud/install_k8s
