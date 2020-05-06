@@ -377,7 +377,8 @@ vi /etc/hosts
 > pause版本是3.1，用到的镜像是k8s.gcr.io/pause:3.1
 > etcd版本是3.4.3，用到的镜像是k8s.gcr.io/etcd:3.4.3-0        
 > cordns版本是1.6.5，用到的镜像是k8s.gcr.io/coredns:1.6.5
-> cni版本是3.5.3，用到的镜像是quay.io/calico/cni:v3.5.3
+> cni版本是3.5.3，用到的镜像是quay.io/
+> /cni:v3.5.3
 > calico版本是3.5.3，用到的镜像是quay.io/calico/node:v3.5.3          
 > apiserver、scheduler、controller-manager、kube-proxy版本是1.17.3，用到的镜像分别是
 > k8s.gcr.io/kube-apiserver:v1.17.3
@@ -840,73 +841,94 @@ cd /root && mkdir -p /etc/kubernetes/pki/etcd &&mkdir -p ~/.kube/
 
 ## 安装dashboard
 
-### 上传 recommended.yaml 文件到master1中
 
-### 删除之前的dashboard
+### 下载镜像
 
-	kubectl delete ns kubernetes-dashboard
+dashboard_2_0_0.tar.gz
 
+metrics-scrapter-1-0-1.tar.gz
 
-### 拉取镜像及修改tag
-
-
-	docker pull registry.cn-hangzhou.aliyuncs.com/rsqlh/kubernetes-dashboard:v1.10.1
-	docker tag registry.cn-hangzhou.aliyuncs.com/rsqlh/kubernetes-dashboard:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+链接：https://pan.baidu.com/s/1k1heJy8lLnDk2JEFyRyJdA
+提取码：udkj
 
 
-##### 代理格式：
+### 加载镜像（在每一个节点）
 
-阿里云代理仓库地址为：registry.aliyuncs.com/google_containers
+上传镜像到每一个节点后：
 
-比如下载
-
-k8s.gcr.io/coredns:1.6.5
-
-可以代理为：
-
-registry.aliyuncs.com/google_containers/coredns:1.6.5
+	docker load -i dashboard_2_0_0.tar.gz
+	docker load -i metrics-scrapter-1-0-1.tar.gz
 
 
+### 安装dashboard
 
-执行
+上传 kubernetes-dashboard.yaml 文件到master1中
 
-	kubectl create -f recommended.yaml
+执行：
 
-
-
-查看是否成功
-
-	kubectl get pods -n kube-system -o wide
+	kubectl apply -f kubernetes-dashboard.yaml
 
 
-显示如下就代表成功：
+看到下面内容表示成功：
 
-kubernetes-dashboard-7c54d59f66-8wgr9   1/1     Running   0          2m37s   10.244.3.10       node1     <none>           <none>
-
-
-### 登陆dashboard
-
-访问：ip:32000。 推荐firefox。 google chrome打不开
-
-	https://192.168.195.140:32000/
-
-通过token登陆。
+	NAME                                        READY   STATUS    RESTARTS  AGE 
+	dashboard-metrics-scraper-694557449d-8xmtf   1/1    Running   0          60s  
+	kubernetes-dashboard-5f98bdb684-ph9wg        1/1    Running   2          60s
 
 
-### 生成token过程
+查看：
+
+	kubectl get svc -n kubernetes-dashboard
+
+
+显示：
+
+	NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE  
+	dashboard-metrics-scraper ClusterIP  10.100.23.9       <none>        8000/TCP   50s  
+	kubernetes-dashboard       ClusterIP   10.105.253.155   <none>        443/TCP    50s
+
+
+### 修改service type类型变成NodePort：
+
+	kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
+
+把type: ClusterIP变成 type: NodePort，保存退出即可
+
+验证：
+
+	kubectl get svc -n kubernetes-dashboard
+
+![](../Images/4.png)
+
+访问ip:port 就可以看到dashboard. port是上图红色框所示。 例如： https://192.168.195.140:30804
+
+
+### 创建管理员token，可查看任何空间权限
+
+	kubectl create clusterrolebinding dashboard-cluster-admin --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+
+
+1）查看kubernetes-dashboard名称空间下的secret
+
+	kubectl get secret -n kubernetes-dashboard
+
+显示
+
+	NAME                               TYPE                                  DATA   AGE
+	default-token-spgpq                kubernetes.io/service-account-token   3      18m
+	kubernetes-dashboard-certs         Opaque                                0      18m
+	kubernetes-dashboard-csrf          Opaque                                1      18m
+	kubernetes-dashboard-key-holder    Opaque                                2      18m
+	kubernetes-dashboard-token-6fvhs   kubernetes.io/service-account-token   3      18m
+
+2） 找到对应的带有token的kubernetes-dashboard-token-6fvhs
+
+	kubectl  describe  secret kubernetes-dashboard-token-6fvhs  -n   kubernetes-dashboard
+
+得到token。
 
 
 
-查看token
+3）进入dashboard,填入token。
 
-	kubectl get secret -n kube-system
-
-找到：
-
-	kubernetes-dashboard-key-holder                  Opaque                                2      31m
-	kubernetes-dashboard-token-s9pj5                 kubernetes.io/service-account-token   3      31m
-
-
-dashboard-admin-token-slfcr 通过上边命令获取到的
-
-	kubectl describe secret kubernetes-dashboard-token-s9pj5 -n kube-system
+![](../Images/5.png)
