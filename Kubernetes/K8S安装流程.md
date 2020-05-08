@@ -291,17 +291,9 @@ vi /etc/hosts
 ### (2)修改docker配置文件，配置镜像加速器
 
 	 cat > /etc/docker/daemon.json <<EOF
-	{
-	 "exec-opts": ["native.cgroupdriver=systemd"],
-	 "log-driver": "json-file",
-	 "log-opts": {
-	   "max-size": "100m"
-	  },
-	 "storage-driver": "overlay2",
-	 "storage-opts": [
-	   "overlay2.override_kernel_check=true"
-	  ]
-	}
+	 {
+	 "registry-mirrors": ["https://6kx4zyno.mirror.aliyuncs.com"]
+	 }
 	EOF
 
 
