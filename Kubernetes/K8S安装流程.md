@@ -861,6 +861,11 @@ metrics-scrapter-1-0-1.tar.gz
 	kubectl apply -f kubernetes-dashboard.yaml
 
 
+查询：
+
+	 kubectl get pods -n kubernetes-dashboard -o wide
+
+
 看到下面内容表示成功：
 
 	NAME                                        READY   STATUS    RESTARTS  AGE 
