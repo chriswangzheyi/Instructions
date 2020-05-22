@@ -1,5 +1,13 @@
 # Spark Wordcount Demo
 
+## 数据
+
+	hadoop hive
+	hive hadoop
+	hbase sqoop
+	hbase sqoop
+	hadoop hive
+
 ## Wordcount demo
 
 
