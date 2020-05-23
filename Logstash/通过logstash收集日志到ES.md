@@ -1,4 +1,4 @@
-# 通过logstash收集日志
+# 通过logstash收集日志到ES
 
 
 参考：https://www.cnblogs.com/yanjieli/p/11187573.html
