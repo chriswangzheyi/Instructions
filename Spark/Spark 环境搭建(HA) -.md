@@ -30,7 +30,6 @@ vi /etc/profile
 
 验证：
 
-	pyspark --version
 	scala -version
 
 
