@@ -59,9 +59,14 @@
 
 	rz
 
+将文件传到对应目录
+
+	cp /root/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+
+
 增加权限
 
-	sudo chmod +x /root/docker-compose-Linux-x86_64
+	chmod +x /usr/local/bin/docker-compose
 
 验证
 
