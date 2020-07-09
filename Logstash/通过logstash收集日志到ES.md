@@ -23,7 +23,7 @@
 	    file {
 	        path => "/es/data/messages/1.data"
 	        type => "systemlog"
-	        start_position => "beginning/1.data"
+	        start_position => "beginning"
 	        stat_interval => "3"
 	    }
 	    file {
