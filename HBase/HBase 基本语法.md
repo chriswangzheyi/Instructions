@@ -77,15 +77,18 @@
 
 ## 建表
 	
-### create 'table_name, 'family1','family2','familyN'    
+	create 'namespace:table_name, 'family1','family2','familyN'    
 
 创建表和列簇
 	
-	create 'test', 'cf'
+	create 'test', 'cf'  #创建列族在default命名空间中
+	create 'ns1:test','cf'  #创建列族在ns1命名空间中
 
-### put 'table_name', 'rowkey', 'family:column', 'value' 
 
-把数据放到表中
+把数据放到表中：
+
+	put 'table_name', 'rowkey', 'family:column', 'value' 
+
 	
 	hbase(main):004:0* put 'test','row1','cf:a','value1'
 	Took 0.2791 seconds                                                                                                                                                   
@@ -142,6 +145,15 @@
 	count 'test'
 
 
+## 创建namespace
+
+	create_namespace "name"
+
+hbase中没有数据库概念，hbase中有namespace相当于hive中的数据库。
+
+## 查看namespace列表
+
+	list_namespace
 
 
 ## 综合例子
@@ -157,3 +169,7 @@
 	put 'userinfo','Row1','personal:phone','1311111111'
 	put 'userinfo','Row1','office:tel','010-11111111'
 	put 'userinfo','Row1','office:address','帝都大厦-18F-01'
+
+
+
+
