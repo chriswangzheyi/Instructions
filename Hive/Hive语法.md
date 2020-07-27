@@ -393,3 +393,9 @@ https://www.jianshu.com/p/6383611b308d
 
 	DESC person
 
+
+
+## HDFS 
+ 
+	#查看hdfs
+	dfs -lsr /;
