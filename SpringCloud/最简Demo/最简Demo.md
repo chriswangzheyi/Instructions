@@ -3,7 +3,7 @@
 ---
 
 ## 项目架构
-![](../Images/1.png)
+![](Images/1.png)
 
 
 ## 搭建步骤
@@ -14,7 +14,7 @@
 
 新建一个Maven 父项目:Springcloud_demo
 
-![](../Images/2.png)
+![](Images/2.png)
 
 
 #### pom
@@ -38,11 +38,11 @@
 
 父项目右键--> new -->Module
 
-![](../Images/3.png)
+![](Images/3.png)
 
-![](../Images/4.png)
+![](Images/4.png)
 
-![](../Images/5.png)
+![](Images/5.png)
 
 
 
@@ -171,7 +171,7 @@
 
 父项目右键--> new -->Module --> Spring spring initializer， 
 
-勾选eureka discovery, springboot web, hystrix(非必须)
+勾选eureka discovery, spring web, hystrix(非必须)
 
 
 
@@ -337,7 +337,7 @@
 
 父项目右键--> new -->Module --> Spring spring initializer， 
 
-勾选eureka discovery, openfeign, springboot web
+勾选eureka discovery, openfeign, spring web
 
 #### consumerController 
 
@@ -425,7 +425,60 @@
 
 父项目右键--> new -->Module --> Spring spring initializer，
 
-勾选eureka discovery, openfeign, springboot web
+勾选eureka discovery, hystrix dashboard, springweb
+
+###HystrixdashboardDemoApplication
+
+	package com.wzy.hystrixdashboard_demo;
+	
+	import org.springframework.boot.SpringApplication;
+	import org.springframework.boot.autoconfigure.SpringBootApplication;
+	import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+	import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+	
+	@SpringBootApplication
+	@EnableHystrixDashboard
+	public class HystrixdashboardDemoApplication {
+	
+	    public static void main(String[] args) {
+	        SpringApplication.run(HystrixdashboardDemoApplication.class, args);
+	    }
+	
+	}
+
+
+
+### application.yml
+
+	server:
+	  port: 9001
+	
+	eureka:
+	  client:
+	    service-url:
+	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+	  instance:
+	    instance-id: hystrix_dashboard   #在信息列表显示主机名称
+	    prefer-ip-address: true  # 访问路径变为ip地址
+	
+	
+	spring:
+	  application:
+	    name: hystrix_dashboard  # 名字相同则认为是同一个服务
+	
+	hystrix:
+	  dashboard:
+	    proxy-stream-allow-list: "*"
+
+
+访问页面：
+
+	http://localhost:9001/hystrix
+	
+
+填入：http://localhost:8001/hystrix.stream
+
+![](Images/7.png)
 
 
 ## 使用Docker构建容器
@@ -434,7 +487,7 @@
 
 将项目所有的子项目打包，并上传至服务器，创建对应的文件夹。
 
-![](../Images/6.png)
+![](Images/6.png)
 
 
 ### Eureka1
