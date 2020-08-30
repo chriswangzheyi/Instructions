@@ -25,7 +25,7 @@ vi /etc/profile
 
  source /etc/profile
 
-![](../Images/1.png)
+![](Images/1.png)
 
 
 验证：

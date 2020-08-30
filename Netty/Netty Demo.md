@@ -3,7 +3,7 @@
 echo 服务
 
 ## 项目结构
-![](../Images/1.png)
+![](Images/1.png)
 
 
 ## 源码
