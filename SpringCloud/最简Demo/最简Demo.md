@@ -194,7 +194,7 @@
 	        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
 	        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
 	        registrationBean.setLoadOnStartup(1);
-	        registrationBean.addUrlMappings("/hystrix.stream");
+	        registrationBean.addUrlMappings("/actuator/hystrix.stream");
 	        registrationBean.setName("HystrixMetricsStreamServlet");
 	        return registrationBean;
 	    }
@@ -476,9 +476,148 @@
 	http://localhost:9001/hystrix
 	
 
-填入：http://localhost:8001/hystrix.stream
+填入：http://localhost:8001/actuator/hystrix.stream
 
 ![](Images/7.png)
+
+
+## 搭建Turbine
+
+
+父项目右键--> new -->Module --> Spring spring initializer，
+
+勾选eureka discovery, turbine, spring web
+
+
+
+
+###TurbineDemoApplication
+
+	package com.wzy.turbine_demo;
+	
+	import org.springframework.boot.SpringApplication;
+	import org.springframework.boot.autoconfigure.SpringBootApplication;
+	import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+	import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+	import org.springframework.cloud.netflix.turbine.EnableTurbine;
+	
+	@SpringBootApplication
+	@EnableDiscoveryClient
+	@EnableTurbine
+	public class TurbineDemoApplication {
+	
+	    public static void main(String[] args) {
+	        SpringApplication.run(TurbineDemoApplication.class, args);
+	    }
+	
+	}
+
+
+### application.yml
+
+	server:
+	  port: 9101
+	
+	spring:
+	  application:
+	    name: turbine
+	
+	eureka:
+	  client:
+	    service-url:
+	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+	  instance:
+	    instance-id: turbine  #在信息列表显示主机名称
+	    prefer-ip-address: true  # 访问路径变为ip地址
+	
+	turbine:
+	  app-config: PROVIDER  #填入在eureka中注册的名字。如果有多个服务则用逗号分隔开
+	  combine-host-port: true
+	  cluster-name-expression: new String('default')
+
+
+### pom.xml
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	    <modelVersion>4.0.0</modelVersion>
+	    <parent>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-parent</artifactId>
+	        <version>2.3.3.RELEASE</version>
+	        <relativePath/> <!-- lookup parent from repository -->
+	    </parent>
+	    <groupId>com.wzy</groupId>
+	    <artifactId>turbine_demo</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	    <name>turbine_demo</name>
+	    <description>Demo project for Spring Boot</description>
+	
+	    <properties>
+	        <java.version>1.8</java.version>
+	        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+	    </properties>
+	
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-web</artifactId>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-test</artifactId>
+	            <scope>test</scope>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>org.junit.vintage</groupId>
+	                    <artifactId>junit-vintage-engine</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+	    </dependencies>
+	
+	    <dependencyManagement>
+	        <dependencies>
+	            <dependency>
+	                <groupId>org.springframework.cloud</groupId>
+	                <artifactId>spring-cloud-dependencies</artifactId>
+	                <version>${spring-cloud.version}</version>
+	                <type>pom</type>
+	                <scope>import</scope>
+	            </dependency>
+	        </dependencies>
+	    </dependencyManagement>
+	
+	    <build>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	            </plugin>
+	        </plugins>
+	    </build>
+	
+	</project>
+
+
+
+查看信息：
+
+	http://localhost:9101/turbine.stream
+	
+在Hystrix Dashboard中填入上面的链接可以看到聚合监控
+
+![]( Images/8.png)
 
 
 ## 使用Docker构建容器
