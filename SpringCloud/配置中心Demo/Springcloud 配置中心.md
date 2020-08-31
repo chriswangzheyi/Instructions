@@ -4,7 +4,7 @@
 ## 准备配置内容
 
 ### 创建Git repository
-![](../Images/1.png)
+![](Images/1.png)
 
 创建一个git的repository, 以micorconfig为名。创建一个文件，名字叫test-dev.properties.
 
@@ -14,7 +14,7 @@
 
 ## 创建Maven父项目
 
-![](../Images/2.png)
+![](Images/2.png)
 
 
 ## Eureka
@@ -23,11 +23,11 @@
 
 增加eureka Server
 
-![](../Images/3.png)
+![](Images/3.png)
 
 ### 项目结构
 
-![](../Images/4.png)
+![](Images/4.png)
 
 ### EurekaApplication
 
@@ -446,4 +446,4 @@
 
 	http://localhost:8001/word
 
-![](../Images/10.png)
+![](Images/10.png)
