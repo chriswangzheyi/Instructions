@@ -273,7 +273,7 @@
 
  
 
-### 搭建Gateway
+### 搭建zuul
 
 父项目右键--> new -->Module --> Spring spring initializer， 
 
@@ -315,12 +315,12 @@
 	    service-url:
 	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
 	  instance:
-	    instance-id: gateway   #在信息列表显示主机名称
+	    instance-id: zuul   #在信息列表显示主机名称
 	    prefer-ip-address: true  # 访问路径变为ip地址
 	
 	spring:
 	  application:
-	    name: gateway
+	    name: zuul
 	zuul:
 	  prefix: /
 	  ignored-services:
@@ -620,6 +620,137 @@
 ![]( Images/8.png)
 
 
+## 搭建Gateway
+
+zuul和gateway功能类似，选择其中一个就可以承担路由功能。
+
+
+父项目右键--> new -->Module --> Spring spring initializer，
+
+勾选eureka discovery, spring gateway
+
+
+### GatewayDemoApplication
+
+	package com.wzy.gateway_demo;
+	
+	import org.springframework.boot.SpringApplication;
+	import org.springframework.boot.autoconfigure.SpringBootApplication;
+	import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+	
+	@SpringBootApplication
+	@EnableDiscoveryClient
+	public class GatewayDemoApplication {
+	
+	    public static void main(String[] args) {
+	        SpringApplication.run(GatewayDemoApplication.class, args);
+	    }
+	
+	}
+
+
+### application.yml
+
+	server:
+	  port: 4001
+	
+	spring:
+	  cloud:
+	    gateway:
+	      routes:
+	        - id: before_route
+	          uri: http://localhost:7001/consumer
+	          predicates:
+	            - Path=/consumer
+	  application:
+	    name: gateway
+	
+	
+	eureka:
+	  client:
+	    service-url:
+	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+	  instance:
+	    instance-id: gateway  #在信息列表显示主机名称
+	    prefer-ip-address: true  # 访问路径变为ip地址
+	    
+	    
+### pom.xml
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	    <modelVersion>4.0.0</modelVersion>
+	    <parent>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-parent</artifactId>
+	        <version>2.3.3.RELEASE</version>
+	        <relativePath/> <!-- lookup parent from repository -->
+	    </parent>
+	    <groupId>com.wzy</groupId>
+	    <artifactId>gateway_demo</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	    <name>gateway_demo</name>
+	    <description>Demo project for Spring Boot</description>
+	
+	    <properties>
+	        <java.version>1.8</java.version>
+	        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+	    </properties>
+	
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-starter-gateway</artifactId>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-test</artifactId>
+	            <scope>test</scope>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>org.junit.vintage</groupId>
+	                    <artifactId>junit-vintage-engine</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+	    </dependencies>
+	
+	    <dependencyManagement>
+	        <dependencies>
+	            <dependency>
+	                <groupId>org.springframework.cloud</groupId>
+	                <artifactId>spring-cloud-dependencies</artifactId>
+	                <version>${spring-cloud.version}</version>
+	                <type>pom</type>
+	                <scope>import</scope>
+	            </dependency>
+	        </dependencies>
+	    </dependencyManagement>
+	
+	    <build>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	            </plugin>
+	        </plugins>
+	    </build>
+	
+	</project>
+
+
+
+### 测试
+
+访问 http://localhost:4001/consumer， 即可以路由到consumer微服务中
+
+
 ## 使用Docker构建容器
 
 ### 准备
@@ -661,20 +792,20 @@
 	
 	docker build -t zheyi_eureka2 .
 
-### Gateway
+### Zuul
 
 	#构建Dockerfile
 	vi Dockerfile
 
 	FROM docker.io/kdvolder/jdk8
 	VOLUME /tmp
-	ADD gateway_demo-0.0.1-SNAPSHOT.jar /gateway_demo-0.0.1-SNAPSHOT.jar
+	ADD zuul_demo-0.0.1-SNAPSHOT.jar /zuul_demo-0.0.1-SNAPSHOT.jar
 	EXPOSE 5001
-	ENTRYPOINT ["java","-jar","/gateway_demo-0.0.1-SNAPSHOT.jar"]
+	ENTRYPOINT ["java","-jar","/zuul_demo-0.0.1-SNAPSHOT.jar"]
 
 生成镜像
 	
-	docker build -t zheyi_gateway .
+	docker build -t zheyi_zuul .
 
 ### Provider1
 
@@ -730,7 +861,7 @@
 
 	docker run -idt --name=eureka1 -p 6001:6001 zheyi_eureka1
 	docker run -idt --name=eureka2 -p 6002:6002 zheyi_eureka2 
-	docker run -idt --name=gateway -p 5001:5001 zheyi_gateway
+	docker run -idt --name=zuul -p 5001:5001 zheyi_zuul
 	docker run -idt --name=consumer -p 7001:7001 zheyi_consumer 
 	docker run -idt --name=provider1 -p 8001:8001 zheyi_provider1
 	docker run -idt --name=provider2 -p 8002:8002 zheyi_provider2
