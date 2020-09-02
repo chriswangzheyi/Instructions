@@ -489,8 +489,6 @@
 勾选eureka discovery, turbine, spring web
 
 
-
-
 ###TurbineDemoApplication
 
 	package com.wzy.turbine_demo;
@@ -534,81 +532,6 @@
 	  app-config: PROVIDER  #填入在eureka中注册的名字。如果有多个服务则用逗号分隔开
 	  combine-host-port: true
 	  cluster-name-expression: new String('default')
-
-
-### pom.xml
-
-	<?xml version="1.0" encoding="UTF-8"?>
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	    <modelVersion>4.0.0</modelVersion>
-	    <parent>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-parent</artifactId>
-	        <version>2.3.3.RELEASE</version>
-	        <relativePath/> <!-- lookup parent from repository -->
-	    </parent>
-	    <groupId>com.wzy</groupId>
-	    <artifactId>turbine_demo</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-	    <name>turbine_demo</name>
-	    <description>Demo project for Spring Boot</description>
-	
-	    <properties>
-	        <java.version>1.8</java.version>
-	        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-	    </properties>
-	
-	    <dependencies>
-	        <dependency>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-starter-web</artifactId>
-	        </dependency>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-	        </dependency>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
-	        </dependency>
-	
-	        <dependency>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-starter-test</artifactId>
-	            <scope>test</scope>
-	            <exclusions>
-	                <exclusion>
-	                    <groupId>org.junit.vintage</groupId>
-	                    <artifactId>junit-vintage-engine</artifactId>
-	                </exclusion>
-	            </exclusions>
-	        </dependency>
-	    </dependencies>
-	
-	    <dependencyManagement>
-	        <dependencies>
-	            <dependency>
-	                <groupId>org.springframework.cloud</groupId>
-	                <artifactId>spring-cloud-dependencies</artifactId>
-	                <version>${spring-cloud.version}</version>
-	                <type>pom</type>
-	                <scope>import</scope>
-	            </dependency>
-	        </dependencies>
-	    </dependencyManagement>
-	
-	    <build>
-	        <plugins>
-	            <plugin>
-	                <groupId>org.springframework.boot</groupId>
-	                <artifactId>spring-boot-maven-plugin</artifactId>
-	            </plugin>
-	        </plugins>
-	    </build>
-	
-	</project>
-
 
 
 查看信息：
@@ -675,80 +598,91 @@ zuul和gateway功能类似，选择其中一个就可以承担路由功能。
 	    prefer-ip-address: true  # 访问路径变为ip地址
 	    
 	    
-### pom.xml
-
-	<?xml version="1.0" encoding="UTF-8"?>
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	    <modelVersion>4.0.0</modelVersion>
-	    <parent>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-parent</artifactId>
-	        <version>2.3.3.RELEASE</version>
-	        <relativePath/> <!-- lookup parent from repository -->
-	    </parent>
-	    <groupId>com.wzy</groupId>
-	    <artifactId>gateway_demo</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-	    <name>gateway_demo</name>
-	    <description>Demo project for Spring Boot</description>
-	
-	    <properties>
-	        <java.version>1.8</java.version>
-	        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-	    </properties>
-	
-	    <dependencies>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-starter-gateway</artifactId>
-	        </dependency>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-	        </dependency>
-	
-	        <dependency>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-starter-test</artifactId>
-	            <scope>test</scope>
-	            <exclusions>
-	                <exclusion>
-	                    <groupId>org.junit.vintage</groupId>
-	                    <artifactId>junit-vintage-engine</artifactId>
-	                </exclusion>
-	            </exclusions>
-	        </dependency>
-	    </dependencies>
-	
-	    <dependencyManagement>
-	        <dependencies>
-	            <dependency>
-	                <groupId>org.springframework.cloud</groupId>
-	                <artifactId>spring-cloud-dependencies</artifactId>
-	                <version>${spring-cloud.version}</version>
-	                <type>pom</type>
-	                <scope>import</scope>
-	            </dependency>
-	        </dependencies>
-	    </dependencyManagement>
-	
-	    <build>
-	        <plugins>
-	            <plugin>
-	                <groupId>org.springframework.boot</groupId>
-	                <artifactId>spring-boot-maven-plugin</artifactId>
-	            </plugin>
-	        </plugins>
-	    </build>
-	
-	</project>
-
-
 
 ### 测试
 
 访问 http://localhost:4001/consumer， 即可以路由到consumer微服务中
+
+
+## 搭建config server
+
+**用于配置外部的资源文件,支持对属性值进行加解密**
+
+父项目右键--> new -->Module --> Spring spring initializer，
+
+勾选eureka discovery, config server
+
+### ConfigServerDemoApplication
+
+	package com.wzy.config_server_demo;
+	
+	import org.springframework.boot.SpringApplication;
+	import org.springframework.boot.autoconfigure.SpringBootApplication;
+	import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+	import org.springframework.cloud.config.server.EnableConfigServer;
+	
+	@SpringBootApplication
+	@EnableConfigServer
+	@EnableDiscoveryClient
+	public class ConfigServerDemoApplication {
+	
+	    public static void main(String[] args) {
+	        SpringApplication.run(ConfigServerDemoApplication.class, args);
+	    }
+	}
+	
+
+### application.yml
+
+	server:
+	  port: 4001
+	
+	spring:
+	  application:
+	    name: config_server  #配置文件名（当应用名跟配置文件相同时可以不用配置）
+	  cloud:
+	    config:
+	      server:
+	        git:
+	          uri: https://github.com/chriswangzheyi/microconfig.git
+	          username: chriswangzheyi
+	          password: wzy19910921
+	
+	eureka:
+	  client:
+	    service-url:
+	      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+	    fetch-registry: true
+	  instance:
+	    instance-id: config_server   #在信息列表显示主机名称
+	    prefer-ip-address: true  # 访问路径变为ip地址
+	
+
+
+### 测试
+
+	http://localhost:4001/test/dev
+
+返回：
+
+	{"name":"test","profiles":["dev"],"label":null,"version":"863135d7c2d15d66fa83ffb2ab037c6d493ed73f","state":null,"propertySources":[{"name":"https://github.com/chriswangzheyi/microconfig.git/test-dev.properties","source":{"word":"hello dev "}}]}
+
+### 规则
+
+####　注：仓库中的配置文件会被转换成web接口，访问规则：
+
+	/{application}/{profile}[/{label}]
+	/{application}-{profile}.yml
+	/{label}/{application}-{profile}.yml
+	/{application}-{profile}.properties
+	/{label}/{application}-{profile}.properties
+
+
+使用配置参考同一级的文件《配置中心Demo》
+
+
+
+
 
 
 ## 使用Docker构建容器
