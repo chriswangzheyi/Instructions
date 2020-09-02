@@ -1,3 +1,22 @@
+server:
+  port: 4001
+
 spring:
-  profiles:
-    active: prod
+  cloud:
+    gateway:
+      routes:
+        - id: before_route
+          uri: http://localhost:7001/consumer
+          predicates:
+            - Path=/consumer
+  application:
+    name: gateway
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+  instance:
+    instance-id: gateway  #在信息列表显示主机名称
+    prefer-ip-address: true  # 访问路径变为ip地址

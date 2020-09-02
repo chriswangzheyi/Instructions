@@ -1,0 +1,20 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: turbine
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+  instance:
+    instance-id: turbine  #在信息列表显示主机名称
+    prefer-ip-address: true  # 访问路径变为ip地址
+
+turbine:
+  app-config: PROVIDER  #填入在eureka中注册的名字。如果有多个服务则用逗号分隔开
+  combine-host-port: true
+  cluster-name-expression: new String('default')
+

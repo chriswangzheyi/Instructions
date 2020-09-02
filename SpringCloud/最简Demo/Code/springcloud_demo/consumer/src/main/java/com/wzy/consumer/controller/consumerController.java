@@ -1,6 +1,5 @@
 package com.wzy.consumer.controller;
 
-import com.wzy.consumer.service.consumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class consumerController {
 
     @Autowired
-    consumerService consumerService;
+    com.wzy.consumer.service.consumerService consumerService;
 
     @RequestMapping("/consumer")
     public String testFeign(){
