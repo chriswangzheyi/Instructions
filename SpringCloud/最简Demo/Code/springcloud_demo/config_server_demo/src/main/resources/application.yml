@@ -1,0 +1,22 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: config_server  #配置文件名（当应用名跟配置文件相同时可以不用配置）
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/chriswangzheyi/microconfig.git
+          username: chriswangzheyi
+          password: wzy19910921
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+    fetch-registry: true
+  instance:
+    instance-id: config_server   #在信息列表显示主机名称
+    prefer-ip-address: true  # 访问路径变为ip地址

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f969dee8-c6df-43e6-9e1d-c3bfdcea90b8" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="673356b8-debc-4002-937a-4c7a9bb1577e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,56 +18,66 @@
     </option>
   </component>
   <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="/usr/local/maven-Repository" />
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="/usr/local/apache-maven-3.6.3/conf/settings.xml" />
+      </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1VSjNSP8VJAsmpDLB28QqHnisQb" />
+  <component name="ProjectId" id="1goLxbjwUu9StKCjLkUNIBEmKuH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/provider_demo2/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sleuth_zipkin_demo2/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\provider_demo2\src\main\resources" />
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\provider_demo\src\main\resources" />
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\gateway_demo\src\main\resources" />
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\eureka_demo2\src\main\resources" />
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\eureka_demo\src\main\resources" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.wzy.provider_demo1" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.wzy.provider_demo.controller" />
-      <recent name="com.wzy.provider_demo2.controller" />
+      <recent name="com.wzy.provider_demo2.config" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Brian\IdeaProjects\springcloud_demo\.idea" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sleuth_zipkin_demo2/src/main/resources" />
+      <recent name="$PROJECT_DIR$/provider_demo2/src/main/resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.ConsumerApplication">
+  <component name="RunManager" selected="Spring Boot.SleuthZipkinDemo2Application">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="config_server_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.config_server_demo.ConfigServerDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ConsumerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="consumer" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.consumer.ConsumerApplication" />
@@ -73,16 +85,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EurekaDemo2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="eureka_demo2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.eureka_demo2.EurekaDemo2Application" />
+    <configuration name="EurekaDemo1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eureka_demo1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.eureka_demo1.EurekaDemo1Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EurekaDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="eureka_demo" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.eureka_demo.EurekaDemoApplication" />
+    <configuration name="EurekaDemo2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eureka_demo2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.eureka_demo2.EurekaDemo2Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,9 +113,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PrivderDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="provider_demo" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.privder_demo.PrivderDemoApplication" />
+    <configuration name="ProviderDemo1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="provider_demo1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.provider_demo1.ProviderDemo1Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,38 +127,158 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProviderDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="provider_demo" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.provider_demo.ProviderDemoApplication" />
+    <configuration name="SleuthZipkinDemo2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sleuth_zipkin_demo2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.sleuth_zipkin_demo2.SleuthZipkinDemo2Application" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="test" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.test.TestApplication" />
+    <configuration name="SleuthZipkinDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sleuth_zipkin_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.sleuth_zipkin_demo.SleuthZipkinDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SluethZipkinDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="slueth_zipkin_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.slueth_zipkin_demo.SluethZipkinDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TurbineDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="turbine_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.turbine_demo.TurbineDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZipkinDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zipkin_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.zipkin_demo.ZipkinDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZuulDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zuul_demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wzy.zuul_demo.ZuulDemoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f969dee8-c6df-43e6-9e1d-c3bfdcea90b8" name="Default Changelist" comment="" />
-      <created>1577253350484</created>
+      <changelist id="673356b8-debc-4002-937a-4c7a9bb1577e" name="Default Changelist" comment="" />
+      <created>1598776249695</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1577253350484</updated>
-      <workItem from="1577253354750" duration="10831000" />
-      <workItem from="1577328422797" duration="19977000" />
-      <workItem from="1577692290803" duration="6940000" />
+      <updated>1598776249695</updated>
+      <workItem from="1598776250775" duration="5921000" />
+      <workItem from="1598843937757" duration="10618000" />
+      <workItem from="1598956600354" duration="6123000" />
+      <workItem from="1599037710922" duration="4882000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="551" y="376" key="#Notifications" timestamp="1598782004599">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="551" y="376" key="#Notifications/0.23.1792.1017@0.23.1792.1017" timestamp="1598782004599" />
+    <state x="385" y="113" key="#Project_Structure" timestamp="1599039486940">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state x="385" y="113" key="#Project_Structure/0.23.1792.1017@0.23.1792.1017" timestamp="1598957266927" />
+    <state x="385" y="113" key="#Project_Structure/0.23.1792.1020@0.23.1792.1020" timestamp="1599039486940" />
+    <state x="526" y="203" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1598845944498">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="526" y="203" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1598845944498" />
+    <state x="897" y="862" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1598780642269">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="897" y="862" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1598780642269" />
+    <state x="1174" y="817" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1598780643717">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="1174" y="817" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.23.1792.1017@0.23.1792.1017" timestamp="1598780643717" />
+    <state x="762" y="324" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1598959227244">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="762" y="324" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1792.1017@0.23.1792.1017" timestamp="1598959227244" />
+    <state width="1750" height="282" key="GridCell.Tab.0.bottom" timestamp="1599040744659">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.0.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994696" />
+    <state width="1750" height="282" key="GridCell.Tab.0.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744659" />
+    <state width="1750" height="282" key="GridCell.Tab.0.bottom/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.0.bottom/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814072" />
+    <state width="1750" height="282" key="GridCell.Tab.0.center" timestamp="1599040744658">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.0.center/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994695" />
+    <state width="1750" height="282" key="GridCell.Tab.0.center/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744658" />
+    <state width="1750" height="282" key="GridCell.Tab.0.center/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.0.center/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814071" />
+    <state width="1750" height="282" key="GridCell.Tab.0.left" timestamp="1599040744658">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.0.left/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994695" />
+    <state width="1750" height="282" key="GridCell.Tab.0.left/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744658" />
+    <state width="1750" height="282" key="GridCell.Tab.0.left/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.0.left/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814071" />
+    <state width="1750" height="282" key="GridCell.Tab.0.right" timestamp="1599040744659">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.0.right/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994695" />
+    <state width="1750" height="282" key="GridCell.Tab.0.right/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744659" />
+    <state width="1750" height="282" key="GridCell.Tab.0.right/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.0.right/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814071" />
+    <state width="1750" height="282" key="GridCell.Tab.1.bottom" timestamp="1599040744660">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.1.bottom/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994697" />
+    <state width="1750" height="282" key="GridCell.Tab.1.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744660" />
+    <state width="1750" height="282" key="GridCell.Tab.1.bottom/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951816" />
+    <state width="1750" height="282" key="GridCell.Tab.1.bottom/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814073" />
+    <state width="1750" height="282" key="GridCell.Tab.1.center" timestamp="1599040744659">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.1.center/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994696" />
+    <state width="1750" height="282" key="GridCell.Tab.1.center/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744659" />
+    <state width="1750" height="282" key="GridCell.Tab.1.center/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.1.center/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814073" />
+    <state width="1750" height="282" key="GridCell.Tab.1.left" timestamp="1599040744659">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.1.left/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994696" />
+    <state width="1750" height="282" key="GridCell.Tab.1.left/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744659" />
+    <state width="1750" height="282" key="GridCell.Tab.1.left/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951815" />
+    <state width="1750" height="282" key="GridCell.Tab.1.left/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814072" />
+    <state width="1750" height="282" key="GridCell.Tab.1.right" timestamp="1599040744660">
+      <screen x="0" y="23" width="1792" height="1020" />
+    </state>
+    <state width="1750" height="282" key="GridCell.Tab.1.right/0.23.1792.1017@0.23.1792.1017" timestamp="1598962994696" />
+    <state width="1750" height="282" key="GridCell.Tab.1.right/0.23.1792.1020@0.23.1792.1020" timestamp="1599040744660" />
+    <state width="1750" height="282" key="GridCell.Tab.1.right/0.23.1792.1022@0.23.1792.1022" timestamp="1598964951816" />
+    <state width="1750" height="282" key="GridCell.Tab.1.right/0.23.1792.1024@0.23.1792.1024" timestamp="1598964814073" />
+    <state x="528" y="521" width="1264" height="470" key="new project wizard" timestamp="1599041170576">
+      <screen x="0" y="23" width="1792" height="1022" />
+    </state>
+    <state x="279" y="428" width="1264" height="470" key="new project wizard/0.23.1792.1017@0.23.1792.1017" timestamp="1598963190765" />
+    <state x="528" y="520" key="new project wizard/0.23.1792.1020@0.23.1792.1020" timestamp="1599039388110" />
+    <state x="528" y="521" key="new project wizard/0.23.1792.1022@0.23.1792.1022" timestamp="1599041170576" />
+    <state x="561" y="248" key="search.everywhere.popup" timestamp="1598845115142">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="561" y="248" key="search.everywhere.popup/0.23.1792.1017@0.23.1792.1017" timestamp="1598845115142" />
   </component>
 </project>

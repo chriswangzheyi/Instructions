@@ -1,3 +1,15 @@
+server:
+  port: 6002
+
 spring:
-  profiles:
-    active: prod
+  application:
+    name: eureka6002
+
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+  environment: dev #eureka显示信息，这里的内容不影响eureka读取配置相关内容

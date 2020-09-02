@@ -1,0 +1,20 @@
+server:
+  port: 5001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka6001:6001/eureka, http://eureka6002:6002/eureka
+  instance:
+    instance-id: zuul   #在信息列表显示主机名称
+    prefer-ip-address: true  # 访问路径变为ip地址
+
+spring:
+  application:
+    name: zuul
+zuul:
+  prefix: /
+  ignored-services:
+    "*"
+  routes:
+    provider: /p/**  #把所有请求provider服务的请求都映射到/p下
