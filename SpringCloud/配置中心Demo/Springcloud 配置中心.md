@@ -138,12 +138,12 @@
 
 增加eureka discovery client, config server
 
-![](../Images/5.png)
+![](Images/5.png)
 
 
 ### 项目结构
 
-![](../Images/6.png)
+![](Images/6.png)
 
 
 ### ConfigServerApplication
@@ -268,7 +268,7 @@
 
 	localhost:4001/test/dev
 
-![](../Images/8.png)
+![](Images/8.png)
 
 
 ####　注：仓库中的配置文件会被转换成web接口，访问规则：
@@ -288,11 +288,11 @@
 
 增加下图所示模块：
 
-![](../Images/7.png)
+![](Images/7.png)
 
 ###项目结构
 
-![](../Images/9.png)
+![](Images/9.png)
 
 ### ClientController
 	
