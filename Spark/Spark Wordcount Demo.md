@@ -11,7 +11,7 @@
 ## Wordcount demo
 
 
-![](../Images/6.png)
+![](Images/6.png)
 
 
 **WordCount:**
@@ -194,4 +194,4 @@ hadoop: 2.7.3
 
 结果如下：
 
-![](../Images/7.png)
+![](Images/7.png)
