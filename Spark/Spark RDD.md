@@ -22,7 +22,7 @@ RDD 具有容错机制，并且只读不能修改，可以执行确定的转换�
 	./spark-shell
 
 
-![](../Images/4.png)
+![](Images/4.png)
 
 
 
@@ -72,7 +72,7 @@ RDD 具有容错机制，并且只读不能修改，可以执行确定的转换�
 	#此时还没有进行运算；得执行collect才进行运算；
 	countRdd.collect
 
-![](../Images/5.png)
+![](Images/5.png)
 
 	#用cache缓存，下一次collect速度会更快；
 	countRdd.cache
