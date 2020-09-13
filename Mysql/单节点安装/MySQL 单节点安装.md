@@ -21,7 +21,8 @@ service mysqld restart
 ### 停掉
 service mysqld stop 
 
-
+### 开机启动
+systemctl start mysqld.service
 
 ## 进入
 
