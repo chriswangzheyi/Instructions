@@ -39,7 +39,7 @@ BOOTPROTO = static
 
 其中GATEWAY的IP地址为
 
-![](../Images/1.png)
+![](Images/1.png)
 
 
 ### master2:
@@ -677,7 +677,7 @@ vi kubeadm-config.yaml
 
 成功以后会显示：
 
-![](../Images/3.png)
+![](Images/3.png)
 
 
 需要将红色部分记录下来。
@@ -928,4 +928,4 @@ metrics-scrapter-1-0-1.tar.gz
 
 3）进入dashboard,填入token。
 
-![](../Images/5.png)
+![](Images/5.png)

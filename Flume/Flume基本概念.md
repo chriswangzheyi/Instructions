@@ -16,10 +16,12 @@
 
 取出 channel 中的数据，进行相应的存储文件系统，数据库，或者提交到远程服务器
 
+![](Images/4.png)
+
 
 ## 逻辑结构
 
-![](../Images/1.png)
+![](Images/1.png)
 
 Flume 逻辑上分三层架构：
 
@@ -52,6 +54,6 @@ Master 是管理协调 agent 和 collector 的配置等信息，是 flume 集群
 
 前面的图展示flume节点典型的拓扑结构和数据流，为了可靠的传输，当collector停止运行或是失去与agents的联系的时候，agents将会 存储他们的events在各自的本地硬盘上，这些agents试图重新连接collector，因为collector的宕机，任何处理和分析的数据流都 被阻塞。
 
-![](../Images/2.png)
+![](Images/2.png)
 
 当你有多个collector如上图所示，即使在collector宕机的情况下，数据处理仍然能够进行下去，如果 collector b 宕机了，agent a，agent b，ageng e，和agentf会分别继续传送events通过collector a 和collector c，agent c 和agent d 的不得不排在其他agent的后面等待日志的处理直到collector b重新上线。
