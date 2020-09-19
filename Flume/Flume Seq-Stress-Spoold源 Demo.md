@@ -31,7 +31,7 @@ vi /root/flumeDemo/flume/conf/r_seq.conf
 	/root/flumeDemo/flume/bin/flume-ng agent -n a1 -f /root/flumeDemo/flume/conf/r_seq.conf -c /root/flumeDemo/flume/conf -Dflume.root.logger=INFO,console
 
 
-![](../Images/3.png)
+![](Images/3.png)
 
 
 ## 压力源
