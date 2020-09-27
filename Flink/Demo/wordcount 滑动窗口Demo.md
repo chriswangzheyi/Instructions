@@ -1,30 +1,38 @@
-# WordCount Demo
+# wordcount 滑动窗口Demo
 
 ## 代码
 
-### wordCount
+### SocketWindowWordCount
 
-	import org.apache.flink.api.scala.ExecutionEnvironment
-	import org.apache.flink.streaming.api.scala.createTypeInformation
+	import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
+	import org.apache.flink.api.scala._
+	import org.apache.flink.streaming.api.windowing.time.Time
 	
-	object wordCount {
+	object SocketWindowWordCount {
 	
 	  def main(args: Array[String]): Unit = {
 	
-	    //设置环境
-	    val env = ExecutionEnvironment.getExecutionEnvironment
+	  //设置环境
+	  val env= StreamExecutionEnvironment.getExecutionEnvironment
 	
-	    //设置数据
-	    val data = env.fromElements("I love Beijing","I love China")
+	  //设置数据源
+	  val text = env.socketTextStream("localhost",1234)
 	
-	    //对第0个Field做groupBy, 对第1个Field做求和
-	    val count = data.flatMap(_.split(" ")).map((_,1)).groupBy(0).sum(1)
+	    //每两秒执行一次，搜集前两秒的信息内容
+	    val windowCounts = text.flatMap( line => line.split(" "))
+	      .map( (_,1))
+	      .keyBy(0)
+	      .timeWindow(Time.seconds(2),Time.seconds(1))
+	      .sum(1)
 	
-	    count.print()
+	    //设置并行度：设置Flink启动多少个线程去执行程序
+	    windowCounts.print.setParallelism(1)
+	
+	    env.execute("socket window count")
+	
 	  }
 	
 	}
-
 
 
 ### pom
@@ -65,9 +73,29 @@
 	
 	</project>
 
-## 测试
 
-	(I,2)
-	(love,2)
+## 测试结果
+
+
+### 客户端
+
+（2秒内每隔一秒连续输入）
+
+	I love Beijing
+	I love Beijing
+
+### idea显示结果
+
+	(I,1)
 	(Beijing,1)
-	(China,1)
+	(love,1)
+	(love,2)
+	(Beijing,2)
+	(I,2)
+	(love,1)
+	(I,1)
+	(Beijing,1)
+	
+	
+	
+可以看到，统计分为1-2-1三次层次。第一个1是第一个I love beijing的统计，第二个2是两个I love beijing的统计，第三个1是第二个I love beijing的统计
