@@ -19,8 +19,8 @@
 	
 	  def main(args: Array[String]): Unit = {
 	
-	    //设置环境
-	    val env= StreamExecutionEnvironment.getExecutionEnvironment
+	    //设置环境(Batch是ExecutionEnviroment)
+	    val env= ExecutionEnvironment.getExecutionEnvironment
 	
 	    //定义变量
 	    val inputPath = "/Users/zheyiwang/Downloads/input"
@@ -33,16 +33,12 @@
 	    val counts = text.flatMap(_.split(" "))
 	      .filter(_.nonEmpty)
 	      .map((_, 1))
-	     .keyBy(new KeySelector[(String,Int),String] {
-	        override def getKey(in: (String, Int)): String = (in._1)
-	      })
-	      .reduce( new ReduceFunction[(String, Int)] {
-	        override def reduce(t: (String, Int), t1: (String, Int)): (String, Int) = (t._1,(t._2+t1._2))
-	      }
-	      ).setParallelism(1)
+	      .groupBy(0)
+	      .sum(1)
+	      .setParallelism(1)
 	
 	    //输出到文档
-	    counts.writeAsText(outputPath).setParallelism(1)
+	    counts.writeAsCsv(outputPath,"\n"," ")
 	
 	    //启动任务
 	    env.execute("batch word count")
@@ -50,6 +46,7 @@
 	  }
 	
 	}
+
 	
 	
 ### pom.xml
@@ -94,15 +91,11 @@
 
 ## 测试
 
-	(I,1)
-	(love,1)
-	(Beijing,1)
-	(I,2)
-	(love,2)
-	(China,1)
-	
-	
-可以看到，元素每多统计一次，
+	Beijing 1
+	China 1
+	I 2
+	love 2
+
 
 
 
