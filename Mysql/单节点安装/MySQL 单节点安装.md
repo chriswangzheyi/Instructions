@@ -24,7 +24,7 @@ service mysqld stop
 ### 开机启动
 systemctl start mysqld.service
 
-## 进入
+## 进入Mysql
 
 ### 查看密码
 
@@ -60,3 +60,4 @@ ALTER USER USER() IDENTIFIED BY '1qa2ws#ED';
 	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1qa2ws#ED';
 		  
 	flush privileges;
+	
