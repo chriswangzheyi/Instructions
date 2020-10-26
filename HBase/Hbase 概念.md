@@ -4,7 +4,7 @@
 
 ##　ＨBase 数据模型
 
-![](../Images/2.png)
+![](Images/2.png)
 
 - 表是行的集合。
 - 行是列族的集合。
@@ -13,7 +13,7 @@
 
 ## HBase 和 RDBMS的比较
 
-![](../Images/3.png)
+![](Images/3.png)
 
 
 ## 关键概念

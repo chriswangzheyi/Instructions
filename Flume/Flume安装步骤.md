@@ -26,6 +26,7 @@ http://www.apache.org/dyn/closer.lua/flume/1.9.0/apache-flume-1.9.0-bin.tar.gz
 	vi /etc/profile
 
 插入
+
 	export FLUME_HOME=/root/flumeDemo/flume
 	export PATH=$PATH:$FLUME_HOME/bin
 	

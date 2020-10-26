@@ -53,7 +53,7 @@ List(hadoop, hive, spark, scala, spark, hive, habase, hive, spark, java)
 
 输出：
 
-List((hadoop,1), (hive,1), (spark,1), (scala,1), (spark,1), (hive,1), (habase,1), (hive,1), (spark,1), (java,1))
+	List((hadoop,1), (hive,1), (spark,1), (scala,1), (spark,1), (hive,1), (habase,1), (hive,1), (spark,1), (java,1))
 
 
 ### mappedWords.groupBy(tuple => tuple._1)

@@ -5,7 +5,7 @@
 
 通过Kibana操作： Dev-Tools:
 
-![](../Images/3.png)
+![](Images/3.png)
 
 
 **创建索引**
@@ -241,7 +241,7 @@ ES提供了强大的查询语言（DSL），它可以允许我们进行更加强
 
 首先需要确定文件映射类型：
 
-![](../Images/4.png)
+![](Images/4.png)
 
 tpye为 keyword的词才可以用Query方式查询
 

@@ -173,3 +173,4 @@ hbase中没有数据库概念，hbase中有namespace相当于hive中的数据库
 
 
 
+[]()
