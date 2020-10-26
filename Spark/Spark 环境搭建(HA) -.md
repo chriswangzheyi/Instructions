@@ -25,7 +25,7 @@ vi /etc/profile
 
  source /etc/profile
 
-![](../Images/1.png)
+![](Images/1.png)
 
 
 验证：
@@ -163,9 +163,9 @@ Master002
 	#管理界面
 	http://192.168.195.129:8080
 
-![](../Images/2.png)
+![](Images/2.png)
 
-![](../Images/3.png)
+![](Images/3.png)
 
 然后在Alive节点，运行命令 
 

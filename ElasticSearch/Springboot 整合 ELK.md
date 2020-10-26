@@ -92,7 +92,7 @@ vi /root/elk/logstash/conf.d/logstash.conf
 
 ## 项目结构
 
-![](../Images/13.png)
+![](Images/13.png)
 
 
 **HelloController:**

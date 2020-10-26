@@ -113,7 +113,7 @@ vi /root/apache-flume-1.9.0-bin/conf/netcat.conf
 	a1.sinks.k1.channel = k1
 
 
-![](../Images/8.png)
+![](Images/8.png)
 
 	vi /root/apache-flume-1.9.0-bin/conf/flume_kafka.conf
 
