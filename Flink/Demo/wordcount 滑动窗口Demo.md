@@ -15,7 +15,7 @@
 	  //设置环境
 	  val env= StreamExecutionEnvironment.getExecutionEnvironment
 	
-	  //设置数据源
+	  //设置数据源（文本流）
 	  val text = env.socketTextStream("localhost",1234)
 	
 	    //每两秒执行一次，搜集前两秒的信息内容
@@ -34,6 +34,9 @@
 	
 	}
 
+流式处理没有groupby，用keyBy替代。
+
+如果不设置timeWindow，则任务会统计生命周期内的全部word
 
 ### pom
 
