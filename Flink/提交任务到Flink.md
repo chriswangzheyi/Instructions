@@ -80,6 +80,7 @@ vi /input.txt
 	    <artifactId>flink_demo</artifactId>
 	    <version>1.0-SNAPSHOT</version>
 	
+	
 	    <dependencies>
 	        <dependency>
 	            <groupId>org.apache.flink</groupId>
@@ -101,22 +102,25 @@ vi /input.txt
 	            <artifactId>flink-clients_2.12</artifactId>
 	            <version>1.11.2</version>
 	        </dependency>
-	
 	    </dependencies>
-	
-	
-	
 	
 	    <build>
 	        <plugins>
-	            <!-- 该插件用于将Scala代码编译成class文件 -->
 	            <plugin>
 	                <groupId>net.alchim31.maven</groupId>
 	                <artifactId>scala-maven-plugin</artifactId>
-	                <version>3.4.6</version>
 	                <executions>
 	                    <execution>
-	                        <!-- 声明绑定到maven的compile阶段 -->
+	                        <id>scala-compile</id>
+	                        <phase>compile</phase>
+	                        <goals>
+	                            <goal>add-source</goal>
+	                            <goal>compile</goal>
+	                        </goals>
+	                    </execution>
+	                    <execution>
+	                        <id>scala-test-compile</id>
+	                        <phase>test-compile</phase>
 	                        <goals>
 	                            <goal>testCompile</goal>
 	                        </goals>
@@ -124,13 +128,86 @@ vi /input.txt
 	                </executions>
 	            </plugin>
 	            <plugin>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <executions>
+	                    <execution>
+	                        <id>default-compile</id>
+	                        <phase>none</phase>
+	                    </execution>
+	                    <execution>
+	                        <id>default-testCompile</id>
+	                        <phase>none</phase>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	
+	            <plugin>
 	                <groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-assembly-plugin</artifactId>
-	                <version>3.0.0</version>
+	                <artifactId>maven-eclipse-plugin</artifactId>
+	                <version>2.8</version>
 	                <configuration>
+	                    <downloadSources>true</downloadSources>
+	                    <projectnatures>
+	                        <projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+	                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+	                    </projectnatures>
+	                    <buildcommands>
+	                        <buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+	                    </buildcommands>
+	                    <classpathContainers>
+	                        <classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
+	                        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+	                    </classpathContainers>
+	                    <excludes>
+	                        <exclude>org.scala-lang:scala-library</exclude>
+	                        <exclude>org.scala-lang:scala-compiler</exclude>
+	                    </excludes>
+	                    <sourceIncludes>
+	                        <sourceInclude>**/*.scala</sourceInclude>
+	                        <sourceInclude>**/*.java</sourceInclude>
+	                    </sourceIncludes>
+	                </configuration>
+	            </plugin>
+	            <plugin>
+	                <groupId>org.codehaus.mojo</groupId>
+	                <artifactId>build-helper-maven-plugin</artifactId>
+	                <version>1.7</version>
+	                <executions>
+	                    <execution>
+	                        <id>add-source</id>
+	                        <phase>generate-sources</phase>
+	                        <goals>
+	                            <goal>add-source</goal>
+	                        </goals>
+	                        <configuration>
+	                            <sources>
+	                                <source>src/main/scala</source>
+	                            </sources>
+	                        </configuration>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <configuration>
+	                    <source>8</source>
+	                    <target>8</target>
+	                </configuration>
+	            </plugin>
+	            <plugin>
+	                <artifactId>maven-assembly-plugin</artifactId>
+	                <configuration>
+	                    <appendAssemblyId>false</appendAssemblyId>
 	                    <descriptorRefs>
 	                        <descriptorRef>jar-with-dependencies</descriptorRef>
 	                    </descriptorRefs>
+	                    <archive>
+	                        <manifest>
+	                            <!--运行主类，全类名-->
+	                            <mainClass>xxxxxxxxxxxxxxx</mainClass>
+	                        </manifest>
+	                    </archive>
 	                </configuration>
 	                <executions>
 	                    <execution>
@@ -144,5 +221,4 @@ vi /input.txt
 	            </plugin>
 	        </plugins>
 	    </build>
-	
 	</project>
