@@ -21,9 +21,23 @@ vi /input.txt
 	
 ## 运行程序
 
+### 设置入口class
+
 输入执行main函数
 
 ![](Images/3.png)
+
+
+### 查看plan
+
+点击show plan
+
+![](Images/4.png)
+
+
+### 提交任务后
+
+![](Images/5.png)
 
 
 ## 代码
@@ -32,7 +46,7 @@ vi /input.txt
 
 	package com.wzy
 	
-	import org.apache.flink.api.scala.ExecutionEnvironment
+	import org.apache.flink.api.scala.{ExecutionEnvironment, createTypeInformation}
 	
 	object BatchWordCountDemo {
 	
@@ -45,7 +59,7 @@ vi /input.txt
 	    //val inputPath = "/Users/zheyiwang/Downloads/input"
 	    //val outputPath = "/Users/zheyiwang/Downloads/output"
 	    val inputPath = "/input.txt"
-	    val outputPath = "/output.txt"
+	    val outputPath = "/opt/flink/output.txt"
 	
 	    //读取文件
 	    val text = env.readTextFile(inputPath)
@@ -66,7 +80,6 @@ vi /input.txt
 	  }
 	
 	}
-
 
 ### pom.xml
 
