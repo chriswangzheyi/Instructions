@@ -96,15 +96,15 @@ vim /root//kafka_test/docker-compose.yml
 
 #### 第一步： add cluster
 
-![](Images/1.png)
+![](../Images/1.png)
 
 #### 第二步： 填写zk等其他配置
 
-![](Images/2.png)
+![](../Images/2.png)
 
 #### 第三步：查看集群
 
-![](Images/3.png)
+![](../Images/3.png)
 
 
 
