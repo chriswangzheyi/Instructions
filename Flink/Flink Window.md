@@ -227,7 +227,28 @@ BI统计(计算各个时间段的指标)
 
 ## 驱逐器 （Evictors）
 
+Flink 窗口模式允许特别的算子Evictor（驱逐器），应用在WindowAssigner和trigger之间。通过evictor()方法使用。
 
+Evictor驱逐器能够在element进入Window窗口聚合之前进行移除数据或者在进入Window窗口聚合后，Trigger触发计算操作之前移除数据。
+
+Evictor的2个方法：
+
+- evictBefore()：移除窗口元素，在Window Function之前调用。
+- evictAfter()：移除窗口元素，在Window Function之后调用。
+
+两个方法的参数都一样，分别是：
+
+- Iterable<TimestampedValue> elements：当前窗口中的元素
+- int size：当前窗口中的元素数量
+- W window：当前窗口
+- EvictorContext evictorContext：evict的上下文
+
+
+Flink自带的3个Evictor：
+
+- CountEvictor：保持窗口中用户指定数量的元素，并从窗口缓冲区的开头丢弃剩余的元素。
+- DeltaEvictor：取一个DeltaFunction和一个threshold，计算窗口缓冲区中最后一个元素与其余每个元素之间的差值，并删除Delta大于或等于阈值的值。
+- TimeEvictor：以interval毫秒为单位作为参数，对于给定窗口，它查找max_ts其元素的最大时间戳，并删除时间戳小于的所有元素max_ts-interval。
 
 ## 允许延迟 (Allowed Lateness)
 
