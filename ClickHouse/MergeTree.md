@@ -236,4 +236,158 @@ CollapsingMergeTree 虽然解决了主键相同的数据即时删除的问题，
 
 ## SummingMergeTree
 
-假设有这样一种查询需求：终端用户只需要查询数据的汇总结果，不关心明细数据，并且数据的汇总条件是预先明确的（GROUP BY 条件明确，且不会随意改变）
+该引擎继承自 MergeTree。区别在于，当合并 SummingMergeTree 表的数据片段时，ClickHouse 会把所有具有相同主键的行合并为一行，该行包含了被合并的行中具有数值数据类型的列的汇总值。如果主键的组合方式使得单个键值对应于大量的行，则可以显著的减少存储空间并加快数据查询的速度。
+
+
+### 例子
+
+
+	CREATE TABLE summing_table(
+		id String,
+		city String,
+		sal UInt32,
+		comm Float64,
+		ctime DateTime
+	)ENGINE = SummingMergeTree()
+	PARTITION BY toYYYYMM(ctime)
+	ORDER BY (id, city)
+	PRIMARY KEY id ;
+
+
+
+	insert into summing_table
+	values
+	(1,'shanghai',10,20,'2020-12-12 01:11:12'),(1,'shanghai',20,30,'2020-12-12 01:11:12'),
+	(3,'shanghai',10,20,'2020-11-12 01:11:12'),(3,'Beijing',10,20,'2020-11-12 01:11:12') ;
+
+查看
+
+	select * from summing_table;
+	
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 3  │ Beijing  │  10 │   20 │ 2020-11-12 01:11:12 │
+	│ 3  │ shanghai │  10 │   20 │ 2020-11-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 1  │ shanghai │  10 │   20 │ 2020-12-12 01:11:12 │
+	│ 1  │ shanghai │  20 │   30 │ 2020-12-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+
+### 优化表结构 
+
+	OPTIMIZE TABLE summing_table FINAL;
+
+查看
+
+	select * from summing_table;
+
+
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 3  │ Beijing  │  10 │   20 │ 2020-11-12 01:11:12 │
+	│ 3  │ shanghai │  10 │   20 │ 2020-11-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 1  │ shanghai │  30 │   50 │ 2020-12-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+
+
+相同分区中,相同的Id 和city 的数据会被聚合在一起，数字字段的数据都会被sum 在一起。
+
+
+### 如果指定合并字段
+
+只有指定的字段才会sum操作
+
+	drop table summing_table2 ;
+	CREATE TABLE summing_table2(
+		id String,
+		city String,
+		sal UInt32,
+		comm Float64,
+		ctime DateTime
+	)ENGINE = SummingMergeTree(sal)
+	PARTITION BY toYYYYMM(ctime)
+	ORDER BY (id, city)
+	PRIMARY KEY id ;
+
+插入：
+
+	insert into summing_table2
+	values
+	(1,'shanghai',10,20,'2020-12-12 01:11:12'),(1,'shanghai',20,30,'2020-12-12 01:11:12'),
+	(3,'shanghai',10,20,'2020-11-12 01:11:12'),(3,'Beijing',10,20,'2020-11-12 01:11:12') ;
+
+查看：
+
+	select * from summing_table2;
+
+
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 3  │ Beijing  │  10 │   20 │ 2020-11-12 01:11:12 │
+	│ 3  │ shanghai │  10 │   20 │ 2020-11-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 1  │ shanghai │  10 │   20 │ 2020-12-12 01:11:12 │
+	│ 1  │ shanghai │  20 │   30 │ 2020-12-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+
+
+优化表
+
+	OPTIMIZE TABLE summing_table2 FINAL;
+
+
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 3  │ Beijing  │  10 │   20 │ 2020-11-12 01:11:12 │
+	│ 3  │ shanghai │  10 │   20 │ 2020-11-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+	┌─id─┬─city─────┬─sal─┬─comm─┬───────────────ctime─┐
+	│ 1  │ shanghai │  30 │   20 │ 2020-12-12 01:11:12 │
+	└────┴──────────┴─────┴──────┴─────────────────────┘
+
+
+可以看到，因为指定了SummingMergeTree(sal)，所以只有sal的数据被合并了。
+
+
+## AggregatingMergeTree
+
+
+
+AggregatingMergeTree 就有些许数据立方体的意思，它能够在合并分区的时候，按照预先定义的条件聚
+合数据。同时，根据预先定义的聚合函数计算数据并通过二进制的格式存入表内。将同一分组下的多行数据聚合成一行，既减少了数据行，又降低了后续聚合查询的开销。可以说，AggregatingMergeTree是SummingMergeTree 的升级版，它们的许多设计思路是一致的，例如同时定义ORDER BY 与PRIMARY KEY 的原因和目的。但是在使用方法上，两者存在明显差异，应该说AggregatingMergeTree
+的定义方式是MergeTree 家族中最为特殊的一个。
+
+
+### 例子
+
+	#建立明细表
+
+	CREATE TABLE detail_table
+	(id UInt8,
+	ctime Date,
+	uid UInt64
+	) ENGINE = MergeTree()
+	PARTITION BY toYYYYMM(ctime)
+	ORDER BY (id, ctime);
+
+	#插入明细数据
+	INSERT INTO detail_table VALUES(1, '2020-08-06', 1);
+	INSERT INTO detail_table VALUES(1, '2020-08-06', 2);
+	INSERT INTO detail_table VALUES(2, '2020-08-07', 1);
+	INSERT INTO detail_table VALUES(2, '2020-08-07', 2);
+
+	#建立预先聚合表，
+	CREATE TABLE agg_table
+	(id UInt8,
+	ctime Date,
+	uid AggregateFunction(uniq, UInt64)
+	) ENGINE = AggregatingMergeTree()
+	PARTITION BY toYYYYMM(ctime)
+	ORDER BY (id, ctime);
+
+上面的语句表示在uniq这个字段上做聚合。
+
+	INSERT INTO agg_table
+	select id, ctime, uniqState(uid)
+	from detail_table
+	group by id, ctime ;
