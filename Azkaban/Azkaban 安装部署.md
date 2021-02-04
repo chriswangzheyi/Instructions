@@ -61,3 +61,41 @@
 
 	./gradlew build installDist -x test
 
+
+## Solo Server  
+
+	tar zxvf  /root/azkaban_demo/azkaban-3.90.0/azkaban-solo-server/build/distributions/azkaban-solo-server-0.1.0-SNAPSHOT.tar.gz
+	
+		
+	vim /root/azkaban_demo/azkaban-3.90.0/azkaban-solo-server/build/distributions/azkaban-solo-server-0.1.0-SNAPSHOT/conf/azkaban.properties
+
+找到 default.timezone.id 行，做如下修改:
+
+	default.timezone.id=Asia/Shanghai
+	
+启动
+
+	cd /root/azkaban_demo/azkaban-3.90.0/azkaban-solo-server/build/distributions/azkaban-solo-server-0.1.0-SNAPSHOT
+	
+	(必须在根目录下执行命令)
+	bin/start-solo.sh
+	
+验证
+
+	 [root@wangzheyi azkaban-solo-server-0.1.0-SNAPSHOT]# jps
+	19299 AzkabanSingleServer
+	
+webUI
+
+	cat soloServerLog_XXXX.out (在根目录下能查到)
+	
+	查看log
+	2021/02/04 23:42:16.418 +0800  INFO [log] [main] [Azkaban] Started SocketConnector@0.0.0.0:8081 
+	
+	
+访问UI
+
+	http://47.112.142.231:8081/
+	
+	账号密码：azkaban  / azkaban
+	
