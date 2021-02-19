@@ -34,9 +34,36 @@
 
 ### 创建keycloak数据库
 
-CREATE DATABASE IF NOT EXISTS keycloak DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+	CREATE DATABASE IF NOT EXISTS keycloak DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 
 ## 安装keyloak
 
-	docker run --name keycloak    --restart=always     --network cloud     -p 8010:8080   -e KEYCLOAK_USER=admin    -e KEYCLOAK_PASSWORD=admin    -e DB_VENDOR=mysql   -e DB_ADDR=mysql     -e DB_PORT=3306    -e DB_DATABASE=keycloak    -e DB_USER=root     -e DB_PASSWORD=root     -e JDBC_PARAMS='connectTimeout=90&useSSL=false'     -d jboss/keycloa
+	docker run --name keycloak    --restart=always     --network cloud     -p 8010:8080   -e KEYCLOAK_USER=admin    -e KEYCLOAK_PASSWORD=admin    -e DB_VENDOR=mysql   -e DB_ADDR=47.112.142.231     -e DB_PORT=3306    -e DB_DATABASE=keycloak    -e DB_USER=root     -e DB_PASSWORD=1qa2ws#ED     -e JDBC_PARAMS='connectTimeout=90&useSSL=false'     -d jboss/keycloak
+
+
+### 修改配置
+
+因为模式是使用的https 所以需要进行登录系统修改
+
+登录数据库进行修改
+
+	mysql -uroot -p
+
+	use keycloak
+	update REALM set ssl_required='NONE' where id = 'master';
+
+
+## 访问keyloak
+
+### 重启容器
+
+	docker restart  keycloak
+
+
+### 访问
+
+	http://47.112.142.231:8010/
+
+
+账号密码都是admin
