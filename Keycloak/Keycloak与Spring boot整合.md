@@ -1,4 +1,4 @@
-# Keyloak与Spring boot整合
+# Keycloak与Spring boot整合
 
 参考：https://blog.csdn.net/q64261750/article/details/108263280
 
@@ -24,6 +24,12 @@
 
 ![](Images/2.png)
 
+### 修改访问限制
+
+![](Images/11.png)
+
+将require SSL 修改为 none 
+
 
 ###创建Client
 
@@ -45,9 +51,9 @@
 
 ![](Images/6.png)
 
-	Valid Redirect URIs：  http://localhost:8081/*
+	Valid Redirect URIs：  http://47.112.142.231:8010/*
 	
-	Base URL： http://localhost:8081
+	Base URL： http://47.112.142.231:8010
 
 如图，我们配置了Access Type为public，配置了Valid Redirect URLS，这是认证成功后跳转到的页面地址，其中我们使用了通配符；配置了Base URL，一般配置成微服务首页即可。
 
