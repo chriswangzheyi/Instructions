@@ -82,3 +82,106 @@
 
 
 给user1设置111111，user2设置222222
+
+
+
+## 测试代码
+
+### pom
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	    <modelVersion>4.0.0</modelVersion>
+	    <parent>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-parent</artifactId>
+	        <version>2.4.3</version>
+	        <relativePath/> <!-- lookup parent from repository -->
+	    </parent>
+	    <groupId>com.wzy</groupId>
+	    <artifactId>springboot_keycloak</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	    <name>springboot_keycloak</name>
+	    <description>Demo project for Spring Boot</description>
+	    <properties>
+	        <java.version>1.8</java.version>
+	    </properties>
+	
+	
+	    <dependencies>
+	
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-test</artifactId>
+	            <scope>test</scope>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.keycloak</groupId>
+	            <artifactId>keycloak-spring-boot-starter</artifactId>
+	            <version>12.0.3</version>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-web</artifactId>
+	        </dependency>
+	
+	    </dependencies>
+	
+	
+	    <build>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	            </plugin>
+	        </plugins>
+	    </build>
+	
+	</project>
+
+
+### testController
+
+	package com.wzy.springboot_keycloak;
+	
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.RestController;
+	
+	
+	@RestController
+	public class testController {
+	
+	    @GetMapping("/test")
+	    public String test() {
+	
+	    return "11";
+	    }
+	
+	}
+
+
+
+### application.yml
+
+	keycloak:
+	  # 表示是一个public的client
+	  public-client: true
+	  # keycloak的地址
+	  auth-server-url: http://47.112.142.231:8010/auth/
+	  # keycloak中的realm
+	  realm: realm
+	  resource: ms-content-sample
+	  securityConstraints:
+	    - authRoles:
+	        # 以下路径需要user-role角色才能访问
+	        - user-role
+	      securityCollections:
+	        # name可以随便写
+	        - name: user-role-mappings
+	          patterns:
+	            - /test
+	server:
+	  port: 8081
