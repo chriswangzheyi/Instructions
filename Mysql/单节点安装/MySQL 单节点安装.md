@@ -58,6 +58,8 @@ ALTER USER USER() IDENTIFIED BY '1qa2ws#ED';
 	update user set host = '%' where user ='root';
 	
 	ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1qa2ws#ED';
+
+	grant all privileges on *.* to 'root'@'%'; 
 		  
 	flush privileges;
 	
