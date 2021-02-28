@@ -3,10 +3,10 @@
 ## 解压
 
 	tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz
-	tar -zxvf scala-2.13.5.tgz
+	tar -zxvf scala-2.12.2.tgz
 
  	mv spark-2.4.7-bin-hadoop2.7 /usr/local/spark
-	mv scala-2.13.5 /usr/local/scala
+	mv scala-2.12.2 /usr/local/scala
 
 
 ## 配置
