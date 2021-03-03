@@ -161,13 +161,34 @@ vim test11
 	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	    <modelVersion>4.0.0</modelVersion>
 	
+	    <parent>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-parent</artifactId>
+	        <version>2.0.2.RELEASE</version>
+	        <relativePath/>
+	    </parent>
+	
+	
 	    <groupId>org.example</groupId>
 	    <artifactId>datalake_system</artifactId>
 	    <packaging>pom</packaging>
 	    <version>1.0-SNAPSHOT</version>
 	    <modules>
 	        <module>hudi_test</module>
+	        <module>system_analy</module>
 	    </modules>
+	
+	    <dependencyManagement>
+	        <dependencies>
+	            <dependency>
+	                <groupId>org.springframework.cloud</groupId>
+	                <artifactId>spring-cloud-dependencies</artifactId>
+	                <version>Finchley.RELEASE</version>
+	                <type>pom</type>
+	                <scope>import</scope>
+	            </dependency>
+	        </dependencies>
+	    </dependencyManagement>
 	
 	</project>
 
