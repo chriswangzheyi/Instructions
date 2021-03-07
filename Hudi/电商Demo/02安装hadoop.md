@@ -61,6 +61,14 @@ vim core-site.xml
 		  <name>hadoop.tmp.dir</name>
 		  <value>/usr/local/hadoop/tmp</value>
 		</property>
+		<property>
+		    <name>hadoop.proxyuser.root.hosts</name>
+		    <value>*</value>
+		</property>
+		<property>
+		    <name>hadoop.proxyuser.root.groups</name>
+		    <value>*</value>
+		</property>
     </configuration>
 
 

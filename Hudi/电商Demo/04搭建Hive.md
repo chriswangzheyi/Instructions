@@ -55,6 +55,17 @@ cp /root/mysql-connector-java-8.0.18.jar /usr/local/hive/lib
 	        <name>hive.metastore.schema.verification</name>
 	        <value>false</value>
 	    </property>
+
+		<property>
+	    	<name>hive.server2.thrift.port</name>
+	    	<value>10000</value>
+		</property>
+
+    	<property>
+	    	<name>hive.server2.thrift.bind.host</name>
+	    	<value>192.168.195.150</value>
+    	</property>
+
 	</configuration>
 
 
@@ -97,6 +108,12 @@ cp /root/mysql-connector-java-8.0.18.jar /usr/local/hive/lib
 
 ## 启动
 
-	hive --service metastore & schematool -dbType mysql -initSchema
-	hive
+用来启动metastore
+
+	nohup hive --service metastore 2>&1 &
+
+用来启动hiveserver2
+
+	nohup  hive --service hiveserver2   2>&1 &
+
 

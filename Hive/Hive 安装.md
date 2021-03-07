@@ -124,9 +124,14 @@ cp /root/mysql-connector-java-8.0.18.jar /root/apache-hive-2.3.7-bin/lib
 
 	cd /root/apache-hive-2.3.7-bin/bin
 
-	./hive --service metastore &
-	schematool -dbType mysql -initSchema
-	./hive
+用来启动metastore
+
+	nohup hive --service metastore 2>&1 &
+
+用来启动hiveserver2
+
+	nohup  hive --service hiveserver2   2>&1 &
+
 
 
 ## 验证
