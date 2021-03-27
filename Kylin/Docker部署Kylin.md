@@ -50,3 +50,10 @@
 	HDFS NameNode 页面：http://47.112.142.231:50070/dfshealth.html#tab-overview
 	YARN ResourceManager 页面：http://47.112.142.231:8088/cluster
 	HBase 页面：http://47.112.142.231:16010/master-status
+	
+	
+kylin的登陆页面可以在log中看到：
+
+	Web UI is at http://6a96f4815e57:7070/kylin
+	
+如果看不到登陆页面，需要在bin文件下，./kylin.sh start来启动
