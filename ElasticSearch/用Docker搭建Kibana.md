@@ -18,7 +18,7 @@ Version: 5.6.12
 
 得到:
 
-![](../Images/2.png)
+![](Images/2.png)
 
 
 
