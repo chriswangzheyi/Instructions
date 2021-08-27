@@ -127,12 +127,14 @@ vim test11
 	      .option("hoodie.upsert.shuffle.parallelism", 2)
 	      .option("PRECOMBINE_FIELD_OPT_KEY", "ts") //指定提交时间列
 	      .option("RECORDKEY_FIELD_OPT_KEY", "uuid") //指定uuid唯一标示列
-	      .option("hoodie.table.name", "youfanTable")
+	      .option("hoodie.table.name", "wzyTable")
 	      .option("hoodie.datasource.write.partitionpath.field", "hudipart") //分区列
 	      .mode(SaveMode.Overwrite)
 	      .save("/wzy/data/hudi")
 	  }
+	
 	}
+
 
 
 ###　JsonUtil
@@ -153,7 +155,7 @@ vim test11
 	}
 
 
-### pom.xml
+### 父项目的 pom.xml
 
 	<?xml version="1.0" encoding="UTF-8"?>
 	<project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -161,38 +163,124 @@ vim test11
 	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	    <modelVersion>4.0.0</modelVersion>
 	
-	    <parent>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-parent</artifactId>
-	        <version>2.0.2.RELEASE</version>
-	        <relativePath/>
-	    </parent>
-	
-	
 	    <groupId>org.example</groupId>
-	    <artifactId>datalake_system</artifactId>
+	    <artifactId>datalake</artifactId>
 	    <packaging>pom</packaging>
 	    <version>1.0-SNAPSHOT</version>
 	    <modules>
 	        <module>hudi_test</module>
-	        <module>system_analy</module>
 	    </modules>
-	
-	    <dependencyManagement>
-	        <dependencies>
-	            <dependency>
-	                <groupId>org.springframework.cloud</groupId>
-	                <artifactId>spring-cloud-dependencies</artifactId>
-	                <version>Finchley.RELEASE</version>
-	                <type>pom</type>
-	                <scope>import</scope>
-	            </dependency>
-	        </dependencies>
-	    </dependencyManagement>
 	
 	</project>
 
 
+### hudi_test 的 pom.xml
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+	         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	    <parent>
+	        <artifactId>datalake</artifactId>
+	        <groupId>org.example</groupId>
+	        <version>1.0-SNAPSHOT</version>
+	    </parent>
+	    <modelVersion>4.0.0</modelVersion>
+	
+	    <artifactId>hudi_test</artifactId>
+	
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.apache.hudi</groupId>
+	            <artifactId>hudi-client</artifactId>
+	            <version>0.5.3</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.hudi</groupId>
+	            <artifactId>hudi-hive</artifactId>
+	            <version>0.5.3</version>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.apache.hudi</groupId>
+	            <artifactId>hudi-spark-bundle_2.11</artifactId>
+	            <version>0.5.3</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.hudi</groupId>
+	            <artifactId>hudi-common</artifactId>
+	            <version>0.5.3</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.hudi</groupId>
+	            <artifactId>hudi-hadoop-mr-bundle</artifactId>
+	            <version>0.5.3</version>
+	        </dependency>
+	
+	        <!-- Spark的依赖引入 -->
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-core_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-sql_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-hive_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-avro_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.scala-lang</groupId>
+	            <artifactId>scala-library</artifactId>
+	            <version>2.11.8</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.hadoop</groupId>
+	            <artifactId>hadoop-client</artifactId>
+	            <version>2.7.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.alibaba</groupId>
+	            <artifactId>fastjson</artifactId>
+	            <version>1.2.76</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-hive_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.spark-project.hive</groupId>
+	            <artifactId>hive-jdbc</artifactId>
+	            <version>1.2.1.spark2</version>
+	        </dependency>
+	
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.spark</groupId>
+	            <artifactId>spark-streaming_2.11</artifactId>
+	            <version>2.4.5</version>
+	        </dependency>
+	    </dependencies>
+	
+	
+	</project>
+
+
+
 ## 结果
 
-	![](Images/2.png)
+![](Images/2.png)

@@ -88,6 +88,7 @@ vim hdfs-site.xml
 
 
 cp mapred-site.xml.template mapred-site.xml
+
 vim mapred-site.xml
 
 	<configuration>
@@ -173,7 +174,7 @@ source /etc/profile
 
 	ssh-copy-id master
 
-## 复制安装包he和配置文件
+## 复制安装包和配置文件
 
 在192.168.195.150上操作
 
