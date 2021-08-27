@@ -24,7 +24,7 @@ cp /root/mysql-connector-java-8.0.18.jar /usr/local/hive/lib
 	<configuration>
 	    <property>
 	      <name>javax.jdo.option.ConnectionURL</name>
-		  <value>jdbc:mysql://192.168.195.150:3306/hive?createDatabaseIfNotExist=true</value>
+		  <value>jdbc:mysql://master:3306/hive?createDatabaseIfNotExist=true</value>
 	      <description>JDBC connect string for a JDBC metastore</description>
 	    </property>
 	
@@ -63,7 +63,8 @@ cp /root/mysql-connector-java-8.0.18.jar /usr/local/hive/lib
 
     	<property>
 	    	<name>hive.server2.thrift.bind.host</name>
-	    	<value>192.168.195.150</value>
+	    	<value>master::
+	    	</value>
     	</property>
 
 	</configuration>
@@ -107,6 +108,17 @@ cp /root/mysql-connector-java-8.0.18.jar /usr/local/hive/lib
 
 
 ## 启动
+
+初始化
+
+	cd /usr/local/hive/bin
+	./schematool -initSchema -dbType mysql
+	
+
+启动
+
+	hive	
+	
 
 用来启动metastore
 
