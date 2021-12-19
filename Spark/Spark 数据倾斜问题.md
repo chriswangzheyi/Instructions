@@ -2,6 +2,10 @@
 
 参考：http://itindex.net/detail/57899-spark-%E6%95%B0%E6%8D%AE-%E6%96%B9%E6%B3%95
 
+
+![](Images/30.png)
+
+
 ##解决方案
 
 ### 使用Hive ETL预处理
