@@ -31,6 +31,10 @@ RDD 具有容错机制，并且只读不能修改，可以执行确定的转换�
 
 ![](Images/4.png)
 
+## RDD容错
+
+Spark的计算本质就是对RDD做各种转换，因为RDD是一个不可变只读的集合，因此每次的转换都需要上一次的RDD作为本次转换的输入，因此RDD的lineage描述的是RDD间的相互依赖关系。为了保证RDD中数据的健壮性，RDD数据集通过所谓血统关系（lineage）记住了他是如何其他RDD中演变过来的。Spark将RDD之间的关系规类为宽依赖和窄依赖。Spark会根据Lineage存储的RDD的依赖关系对RDD计算做故障容错，目前Spark的容错策略主要是根据RDD依赖关系重新计算、对RDD做cache、对RDD做checkpoint手段完成RDD计算的故障容错。
+
 
 
 

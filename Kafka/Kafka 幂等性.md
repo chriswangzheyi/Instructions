@@ -17,4 +17,4 @@
 
 ## 方法二：为producer增加pid
 
-为producer增加pid，在后续插入redis或者数据库的时候采用唯一索引可以去重。
+为了实现Producer的幂等性，Kafka引入了Producer ID（即PID）和Sequence Number。在后续插入redis或者数据库的时候采用唯一索引可以去重。
