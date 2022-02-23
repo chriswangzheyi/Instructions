@@ -183,7 +183,7 @@
 	cd /var/www/html/MySQL5.7
 	yum install -y ./*.rpm
 	
-### 启动yu
+### 启动
 
 	systemctl start mysqld && systemctl enable mysqld
 	
@@ -202,7 +202,7 @@
 
 	mysql> alter user root@localhost identified by '1qa2ws#ED';
 	mysql> flush privileges;
-	mysql.quit
+	mysql> quit
 
 #### mysql 驱动
 
@@ -334,3 +334,5 @@
 ### 监控界面
 
 ![](Images/17.png)
+
+http://192.168.3.111/cmf/home
