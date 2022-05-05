@@ -18,7 +18,15 @@
 	
 	#CDH103
 	hostnamectl set-hostname cdh3
-	
+
+## 添加用户名
+
+	vim /etc/sudoers
+
+在root ALL=(ALL)ALL行下添加XXX 
+ALL=(ALL)ALL，XXX为你的用户名
+
+	jumpuser ALL=(ALL) ALL
 
 ## 搭建本地YUM仓库
 
