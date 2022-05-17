@@ -38,18 +38,7 @@ spark-shell启动,需要指定spark-avro模块，因为默认环境里没有，s
         ---------------------------------------------------------------------
         |      default     |   2   |   2   |   2   |   0   ||   2   |   2   |
         ---------------------------------------------------------------------
-
-	:: problems summary ::
-	:::: ERRORS
-	        SERVER ERROR: Bad Gateway url=http://dl.bintray.com/spark-packages/maven/org/apache/apache/18/apache-18.jar
-	
-	        SERVER ERROR: Bad Gateway url=http://dl.bintray.com/spark-packages/maven/org/apache/spark/spark-parent_2.11/2.4.0/spark-parent_2.11-2.4.0.jar
-	
-	        SERVER ERROR: Bad Gateway url=http://dl.bintray.com/spark-packages/maven/org/apache/spark/spark-avro_2.11/2.4.0/spark-avro_2.11-2.4.0-javadoc.jar
-	
-	        SERVER ERROR: Bad Gateway url=http://dl.bintray.com/spark-packages/maven/org/sonatype/oss/oss-parent/9/oss-parent-9.jar
-	
-	
+		
 	:: USE VERBOSE OR DEBUG MESSAGE LEVEL FOR MORE DETAILS
 	:: retrieving :: org.apache.spark#spark-submit-parent-968bf946-67a3-4b8b-a8e9-8ce6d1fbd0a2
 	        confs: [default]
