@@ -59,3 +59,7 @@ numbers[1] + numbers[2] = 9
 	            if target - num in hash:
 	                return [hash[target-num],i]
 	            hash[num] = i
+
+## 代码2 (双指针解法)
+
+ 
