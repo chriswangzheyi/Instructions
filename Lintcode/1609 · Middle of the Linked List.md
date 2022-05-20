@@ -50,3 +50,10 @@ Example 2:
         
         
 
+### 容易错的点
+
+
+
+	while fast.next and fast.next.next
+	
+	
