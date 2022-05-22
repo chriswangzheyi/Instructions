@@ -15,7 +15,7 @@ Example 2:
 	Output: -1
 
 
-##  代码
+##  代码 （二分法）
 
 	from typing import (
 	    List,
