@@ -32,10 +32,8 @@ Example 2:
 	        if not nums:
 	            return -1
 	
-	        left = 0 
-	        right = len(nums) - 1
-	
-		 # 关键步骤：考虑到相同指，取右边的数，则需要left + 1 
+	        left, right = 0 , len(nums)-1
+	         
 	        while left + 1 < right:
 	            mid = left + (right - left) // 2
 	            if nums[mid] > target:
@@ -48,3 +46,8 @@ Example 2:
 	        if nums[left] == target:
 	            return left
 	        return -1
+	        
+关键步骤：
+
+	 left + 1 < right:
+	 考虑是取“Last Position”，因此用+ 1
