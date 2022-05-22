@@ -50,7 +50,7 @@ Explanation:
 
 There is no 6 in the array，return -1.
 
-## 代码
+## 代码 (二分法)
 
 	from typing import (
 	    List,

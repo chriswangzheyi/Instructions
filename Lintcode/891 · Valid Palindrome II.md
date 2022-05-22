@@ -22,7 +22,7 @@ Example 3:
 	Output: false
 	Explanation: Deleting any letter can not make it a palindrome.
 	
-## 代码1
+## 代码 （双指针）
 
 	class Solution:
 	    """
@@ -35,7 +35,6 @@ Example 3:
 	            return False
 	
 	        left, right = self.findDifference(s, 0, len(s)-1)
-	        print(left, right)
 	
 	        if left >= right:
 	            return True

@@ -22,7 +22,7 @@ Output: false
 Explanation: "raceacar"
 
 
-## 代码
+## 代码 （双指针）
 
 	class Solution:
 	    """
