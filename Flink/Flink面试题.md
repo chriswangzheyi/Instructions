@@ -63,3 +63,13 @@ Flink会因为数据堆积和处理速度变慢导致checkpoint超时，而check
 端到端的 exactly-once 对 sink 要求比较高，具体实现主要有幂等写入和 事务性写入两种方式。幂等写入的场景依赖于业务逻辑，更常见的是用事务性写入。 而事务性写入又有​​预写日志（WAL）​​​和​​两阶段提交（2PC）​​两种方式。
 
 如果外部系统不支持事务，那么可以用预写日志的方式，把结果数据先当成状态保存，然后在收到 checkpoint 完成的通知时，一次性写入 sink 系统。
+
+## checkpoint 与 spark 比较
+
+spark streaming 的 checkpoint 仅仅是针对 driver 的故障恢复做了数据和元数据的checkpoint。而 flink 的 checkpoint 机制要复杂了很多，它采用的是轻量级的分布式快照，实现了每个算子的快照，及流动中的数据的快照。
+
+## 三种时间语义
+
+* Event Time：这是实际应用最常见的时间语义，指的是事件创建的时间，往往跟watermark结合使用
+* Processing Time：指每一个执行基于时间操作的算子的本地系统时间，与机器相关。适用场景：没有事件时间的情况下，或者对实时性要求超高的情况
+* Ingestion Time：指数据进入Flink的时间。适用场景：存在多个 Source Operator 的情况下，每个 Source Operator 可以使用自己本地系统时钟指派 Ingestion Time。后续基于时间相关的各种操作， 都会使用数据记录中的 Ingestion Time
