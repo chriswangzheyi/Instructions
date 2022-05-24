@@ -56,3 +56,10 @@ Flink会因为数据堆积和处理速度变慢导致checkpoint超时，而check
 资源调优和算子调优：资源调优即对作业中的 Operator 并发数（Parallelism）、CPU（Core）、堆内存（Heap_memory）等参数进行调优；
 
 作业参数调优：并行度的设置、State 的设置、Checkpoint 的设置。
+
+
+## exactly-once 的保证
+
+端到端的 exactly-once 对 sink 要求比较高，具体实现主要有幂等写入和 事务性写入两种方式。幂等写入的场景依赖于业务逻辑，更常见的是用事务性写入。 而事务性写入又有​​预写日志（WAL）​​​和​​两阶段提交（2PC）​​两种方式。
+
+如果外部系统不支持事务，那么可以用预写日志的方式，把结果数据先当成状态保存，然后在收到 checkpoint 完成的通知时，一次性写入 sink 系统。
