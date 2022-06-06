@@ -44,11 +44,63 @@ ink为CEP提供了专门的Flink CEP library，它包含如下组件：Event Str
 
 ![](Images/38.png)
 
+## 关键配置
+
+##Pattern 组合方式配置
+定义组合配置主要是如下3个方法：
+
+* begin：匹配模版的开始。
+* next：严格匹配，A next B含义为A后必须紧跟着B。
+* followedBy：非严格匹配，不要求非得紧跟着，中间可以穿插其他元素。例如A followedBy B不仅能匹配A B，还能匹配A C B。C未能匹配会被忽略掉。仅仅忽略未被匹配的元素。
+* followedByAny：非严格匹配，比followedBy更加宽松，甚至能忽略掉可被匹配的元素，例如A followedByAny B去匹配A C B1 B2可以匹配到A B1（C被忽略）和A B2（尽管B1符合条件，但是也能被忽略掉，这是followedByAny和followedBy的不同之处）。如果是A followedBy B仅仅能匹配出A B1。
+* notNext：next的否定形式
+* notFollowedBy：followedBy的否定形式，注意notFollowedBy不能用在Pattern的结尾。
+
+### 指定重复次数
+
+* times(n)：n次
+* times(n, m)：n次到m次
+* optional()：带上这个允许出现0次
+* oneOrMore()：1次或多次
+* timesOrMore(n)：n次或多次
+* greedy()：表示尽可能匹配次数多的。例如到来的元素为 A X X B。其中X既满足条件A又满足条件B。对于Pattern A+ B，可以匹配到A X，A X X，X X B，X B和 A X X B。但是对于A (greedy)+ B，Flink会尽可能的多匹配A条件，故只会匹配到A X X B。
+* consecutive()：要求Pattern必须连续。
+* allowCombinations()：和consecutive相反，不要求连续。
+
+### 指定条件
+
+* where()：参数为一个内部类，非常类似于filter算子，可编写自定义条件表达式。
+* subtype()：指定匹配元素的类型。
+
+### 匹配后跳过策略
+
+* NO_SKIP: 不跳过，匹配所有的可能性。
+* SKIP_TO_NEXT: 从匹配成功的事件序列中的第一个事件的下一个事件开始进行下一次匹配。
+* SKIP_PAST_LAST_EVENT: 从匹配成功的事件序列中的最后一个事件的下一个事件开始进行下一次匹配。
+* SKIP_TO_FIRST(patternName): 从匹配成功的事件序列中第一个对应于patternName的事件开始进行下一次匹配。
+* SKIP_TO_LAST(patternName): 从匹配成功的事件序列中最后一个对应于patternName的事件开始进行下一次匹配。
+
+
 
 ## Pattern API
 处理事件的规则，被叫作模式（Pattern）
 
 Flink CEP提供了Pattern API用于对输入流数据进行复杂事件规则定义，用来提取符合规则的事件序列。
+
+## Demo
+编写一个连续10次以上机房测温高于50度的Pattern
+
+	Pattern<Row, Row> pattern = Pattern.<Row>begin("high").where(new SimpleCondition<Row>() {
+	    @Override
+	    public boolean filter(Row row) throws Exception {
+	        int temp = (int) row.getField("temperature");
+	        return temp >= 50;
+	    }
+	}).timesOrMore(10).consecutive();
+
+首先我们调用Pattern的begin方法，标记Pattern的开始，需要为开始的Pattern指定一个名称。一个Pattern可以分为多段，每段都具有自己的名称，在后面捕获匹配数据流的元素时候需要用到。begin方法需要指定泛型，即数据源的数据类型。然后跟随的是一个where条件。where方法接收一个SimpleCondition内部类，对用户数据进行解析和条件判断，符合条件的元素返回true。接下来是指定满足条件的元素的个数，这里使用了timesOrMore(n)，含义为n次或n次以上。我们注意到后面还有一个consecutive，意味着timesOrMore(n)必须是连续的，中间不能够穿插有其他元素。
+
+
 
 ###  ① 个体模式（Individual Patterns）
 
