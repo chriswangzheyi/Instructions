@@ -73,3 +73,31 @@ spark streaming 的 checkpoint 仅仅是针对 driver 的故障恢复做了数�
 * Event Time：这是实际应用最常见的时间语义，指的是事件创建的时间，往往跟watermark结合使用
 * Processing Time：指每一个执行基于时间操作的算子的本地系统时间，与机器相关。适用场景：没有事件时间的情况下，或者对实时性要求超高的情况
 * Ingestion Time：指数据进入Flink的时间。适用场景：存在多个 Source Operator 的情况下，每个 Source Operator 可以使用自己本地系统时钟指派 Ingestion Time。后续基于时间相关的各种操作， 都会使用数据记录中的 Ingestion Time
+
+
+## Flink CEP 编程中当状态没有到达的时候会将数据保存在哪里？
+
+在流式处理中，CEP 当然是要支持 EventTime 的，那么相对应的也要支持数据的迟到现象，也就是 watermark 的处理逻辑。CEP 对未匹配成功的事件序列的处理，和迟到数据是类似的。在 Flink CEP 的处理逻辑中，状态没有满足的和迟到的数据，都会存储在一个 Map 数据结构中，也就是说，如果我们限定判断事件序列的时长为 5 分钟，那么内存中就会存储 5 分钟的数据，这在我看来，也是对内存的极大损伤之一。
+
+## Flink有没有重启策略？说说有哪几种？
+
+* 固定延迟重启策略（Fixed Delay Restart Strategy）
+* 故障率重启策略（Failure Rate Restart Strategy）
+* 没有重启策略（No Restart Strategy）
+* Fallback重启策略（Fallback Restart Strategy）
+
+
+## 说说Flink中的状态存储？
+
+MemoryStateBackend、FsStateBackend、RocksDBStateBackend。
+
+
+## Flink的内存管理是如何做的?
+
+link 并不是将大量对象存在堆上，而是将对象都序列化到一个预分配的内存块上。此外，Flink大量的使用了堆外内存。如果需要处理的数据超出了内存限制，则会将部分数据存储到硬盘上。Flink 为了直接操作二进制数据实现了自己的序列化框架。
+
+理论上Flink的内存管理分为三部分：
+
+* Network Buffers：这个是在TaskManager启动的时候分配的，这是一组用于缓存网络数据的内存，每个块是32K，默认分配2048个，可以通过“taskmanager.network.numberOfBuffers”修改
+* Memory Manage pool：大量的Memory Segment块，用于运行时的算法（Sort/Join/Shuffle等），这部分启动的时候就会分配。下面这段代码，根据配置文件中的各种参数来计算内存的分配方法。（heap or off-heap，这个放到下节谈），内存的分配支持预分配和lazy load，默认懒加载的方式。
+* User Code，这部分是除了Memory Manager之外的内存用于User code和TaskManager本身的数据结构。
