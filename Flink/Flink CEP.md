@@ -6,6 +6,20 @@
 
 一个或多个由简单事件构成的事件流通过一定的规则匹配，然后输出用户想得到的数据，满足规则的复杂事件。Flink-Cep 是flink中的高级library，用于进行复杂事件处理，例如某一类事件连续出现三次就触发告警，可以类比Siddhi、Esper；
 
+## CEP-NFA
+
+Flink 的每个模式包含多个状态，模式匹配的过程就是状态转换的过程，每个状态(state)可以理解成由Pattern构成，为了从当前的状态转换成下一个状态，用户可以在Pattern上指定条件，用于状态的过滤和转换。
+
+实际上Flink CEP 首先需要用户创建定义一个个pattern，然后通过链表将由前后逻辑关系的pattern串在一起，构成模式匹配的逻辑表达。然后需要用户利用NFACompiler，将模式进行分拆，创建出NFA(非确定有限自动机)对象，NFA包含了该次模式匹配的各个状态和状态间转换的表达式。整个示意图就像如下：
+
+![](Images/40.jpeg)
+
+## 三种状态迁移边
+
+* Take: 表示事件匹配成功，将当前状态更新到新状态，并前进到“下一个”状态；
+* Procceed: 当事件来到的时候，当前状态不发生变化，在状态转换图中事件直接“前进”到下一个目标状态；
+* IGNORE: 当事件来到的时候，如果匹配不成功，忽略当前事件，当前状态不发生任何变化。
+
 ## 特征
 
 目标：从有序的简单事件流中发现一些高阶特征
@@ -79,11 +93,19 @@ Flink CEP提供了Pattern API用于对输入流数据进行复杂事件规则定
 
 ### 宽松近邻
 
-允许中间出现不匹配的事件，由.followedBy()指定。例如对于模式“a followedBy b”，事件序列“a,c,b1,b2”匹配为{a,b1}。
+允许中间出现不匹配的事件，由
+
+	.followedBy()
+
+指定。例如对于模式“a followedBy b”，事件序列“a,c,b1,b2”匹配为{a,b1}。
 
 ### 非确定性宽松近邻
 
-进一步放宽条件，之前已经匹配过的事件也可以再次使用，由.followedByAny()指定。例如对于模式“a followedByAny b”，事件序列“a,c,b1,b2”匹配为{ab1}，{a,b2}。	
+进一步放宽条件，之前已经匹配过的事件也可以再次使用，由
+
+	.followedByAny()
+
+指定。例如对于模式“a followedByAny b”，事件序列“a,c,b1,b2”匹配为{ab1}，{a,b2}。	
 
 ### 不希望出现某种近邻关系
 
@@ -97,6 +119,26 @@ Flink CEP提供了Pattern API用于对输入流数据进行复杂事件规则定
 * ③“not”类型的模式不能被optional所修饰；
 * ④可以为模式指定时间约束，用来要求在多长时间内匹配有效。
 
+
+### demo
+
+	val input: DataStream[Event] = ...
+	
+	val pattern = Pattern.begin[Event]("start").where(_.getId == 42)
+	  .next("middle").subtype(classOf[SubEvent]).where(_.getVolume >= 10.0)
+	  .followedBy("end").where(_.getName == "end")
+	
+	val patternStream = CEP.pattern(input, pattern)
+	
+	val result: DataStream[Alert] = patternStream.process(
+	    new PatternProcessFunction[Event, Alert]() {
+	        override def processMatch(
+	              `match`: util.Map[String, util.List[Event]],
+	              ctx: PatternProcessFunction.Context,
+	              out: Collector[Alert]): Unit = {
+	            out.collect(createAlertFrom(pattern))
+	        }
+	    })
 
       
 
@@ -223,3 +265,71 @@ Flink CEP提供了Pattern API用于对输入流数据进行复杂事件规则定
 	        return false
 	      }
 	    })
+
+### 案例三
+
+当相同的card_id在十分钟内，从两个不同的location发生刷卡现象，就会触发报警机制，以便于监测信用卡盗刷等现象。
+
+	CREATE TABLE datahub_stream (
+	    `timestamp`               TIMESTAMP,
+	    card_id                   VARCHAR,
+	    location                  VARCHAR,
+	    `action`                  VARCHAR,
+	    WATERMARK wf FOR `timestamp` AS withOffset(`timestamp`, 1000)
+	) WITH (
+	    type = 'datahub'
+	    ...
+	);
+	CREATE TABLE rds_out (
+	    start_timestamp               TIMESTAMP,
+	    end_timestamp                 TIMESTAMP,
+	    card_id                       VARCHAR,
+	    event                         VARCHAR
+	) WITH (
+	    type= 'rds'
+	    ...
+	);
+	
+	--案例描述
+	-- 当相同的card_id在十分钟内，从两个不同的location发生刷卡现象，就会触发报警机制，以便于监测信用卡盗刷等现象
+	-- 定义计算逻辑
+	insert into rds_out
+	select 
+	`start_timestamp`, 
+	`end_timestamp`, 
+	card_id, `event`
+	from datahub_stream
+	MATCH_RECOGNIZE (
+	    PARTITION BY card_id   -- 按card_id分区，将相同卡号的数据分到同一个计算节点上
+	    ORDER BY `timestamp`   -- 在窗口内，对事件时间进行排序
+	    MEASURES               --定义如何根据匹配成功的输入事件构造输出事件
+	        e2.`action` as `event`,                
+	        e1.`timestamp` as `start_timestamp`,   --第一次的事件事件为start_timestamp
+	        LAST(e2.`timestamp`) as `end_timestamp`--最新的事件事件为end_timestamp
+	    ONE ROW PER MATCH           --匹配成功输出一条
+	    AFTER MATCH SKIP TO NEXT ROW--匹配跳转到下一行后
+	    PATTERN (e1 e2+) WITHIN INTERVAL '10' MINUTE  -- 定义两个事件，e1/e2
+	    DEFINE                     --定义在PATTERN中出现的patternVariable的具体含义
+	        e1 as e1.action = 'Tom',    --事件一的action标记为Tom
+	        e2 as e2.action = 'Tom' and e2.location <> e1.location --事件二的action标记为Tom，且事件一和事件二的location不一致
+	);
+	
+测试数据
+
+	timestamp(TIMESTAMP)card_id(VARCHAR)location(VARCHAR)action(VARCHAR)
+	
+	2018-04-13 12:00:00，1，WW，Tom
+	
+	2018-04-13 12:10:00，1，WW2，Tom
+	
+	2018-04-13 12:10:00，1，WW2Tom
+	
+	2018-04-13 12:20:00，1，WW，Tom
+	
+测试结果
+
+	start_timestamp(TIMESTAMP)end_timestamp(TIMESTAMP)card_id(VARCHAR)event(VARCHAR)
+	
+	2018-04-13 20:00:00.0，2018-04-13 20:05:00.01，Tom
+	
+	2018-04-13 20:05:00.0，2018-04-13 20:10:00.01，Tom
