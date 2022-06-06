@@ -2,6 +2,8 @@
 
 参考：https://zhuanlan.zhihu.com/p/43448829
 
+https://www.jianshu.com/p/a3931e203324
+
 ## 什么是复杂事件CEP？
 
 一个或多个由简单事件构成的事件流通过一定的规则匹配，然后输出用户想得到的数据，满足规则的复杂事件。Flink-Cep 是flink中的高级library，用于进行复杂事件处理，例如某一类事件连续出现三次就触发告警，可以类比Siddhi、Esper；
