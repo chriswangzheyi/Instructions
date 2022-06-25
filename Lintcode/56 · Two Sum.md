@@ -62,6 +62,12 @@ numbers[1] + numbers[2] = 9
 	            
 	        return hash
 
+### 解释
+
+target - num in hash: 表示hash的key
+
+
+
 ## 代码2 (双指针解法)
 
  
