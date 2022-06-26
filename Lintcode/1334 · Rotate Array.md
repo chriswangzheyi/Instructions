@@ -21,3 +21,29 @@ Example 2:
 	rotate 2 steps to the right: [3,99,-1,-100]
 
 
+## 代码
+
+	from typing import (
+	    List,
+	)
+	
+	class Solution:
+	    """
+	    @param nums: an array
+	    @param k: an integer
+	    @return: rotate the array to the right by k steps
+	    """
+	    def rotate(self, nums: List[int], k: int) -> List[int]:
+	        # Write your code here
+	        k %= len(nums)
+	        return nums[-k:] + nums[:-k]
+	        
+## 解释
+举例：
+
+输入: [1,2,3,4,5,6,7], k = 3
+
+* k= 3 （ 3 % 7 取模等于3 ）
+* nums[-k:] =     [5, 6, 7]
+* nums[:-k]. =    [1, 2, 3, 4]
+
