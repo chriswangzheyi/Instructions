@@ -39,3 +39,10 @@ Example 2:
 	                # 弹栈
 	                stack.pop()
 	        return not stack
+	        
+
+## 解释
+
+作为括号左边的元素会放在stack中，右边只要有反括号则对stack做pop操作。如果最后stack为空，则表示有效，如果stack不为空（not stack）则表示无效。
+
+
