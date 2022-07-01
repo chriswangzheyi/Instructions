@@ -8,6 +8,8 @@
 
 ## Copy On Write Table
 
+（写时复制）,快照查询+增量查询
+
 简称COW。顾名思义，他是在数据写入的时候，复制一份原来的拷贝，在其基础上添加新数据。正在读数据的请求，读取的是是近的完整副本，这类似Mysql 的MVCC的思想。
 
 ![](Images/1.png)
@@ -22,6 +24,8 @@
 
 
 ## Merge On Read Table
+
+（读时合并），快照查询+增量查询+读取优化查询（近实时）
 
 简称MOR。新插入的数据存储在delta log 中。定期再将delta log合并进行parquet数据文件。读取数据时，会将delta log跟老的数据文件做merge，得到完整的数据返回。当然，MOR表也可以像COW表一样，忽略delta log，只读取最近的完整数据文件。下图演示了MOR的两种数据读写方式
 
