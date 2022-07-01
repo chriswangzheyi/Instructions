@@ -16,11 +16,16 @@ Client被动被rebalance：Consumer节点heartbeat时间超过session timeout，
 
 ![](Images/24.jpeg)
 
-### 订阅topic数发生变更
+### 订阅topic分区数发生变更
 
 订阅topic的partition数发生变更
 
 ![](Images/25.jpeg)
+
+
+### 订阅topic个数发生变化
+
+
 
 
 ## 线上问题
