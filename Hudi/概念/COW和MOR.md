@@ -1,5 +1,11 @@
 # COW和MOR
 
+## 场景
+
+1）COW适用写少读多的场景 ,MOR 适用写多读少的场景;
+
+2）MOR适合CDC场景，更新延迟要求较低，COW目前不支持 changelog mode 不适合处理cdc场景；
+
 ## Copy On Write Table
 
 简称COW。顾名思义，他是在数据写入的时候，复制一份原来的拷贝，在其基础上添加新数据。正在读数据的请求，读取的是是近的完整副本，这类似Mysql 的MVCC的思想。
