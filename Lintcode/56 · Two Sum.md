@@ -53,21 +53,17 @@ numbers[1] + numbers[2] = 9
 	    """
 	    def two_sum(self, numbers: List[int], target: int) -> List[int]:
 	        # write your code here
-	        hash = {}
+	        dic = {}
 	
-	        for i, num in enumerate(numbers):
-	            if target - num in hash:
-	                return [hash[target-num],i]
-	            hash[num] = i
-	            
-	        return hash
-
-### 解释
-
-target - num in hash: 表示hash的key
+	        for key, value in enumerate(nums):
+	            if target - value in dic:
+	                return [dic[target - value], key]
+	            dic[value] = key
+	
+	        return dic
 
 
 
-## 代码2 (双指针解法)
+
 
  
