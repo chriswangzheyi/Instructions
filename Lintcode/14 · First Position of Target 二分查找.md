@@ -76,3 +76,9 @@ There is no 6 in the array，return -1.
 	                low = mid + 1
 	        if nums[low] == target: return low
 	        return -1
+	        
+## 特别注意的点
+
+	while low <= high:
+	      
+这一行需要确保有“等于”  
