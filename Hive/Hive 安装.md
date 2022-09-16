@@ -93,6 +93,11 @@ Mysql 8.0.20
 		    <name>hive.metastore.schema.verification</name>
 		    <value>false</value>
 		</property>
+		
+		<property>
+		    <name>datanucleus.schema.autoCreateAll</name>
+		    <value>true</value>
+		 </property>		
 	</configuration>
 
 
@@ -119,6 +124,17 @@ cp /root/mysql-connector-java-8.0.18.jar /root/apache-hive-2.3.7-bin/lib
 	mysql -uroot -p
 	
 	create database hive;
+	alter database hive character set latin1;
+	
+## 初始化元数据
+
+	schematool -dbType mysql -initSchema	
+	
+显示下面内容表示成功：
+
+	Initialization script completed
+	schemaTool completed	
+
 
 ## 启动
 
