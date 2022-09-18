@@ -34,6 +34,11 @@ vi /etc/profile
 	scala -version
 
 
+![](Images/41.png)
+
+一定注意这两个版本要匹配，否则会出错
+
+
 ## 设置Spark变量
 
 ### 配置环境变量
@@ -155,3 +160,6 @@ vi /etc/profile
 	http://192.168.195.128:8080
 
 	
+## 错误排查
+
+如果要通过spark查mysql数据库，则需要在spark/jars目录下下放对应的mysql-connector-java
