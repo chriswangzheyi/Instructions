@@ -2,7 +2,12 @@
 
 https://github.com/big-data-europe/docker-spark
 
+
 ## 安装
+
+	docker-compose.yml
+
+插入：
 
 	version: '3'
 	services:
@@ -33,6 +38,9 @@ https://github.com/big-data-europe/docker-spark
 	    environment:
 	      - "SPARK_MASTER=spark://spark-master:7077"
 
+## 启动
+
+	docker-compose up
 	      
 ##  验证
 
