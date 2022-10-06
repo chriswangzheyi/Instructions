@@ -18,7 +18,7 @@ vi /etc/profile
 	#插入
 	export SCALA_HOME=/root/scala-2.13.1
 	export SPARK_HOME=/root/spark-2.4.4-bin-hadoop2.7
-	export PATH=$PATH:$SCALA_HOME/bin:$SPARK_HOME/bin
+	export PATH=$PATH:$SCALA_HOME/bin:$SPARK_HOME/sbin
 
 
 注意：Spark_home后面接sbin
