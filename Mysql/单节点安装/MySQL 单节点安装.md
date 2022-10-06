@@ -7,6 +7,7 @@
 
 	wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm 
 	yum localinstall  mysql80-community-release-el7-3.noarch.rpm
+	sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 	yum install mysql-community-client mysql-community-server
 
 
@@ -63,3 +64,7 @@ ALTER USER USER() IDENTIFIED BY '1qa2ws#ED';
 		  
 	flush privileges;
 	
+### 关闭防火墙
+
+	systemctl stop firewalld.service
+	systemctl disable firewalld.service
