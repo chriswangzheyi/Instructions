@@ -5,7 +5,7 @@ https://github.com/big-data-europe/docker-spark
 
 ## 安装
 
-	docker-compose.yml
+	vim docker-compose.yml
 
 插入：
 
