@@ -251,4 +251,4 @@ Flink有三种数据消费语义：
 * At Least Once 最少一次 发生故障有可能重复
 * Exactly-Once 精确一次 如果产生故障，也能保证数据不丢失不重复。
 
->>>>>>> Stashed changes
+
