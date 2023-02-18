@@ -5,6 +5,30 @@
 outerjoinvertices：
 这个操作会把关联上的定点的属性给重新赋值,所以这样join的话就有点leftjoin的感觉
 
+## 源码
+
+	def outerJoinVertices[U, VD2](other: RDD[(VertexID, U)])
+	      (mapFunc: (VertexID, VD, Option[U]) => VD2)
+	    : Graph[VD2, ED]
+	    
+mapFunc的几种写法：
+
+	1）val inputGraph: Graph[Int, String] =
+	  graph.outerJoinVertices(graph.outDegrees)((vid, _, degOpt) => degOpt.getOrElse(0))
+	
+	2）val degreeGraph = graph.outerJoinVertices(outDegrees) { (id, oldAttr, outDegOpt) =>
+	  outDegOpt match {
+	    case Some(outDeg) => outDeg
+	    case None => 0 // No outDegree means zero outDegree
+	  }
+	}
+	
+	3）val rank_cc = cc.outerJoinVertices(pagerankGraph.vertices) {
+	  case (vid, cc, Some(pr)) => (pr, cc)
+	  case (vid, cc, None) => (0.0, cc)
+	}
+
+
 ## 代码
 
 	package com.wzy
