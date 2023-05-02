@@ -1,5 +1,11 @@
 # 简易Demo
 
+
+## UDF 规则
+
+	spark.udf.register(name, lambda function)
+
+
 ## 代码
 
 
