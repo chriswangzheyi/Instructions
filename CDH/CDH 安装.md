@@ -124,9 +124,9 @@ ALL=(ALL)ALL，XXX为你的用户名
 ### 复制key
 
 	cd ~/.ssh
-	ssh-copy-id 192.168.3.111
-	ssh-copy-id 192.168.3.112
-	ssh-copy-id 192.168.3.113
+	ssh-copy-id cdh1
+	ssh-copy-id cdh2
+	ssh-copy-id cdh3
 	
 ### 关闭防火墙和 SELinux
 
@@ -140,13 +140,13 @@ ALL=(ALL)ALL，XXX为你的用户名
 	(echo "*/5 * * * * /usr/sbin/ntpdate -u cn.pool.ntp.org") | crontab
 	systemctl restart crond
 	
-### 安装 JDK环境
+### 安装 JDK环境 (三台服务器都需要)
 
 ####  卸载自带的openjdk
 
 	rpm -qa | grep openjdk |xargs -I {} rpm -e --nodeps {}
 
-#### 安装oracle-jdk1.8
+#### 安装oracle-jdk1.8 
 
 将jdk安装RPM包上传到服务器上，执行如下命令安装：
 
@@ -154,12 +154,24 @@ ALL=(ALL)ALL，XXX为你的用户名
 	rpm -ivh jdk-8u202-linux-x64.rpm
 
 
+设置配置文件
+
+	vim /etc/profile
+
+	#set java environment
+	JAVA_HOME=/usr/java/jdk1.8.0_192-amd64
+	JRE_HOME=$JAVA_HOME/jre
+	PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+	CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+	export JAVA_HOME JRE_HOME PATH CLASSPATH
+
+
 ### 配置本地的yum仓库
 
 	cat > /etc/yum.repos.d/manager-repos.repo <<EOF
 	[manager-repos]
 	name = Cloudera Manager, Version 6.3.1
-	baseurl = http://192.168.3.111/CM6.3.1/
+	baseurl = http://cdh1/CM6.3.1/
 	enabled = 1
 	gpgcheck = 0
 	EOF
@@ -344,3 +356,12 @@ ALL=(ALL)ALL，XXX为你的用户名
 ![](Images/17.png)
 
 http://192.168.3.111/cmf/home
+
+
+## kudu 设置
+
+	Kudu Master WAL Directory: /kudu_master/fs_wal_dir
+	Kudu Master Data Directories: /kudu_master/fs_data_dirs
+	Kudu Tablet Server WAL Directory: /kudu_tablet/fs_wal_dir
+	Kudu Tablet Server Data Directories: /kudu_tablet/fs_data_dirs
+
