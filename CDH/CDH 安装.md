@@ -365,3 +365,22 @@ http://192.168.3.111/cmf/home
 	Kudu Tablet Server WAL Directory: /kudu_tablet/fs_wal_dir
 	Kudu Tablet Server Data Directories: /kudu_tablet/fs_data_dirs
 
+
+## 设置读写权限
+
+###问题
+
+chmod: changing permissions of '/': Permission denied. user=zheyi is not the owner of inode=/
+
+### 解决方案
+
+在所有节点：
+
+	# 添加supergroup组
+	groupadd supergroup
+	# root用户加入supergroup组
+	usermod -a -G supergroup root
+	# zheyi用户加入supergroup组
+	usermod -a -G supergroup zheyi
+	# 同步系统的权限信息到HDFS
+	sudo -u hdfs hdfs dfsadmin -refreshUserToGroupsMappings
