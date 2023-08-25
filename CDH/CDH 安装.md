@@ -21,12 +21,12 @@
 
 ## 添加用户名
 
-	vim /etc/sudoers
+	vi /etc/sudoers
 
 在root ALL=(ALL)ALL行下添加XXX 
 ALL=(ALL)ALL，XXX为你的用户名
 
-	jumpuser ALL=(ALL) ALL
+	zheyi ALL=(ALL) ALL
 
 ## 搭建本地YUM仓库
 
@@ -40,17 +40,26 @@ ALL=(ALL)ALL，XXX为你的用户名
 ### 放置安装包
 
 	cd /var/www/html
-	mkdir CM6.3.1
-	mkdir CDH6.3.2
-	mkdir JDK1.8
-	mkdir MySQL5.7
-	chmod -R 777 /var/www/html/CM6.3.1
-	chmod -R 777 /var/www/html/CDH6.3.2/
-	chmod -R 777 /var/www/html/JDK1.8
-	chmod -R 777 /var/www/html/MySQL5.7
+	sudo mkdir CM6.3.1
+	sudo mkdir CDH6.3.2
+	sudo mkdir JDK1.8
+	sudo mkdir MySQL5.7
+	sudo chmod -R 777 /var/www/html/CM6.3.1
+	sudo chmod -R 777 /var/www/html/CDH6.3.2/
+	sudo chmod -R 777 /var/www/html/JDK1.8
+	sudo chmod -R 777 /var/www/html/MySQL5.7
+	
+### 上传并复制文件到对应目录
+
+	sudo cp -r CDH安装包/*  /var/www/html/CDH6.3.2/
+	sudo cp -r CM安装包/* /var/www/html/CM6.3.1/
+	sudo cp -r mysql安装包/* /var/www/html/MySQL5.7/
+	sudo cp jdk-8u192-linux-x64.rpm /var/www/html/JDK1.8/
+	
 	
 ###查看是否完成上传
 
+	[root@cdh1 html]# cd /var/www/html
 	[root@cdh1 html]# tree
 	.
 	├── CDH6.3.2
@@ -366,6 +375,16 @@ http://192.168.3.111/cmf/home
 	Kudu Tablet Server Data Directories: /kudu_tablet/fs_data_dirs
 
 
+## Kafka 设置
+
+	Destination Broker List: cdh3:9092
+	Source Broker List:cdh3:9092
+
+增加Topic whitelist
+	
+![](Images/19.png)
+
+
 ## 设置读写权限
 
 ###问题
@@ -384,3 +403,14 @@ chmod: changing permissions of '/': Permission denied. user=zheyi is not the own
 	usermod -a -G supergroup zheyi
 	# 同步系统的权限信息到HDFS
 	sudo -u hdfs hdfs dfsadmin -refreshUserToGroupsMappings
+	
+
+### 如果安装时候出现hash校验失败
+
+	vim /etc/httpd/conf/httpd.conf
+	
+	#修改
+	AddType application/x-gzip .gz .tgz.parcel
+	
+	# 重启服务
+	systemctl restart httpd 
