@@ -22,16 +22,14 @@
 
 
 
-# 代码
-
-
+# 引入依赖
 
 ```python
 import torch 
 from torchvision import datasets
-from torchvision import transforms
-import torch.nn as nn
-import torch.optim as optim
+from torchvision import transforms 
+import torch.nn as nn # 神经网络包
+import torch.optim as optim  # 优化器的包
 ```
 
 # 加载数据
@@ -40,13 +38,13 @@ import torch.optim as optim
 ```python
 train_data = datasets.MNIST(
     root="data/minst",
-    train=True, 
+    train=True, #训练数据
     transform=transforms.ToTensor(), # 将下载的文件转换成pytorch认识的tensor类型，且将图片的数值大小从（0-255）归一化到（0-1）
     download=True)
 
 test_data = datasets.MNIST(
     root="data/minst",
-    train=False, 
+    train=False,  #测试数据
     transform=transforms.ToTensor(),
     download=True)
 ```
@@ -69,7 +67,7 @@ test_loader = torch.utils.data.DataLoader(
 
 
 ```python
-class MLP(nn.Module):
+class MLP(nn.Module): 
     
     #初始化方法
     # input_size输入数据的维度
@@ -102,9 +100,8 @@ class MLP(nn.Module):
         #返回结果
         return out
     
-
 #初始化参数
-input_size = 28 * 28 #输入大小
+input_size = 28 * 28 #输入大小（图片大小）
 hidden_size = 512 #隐藏层大小
 num_classes = 10 #输出大小（类别数）
 
@@ -116,13 +113,16 @@ model = MLP(input_size, hidden_size, num_classes)
 
 
 ```python
-criterion= nn.CrossEntropyLoss() #因为是分类问题，所以采用了交叉熵分类函数
+#因为是分类问题，所以采用了交叉熵分类函数
+#交叉熵误差，cross entropy error，用来评估模型输出的概率分布和真实概率分布的差异情况，一般用于解决分类问题
+criterion= nn.CrossEntropyLoss() 
 ```
 
 # 优化器
 
 
 ```python
+#优化器（optimizer）是一种用于调整神经网络模型参数以最小化损失函数的算法。
 learning_rate = 0.001
 optimizer = optim.Adam(model.parameters(),lr=learning_rate)
 ```
@@ -150,8 +150,6 @@ for epoch in range (num_pochs):
         
         if(i+1) % 100 == 0:
             print(f'Epoch[{epoch+1}/{num_pochs}],Step[{i+1}/{len(train_loader)}], Loss:{loss.item():.4f}')
-            
-            
 ```
 
     Epoch[1/10],Step[100/600], Loss:0.3492
