@@ -32,14 +32,14 @@ output_dim = 1
 
 ```python
 # 定义模型
-model = nn.Linear(input_dim,output_dim)
+model = nn.Linear(input_dim,output_dim) #nn.Linear是全连接层（Fully Connected Layer）或密集层（Dense Layer）
 ```
 
 
 ```python
 # 定义损失函数和优化器
-criterion= nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
+criterion= nn.MSELoss() #nn.MSELoss() 是一个用于计算均方误差
+optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)  #优化器的作用是通过调整模型的参数来最小化训练过程中定义的损失函数
 ```
 
 
