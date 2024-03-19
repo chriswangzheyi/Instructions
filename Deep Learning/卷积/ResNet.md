@@ -6,12 +6,24 @@ ResNet的核心思想是利用残差学习（residual learning），即通过添
 
 
 
+**网络中的亮点：**
+
+- 超深的网络结构（突破1000层）
+- 提出**residual模块（主分支和shortcut分支的输出特征矩阵shape必须相同）**
+- 使用**Batch Normalization**加速训练（丢弃Dropout。**Batch Normalization和Dropout不能同时存在**）
+
+
+
 ![](Images/22.png)
 
 
 
 ![](Images/23.png)
 
+
+$$
+H(x) = F(x) + x
+$$
 
 
 ## ResNet版本
@@ -36,3 +48,6 @@ ResNet的核心思想是利用残差学习（residual learning），即通过添
 ### ResNet 和 Vgg 对比
 
 ![](Images/25.png)
+
+
+
