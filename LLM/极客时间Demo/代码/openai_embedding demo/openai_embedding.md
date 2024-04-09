@@ -542,9 +542,12 @@ plt.title("Amazon ratings visualized in language using t-SNE")
 
 
 
-​    
 ![png](output_26_1.png)
-​    
+    
+
+由上图可以得到评分和正文关系不大。
+
+
 
 ## 用k-means聚类，然后使用t-SNE可视化
 
