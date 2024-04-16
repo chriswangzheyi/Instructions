@@ -1,0 +1,8 @@
+
+
+启动gradio_server.py
+
+
+
+查看本机ip：ipconfig getifaddr en0  并修改192.168.5.122 为本机ip
+填入openaikey
