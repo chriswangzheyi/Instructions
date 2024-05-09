@@ -1,5 +1,9 @@
 #  局部敏感哈希：搜索Embedding最近邻
 
+https://time.geekbang.org/column/article/301739
+
+
+
 ## 背景
 
 在深度学习推荐系统中，我们经常采用 Embedding 召回这一准确又便捷的方法。但是，在面对百万甚至更高量级的候选集时，线性地逐一计算 Embedding 间的相似度，往往会造成极大的服务延迟。这个时候，我们要解决的问题就是，如何快速找到与一个 Embedding 最相似的 Embedding？这直接决定了召回层的执行速度，进而会影响推荐服务器的响应延迟。
@@ -89,34 +93,39 @@ Kd-tree（K-dimension tree）：为空间中的点 / 向量建立一个索引。
 在将电影 Embedding 数据转换成 dense Vector 的形式之后，我们使用 Spark MLlib 自带的 LSH 分桶模型 BucketedRandomProjectionLSH（我们简称 LSH 模型）来进行 LSH 分桶。其中最关键的部分是设定 LSH 模型中的 BucketLength 和 NumHashTables 这两个参数。其中，BucketLength 指的就是分桶公式中的分桶宽度 w，NumHashTables 指的是多桶策略中的分桶次数。
 
 
-	def embeddingLSH(spark:SparkSession, movieEmbMap:Map[String, Array[Float]]): Unit ={
-	  //将电影embedding数据转换成dense Vector的形式，便于之后处理
-	  val movieEmbSeq = movieEmbMap.toSeq.map(item => (item._1, Vectors.dense(item._2.map(f => f.toDouble))))
-	  val movieEmbDF = spark.createDataFrame(movieEmbSeq).toDF("movieId", "emb")
-	
-	
-	  //利用Spark MLlib创建LSH分桶模型
-	  val bucketProjectionLSH = new BucketedRandomProjectionLSH()
-	    .setBucketLength(0.1)
-	    .setNumHashTables(3)
-	    .setInputCol("emb")
-	    .setOutputCol("bucketId")
-	  //训练LSH分桶模型
-	  val bucketModel = bucketProjectionLSH.fit(movieEmbDF)
-	  //进行分桶
-	  val embBucketResult = bucketModel.transform(movieEmbDF)
-	  
-	  //打印分桶结果
-	  println("movieId, emb, bucketId schema:")
-	  embBucketResult.printSchema()
-	  println("movieId, emb, bucketId data result:")
-	  embBucketResult.show(10, truncate = false)
-	  
-	  //尝试对一个示例Embedding查找最近邻
-	  println("Approximately searching for 5 nearest neighbors of the sample embedding:")
-	  val sampleEmb = Vectors.dense(0.795,0.583,1.120,0.850,0.174,-0.839,-0.0633,0.249,0.673,-0.237)
-	  bucketModel.approxNearestNeighbors(movieEmbDF, sampleEmb, 5).show(truncate = false)
-	}
+```scala
+def embeddingLSH(spark:SparkSession, movieEmbMap:Map[String, Array[Float]]): Unit ={
+  //将电影embedding数据转换成dense Vector的形式，便于之后处理
+  val movieEmbSeq = movieEmbMap.toSeq.map(item => (item._1, Vectors.dense(item._2.map(f => f.toDouble))))
+  val movieEmbDF = spark.createDataFrame(movieEmbSeq).toDF("movieId", "emb")
+
+
+  //利用Spark MLlib创建LSH分桶模型
+  val bucketProjectionLSH = new BucketedRandomProjectionLSH()
+    .setBucketLength(0.1)
+    .setNumHashTables(3)
+    .setInputCol("emb")
+    .setOutputCol("bucketId")
+  //训练LSH分桶模型
+  val bucketModel = bucketProjectionLSH.fit(movieEmbDF)
+  //进行分桶
+  val embBucketResult = bucketModel.transform(movieEmbDF)
+  
+  //打印分桶结果
+  println("movieId, emb, bucketId schema:")
+  embBucketResult.printSchema()
+  println("movieId, emb, bucketId data result:")
+  embBucketResult.show(10, truncate = false)
+  
+  //尝试对一个示例Embedding查找最近邻
+  println("Approximately searching for 5 nearest neighbors of the sample embedding:")
+  val sampleEmb = Vectors.dense(0.795,0.583,1.120,0.850,0.174,-0.839,-0.0633,0.249,0.673,-0.237)
+  bucketModel.approxNearestNeighbors(movieEmbDF, sampleEmb, 5).show(truncate = false)
+}
+
+```
+
+
 
 
 ### 打印结果
