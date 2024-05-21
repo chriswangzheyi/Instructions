@@ -33,46 +33,55 @@
 
 
 	package com.wzy
-	
-	
-	import java.time.Duration
-	
-	import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
-	import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-	import org.apache.flink.api.scala._
-	
-	
-	case class  SensorReading(id:String,timestamp:Long,temperature:Double)
-	
-	object WaterMarkTest {
-	
-	  def main(args: Array[String]): Unit = {
-	
-	
-	    val env = StreamExecutionEnvironment.getExecutionEnvironment
-	
-	    //从文件中读取
-	    /*val inputPath ="/Users/zheyiwang/IdeaProjects/flink_demo/src/main/scala/com/wzy/sensorReading.txt";
-	    val stream =env.readTextFile(inputPath)*/
-	
-	    val stream = env.socketTextStream("localhost",1234)
-	
-	    val dataStream = stream.map( data =>{
-	      val arr = data.split(",")
-	      SensorReading(arr(0),arr(1).toLong,arr(2).toDouble)
-	      })
-	      .assignTimestampsAndWatermarks(WatermarkStrategy
-	        .forBoundedOutOfOrderness[SensorReading](Duration.ofSeconds(3)).withTimestampAssigner(
-	        new SerializableTimestampAssigner[SensorReading]{
-	          override def extractTimestamp(t: SensorReading, recordTimestamp: Long): Long = t.timestamp
-	        }
-	      )
-	      )
-	      .print()
-	
-	    dataStream.setParallelism(1)
-	
-	    env.execute("watermark test")
-	  }
-	
-	}
+
+
+​	
+```scala
+import java.time.Duration
+
+import org.apache.flink.api.common.eventtime.{SerializableTimestampAssigner, WatermarkStrategy}
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
+import org.apache.flink.api.scala._
+```
+
+
+​	
+```scala
+case class  SensorReading(id:String,timestamp:Long,temperature:Double)
+
+object WaterMarkTest {
+
+  def main(args: Array[String]): Unit = {
+```
+
+
+​	
+```scala
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    //从文件中读取
+    /*val inputPath ="/Users/zheyiwang/IdeaProjects/flink_demo/src/main/scala/com/wzy/sensorReading.txt";
+    val stream =env.readTextFile(inputPath)*/
+
+    val stream = env.socketTextStream("localhost",1234)
+
+    val dataStream = stream.map( data =>{
+      val arr = data.split(",")
+      SensorReading(arr(0),arr(1).toLong,arr(2).toDouble)
+      })
+      .assignTimestampsAndWatermarks(WatermarkStrategy
+        .forBoundedOutOfOrderness[SensorReading](Duration.ofSeconds(3)).withTimestampAssigner(
+        new SerializableTimestampAssigner[SensorReading]{
+          override def extractTimestamp(t: SensorReading, recordTimestamp: Long): Long = t.timestamp
+        }
+      )
+      )
+      .print()
+
+    dataStream.setParallelism(1)
+
+    env.execute("watermark test")
+  }
+
+}
+```
