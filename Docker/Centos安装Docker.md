@@ -1,5 +1,9 @@
 # Centos 安装 Docker
 
+
+
+
+
 ## 步骤
 
 	#更新yum包
@@ -17,11 +21,17 @@
 	#查看所有仓库中所有docker版本，并选择特定版本安装（直接安装的话，这里不要）
 	yum list docker-ce --showduplicates | sort -r
 	
-	#安装Docker，命令：yum install docker-ce-版本号,这里我选择了18.06.3.ce-3.el7（直接安装的话，这里不要）
+	#安装Docker，
+	
+	命令：
+	yum install docker-ce-版本号,这里我选择了18.06.3.ce-3.el7（直接安装的话，这里不要）
 	yum install docker-ce-18.06.3.ce-3.el7
 	
-	#启动Docker，命令：systemctl start docker，然后加入开机启动
-	systemctl start docker
+	#启动Docker，
+	命令：
+	systemctl start docker，
+	
+	然后加入开机启动
 	systemctl enable docker
 	
 	#验证是否安装成功
