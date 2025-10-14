@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "运行 LSTM 情感分析",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/sentiment_analysis_lstm.py",
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "env": {
+                "USE_SAMPLE_DATA": "1"
+            },
+            "justMyCode": true
+        }
+    ]
+}
+
