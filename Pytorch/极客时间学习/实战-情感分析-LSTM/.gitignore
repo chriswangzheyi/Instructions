@@ -1,0 +1,28 @@
+# 数据文件
+data/
+*.pt
+*.pth
+
+# 虚拟环境
+venv/
+env/
+.venv/
+
+# Python缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
