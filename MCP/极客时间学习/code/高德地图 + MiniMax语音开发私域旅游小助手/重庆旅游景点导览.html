@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆旅游景点导览</title>
+    
+    <!-- 外部资源引用 -->
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js" defer></script>
+    
+    <style>
+        /* 自定义样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .card-modern {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .audio-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+        
+        .audio-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .expand-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .expand-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+        
+        .rating-stars {
+            color: #ffd700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .category-badge.history {
+            background: linear-gradient(135deg, #feca57, #ff9ff3);
+            box-shadow: 0 4px 15px rgba(254, 202, 87, 0.3);
+        }
+        
+        .category-badge.nature {
+            background: linear-gradient(135deg, #48cae4, #023e8a);
+            box-shadow: 0 4px 15px rgba(72, 202, 228, 0.3);
+        }
+        
+        .category-badge.experience {
+            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+            box-shadow: 0 4px 15px rgba(168, 230, 207, 0.3);
+        }
+        
+        .category-badge.red {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            box-shadow: 0 4px 15px rgba(255, 118, 117, 0.3);
+        }
+        
+        .category-badge.heritage {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            box-shadow: 0 4px 15px rgba(253, 203, 110, 0.3);
+        }
+        
+        .expand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .expand-content.expanded {
+            max-height: 2000px;
+        }
+        
+        .info-item {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin: 4px;
+            display: inline-block;
+            font-size: 0.875rem;
+            color: #4a5568;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .info-item i {
+            color: #667eea;
+            margin-right: 6px;
+        }
+        
+        .attraction-title {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .floating-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .floating-action:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <div class="hero-gradient text-white py-12 px-4 relative">
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">
+                🌆 重庆旅游景点导览
+            </h1>
+            <p class="text-xl md:text-2xl opacity-90 mb-8 fade-in">
+                山城重庆，一座充满魔幻色彩的城市
+            </p>
+            <div class="glass-effect rounded-2xl p-6 max-w-2xl mx-auto fade-in">
+                <p class="text-lg opacity-95">
+                    这里有8D立体交通，有璀璨的夜景，有麻辣的火锅，更有深厚的历史文化底蕴
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <div class="max-w-6xl mx-auto px-4 py-12" x-data="tourGuideApp()">
+        <!-- 景点分类概览 -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 section-title">📍 景点分类概览</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="category-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">🏙️</div>
+                    <div class="font-semibold text-gray-700 text-sm">网红打卡</div>
+                    <div class="text-xs text-gray-500 mt-1">现代都市风情</div>
+                </div>
+                <div class="category-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">🏛️</div>
+                    <div class="font-semibold text-gray-700 text-sm">历史文化</div>
+                    <div class="text-xs text-gray-500 mt-1">千年古韵传承</div>
+                </div>
+                <div class="category-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">🌄</div>
+                    <div class="font-semibold text-gray-700 text-sm">自然风光</div>
+                    <div class="text-xs text-gray-500 mt-1">山水奇观</div>
+                </div>
+                <div class="category-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">🔴</div>
+                    <div class="font-semibold text-gray-700 text-sm">红色旅游</div>
+                    <div class="text-xs text-gray-500 mt-1">革命历史教育</div>
+                </div>
+                <div class="category-card rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">🌉</div>
+                    <div class="font-semibold text-gray-700 text-sm">特色体验</div>
+                    <div class="text-xs text-gray-500 mt-1">独特山城体验</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 景点列表 -->
+        <div class="space-y-8">
+            <!-- 网红打卡景点 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge text-white px-4 py-2 rounded-full text-sm mr-4">网红打卡</span>
+                    <span class="text-gray-600">现代都市风情</span>
+                </h2>
+                
+                <!-- 洪崖洞 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">洪崖洞民俗风貌区</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.8分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('hongyadong')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'hongyadong' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'hongyadong' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('hongyadong')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'hongyadong' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'hongyadong' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>渝中区嘉陵江滨江路88号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>免费</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>09:00-23:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-subway"></i>
+                                <span>小什字地铁站9号口</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'hongyadong'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            洪崖洞是重庆最著名的网红景点，被誉为"现实版的千与千寻"！这座依山而建的吊脚楼群，夜晚灯火通明，仿佛宫崎骏动画中的场景。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>夜景璀璨，重庆夜景最佳代表</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>独特吊脚楼建筑风格</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>美食天堂，特色小吃丰富</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>最佳拍照时间：晚上7-9点</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议从11楼往下逛</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>节假日建议错峰出行</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 解放碑 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">解放碑步行街</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.7分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('jiefangbei')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'jiefangbei' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'jiefangbei' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('jiefangbei')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'jiefangbei' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'jiefangbei' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>渝中区民族路177号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>免费</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24小时营业</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-subway"></i>
+                                <span>较场口地铁站</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'jiefangbei'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            解放碑是重庆的地标性建筑，也是重庆最繁华的商业中心。这座高27.5米的纪念碑，见证了重庆的解放历史。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>历史地标，承载重庆记忆</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>购物天堂，国际品牌云集</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>美食聚集，八一路好吃街</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议晚上来，夜景更美</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以顺便逛逛八一路好吃街</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>节假日有各种活动表演</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 李子坝 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">李子坝单轨穿楼观景平台</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.6分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('liziba')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'liziba' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'liziba' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('liziba')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'liziba' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'liziba' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>渝中区李子坝正街62号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>免费</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>全天开放</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-subway"></i>
+                                <span>李子坝地铁站1号口</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'liziba'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            李子坝轻轨穿楼是重庆最独特的景观之一！轻轨2号线从19楼的居民楼中间穿过，这种"楼中穿行"的奇观在全世界都极为罕见。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>世界奇观，全球独一无二</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>拍照圣地，各种角度震撼</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>完美展现重庆立体交通</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>轻轨每2-3分钟一班</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议下午光线好的时候拍照</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以体验乘坐轻轨穿楼</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史文化景点 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge history text-white px-4 py-2 rounded-full text-sm mr-4">历史文化</span>
+                    <span class="text-gray-600">千年古韵传承</span>
+                </h2>
+                
+                <!-- 磁器口古镇 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">磁器口古镇</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.8分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('ciqikou')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'ciqikou' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'ciqikou' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('ciqikou')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'ciqikou' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'ciqikou' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>沙坪坝区磁南街1号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>免费</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24小时营业</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-subway"></i>
+                                <span>磁器口地铁站</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'ciqikou'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            磁器口古镇有着千年历史，是重庆保存最完好的古镇之一。这里曾是嘉陵江边重要的水陆码头，商贾云集，繁华一时。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>千年古镇，保存完好的明清建筑</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>巴渝文化，传统民俗体验</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>特色美食，陈麻花、毛血旺等</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议上午来，人相对较少</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以购买传统手工艺品</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>古镇内有很多小巷值得探索</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 自然风光景点 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge nature text-white px-4 py-2 rounded-full text-sm mr-4">自然风光</span>
+                    <span class="text-gray-600">山水奇观</span>
+                </h2>
+                
+                <!-- 武隆天生三桥 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">重庆武隆天生三桥风景区</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.8分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('wulong')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'wulong' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'wulong' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('wulong')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'wulong' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'wulong' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>武隆区仙女山街道</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>135元</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>08:00-17:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-car"></i>
+                                <span>建议自驾或跟团</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'wulong'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            武隆天生三桥是世界自然遗产，也是世界上最高、最大的天生桥群。三座巨大的天然石拱桥横跨峡谷，形成壮观的"三桥夹两坑"景观。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>世界遗产，地质奇观</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>天生三桥，三座巨大石拱桥</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>电影取景地，多部大片拍摄地</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>距离市区较远，建议安排一天</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>景区内需要步行较多</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以乘坐景区内的观光车</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特色体验景点 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge experience text-white px-4 py-2 rounded-full text-sm mr-4">特色体验</span>
+                    <span class="text-gray-600">独特山城体验</span>
+                </h2>
+                
+                <!-- 长江索道 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">重庆长江索道</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.5分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('suodao')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'suodao' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'suodao' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('suodao')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'suodao' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'suodao' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>渝中区新华路151号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>单程20元</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>08:00-22:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-subway"></i>
+                                <span>小什字地铁站5B口</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'suodao'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            长江索道被誉为"空中公交车"，是重庆独特的交通工具，也是游客体验山城魅力的必游项目。索道横跨长江，连接渝中区和南岸区。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>空中体验，独特的交通方式</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>江景视野，俯瞰长江两岸</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>山城特色，体验立体交通</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议选择人少的时间段</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以购买往返票体验不同风景</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>索道车厢较小，注意安全</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 红色旅游景点 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge red text-white px-4 py-2 rounded-full text-sm mr-4">红色旅游</span>
+                    <span class="text-gray-600">革命历史教育</span>
+                </h2>
+                
+                <!-- 白公馆 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">白公馆旧址</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.6分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('baigongguan')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'baigongguan' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'baigongguan' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('baigongguan')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'baigongguan' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'baigongguan' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>沙坪坝区童家桥街道</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>免费</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>09:00-17:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-car"></i>
+                                <span>建议自驾或打车</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'baigongguan'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            白公馆原是四川军阀白驹的别墅，后被国民党特务机关用作秘密监狱，关押过许多革命志士。这里见证了重庆的红色历史。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>红色历史，了解革命历史</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>革命教育，爱国主义教育</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>历史建筑，保存完好的建筑</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议跟团或请导游讲解</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>可以结合其他红色景点游览</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>注意保持庄重的参观态度</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 世界文化遗产 -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="category-badge heritage text-white px-4 py-2 rounded-full text-sm mr-4">世界遗产</span>
+                    <span class="text-gray-600">人类文明瑰宝</span>
+                </h2>
+                
+                <!-- 大足石刻 -->
+                <div class="card-modern rounded-2xl mb-6 fade-in">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold attraction-title mb-2">大足石刻名胜风景区</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="rating-stars mr-3 text-lg">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-lg font-semibold text-gray-700">4.8分</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <button @click="toggleAudio('dazu')" 
+                                        class="audio-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="currentAudio === 'dazu' && !isPaused ? 'fas fa-pause' : 'fas fa-play'" class="mr-2"></i>
+                                    <span x-text="currentAudio === 'dazu' && !isPaused ? '暂停播放' : '播放语音'"></span>
+                                </button>
+                                <button @click="toggleContent('dazu')" 
+                                        class="expand-btn text-white px-6 py-3 rounded-xl flex items-center justify-center font-semibold">
+                                    <i :class="expandedContent === 'dazu' ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="mr-2"></i>
+                                    <span x-text="expandedContent === 'dazu' ? '收起详情' : '查看详情'"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>大足区龙岗镇北山路7号</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>115元</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span>08:30-18:00</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-car"></i>
+                                <span>建议自驾或跟团</span>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-content" :class="{'expanded': expandedContent === 'dazu'}">
+                            <div class="pt-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                            景点特色
+                                        </h4>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            大足石刻是世界文化遗产，始建于唐代，是中国石窟艺术的杰出代表。石刻内容丰富，技艺精湛，反映了唐宋时期的宗教信仰和社会生活。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-heart text-red-500 mr-2"></i>
+                                            游玩亮点
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>世界遗产，艺术价值极高</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>石刻艺术，精美的佛教石刻</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                                <span>历史价值，承载重要文化价值</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                            游玩贴士
+                                        </h4>
+                                        <ul class="text-gray-700 space-y-2">
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>距离市区较远，建议安排一天</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>建议请导游讲解历史背景</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+                                                <span>注意保护文物，不要触摸石刻</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游建议 -->
+        <div class="mt-16 card-modern rounded-2xl p-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 section-title">🎯 旅游建议与贴士</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 mb-4">
+                        <i class="fas fa-calendar-alt text-white text-3xl mb-3"></i>
+                        <h3 class="text-lg font-semibold text-white">最佳旅游时间</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2 text-sm">
+                        <li><strong>春季（3-5月）</strong>: 气候宜人</li>
+                        <li><strong>秋季（9-11月）</strong>: 最佳季节</li>
+                        <li><strong>夏季（6-8月）</strong>: 体验火炉特色</li>
+                        <li><strong>冬季（12-2月）</strong>: 火锅文化</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-6 mb-4">
+                        <i class="fas fa-subway text-white text-3xl mb-3"></i>
+                        <h3 class="text-lg font-semibold text-white">交通建议</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2 text-sm">
+                        <li><strong>地铁</strong>: 市内主要交通工具</li>
+                        <li><strong>轻轨</strong>: 体验立体交通</li>
+                        <li><strong>出租车</strong>: 价格合理</li>
+                        <li><strong>自驾</strong>: 适合远郊景点</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-2xl p-6 mb-4">
+                        <i class="fas fa-utensils text-white text-3xl mb-3"></i>
+                        <h3 class="text-lg font-semibold text-white">美食推荐</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2 text-sm">
+                        <li><strong>火锅</strong>: 必尝美食</li>
+                        <li><strong>小面</strong>: 当地特色</li>
+                        <li><strong>酸辣粉</strong>: 特色小吃</li>
+                        <li><strong>毛血旺</strong>: 传统菜品</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl p-6 mb-4">
+                        <i class="fas fa-dollar-sign text-white text-3xl mb-3"></i>
+                        <h3 class="text-lg font-semibold text-white">预算参考</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2 text-sm">
+                        <li><strong>经济型</strong>: 200-400元/天</li>
+                        <li><strong>舒适型</strong>: 400-800元/天</li>
+                        <li><strong>豪华型</strong>: 800元以上/天</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面底部 -->
+        <div class="mt-12 text-center text-gray-600">
+            <div class="glass-effect rounded-2xl p-6 max-w-4xl mx-auto">
+                <p class="text-sm mb-2">📝 本文档基于高德地图API数据和百度百科信息整理，具体信息请以实际情况为准。</p>
+                <p class="text-xs">🎨 制作时间：2024年 | 📍 数据来源：高德地图API、百度百科 | 🎧 语音技术支持：MiniMax AI语音合成</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动操作按钮 -->
+    <button class="floating-action pulse-animation" @click="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- 音频元素 -->
+    <audio id="audioPlayer" preload="none"></audio>
+
+    <script>
+        function tourGuideApp() {
+            return {
+                // 状态管理
+                currentAudio: null,
+                isPaused: false,
+                expandedContent: null,
+                
+                // 音频URL映射
+                audioUrls: {
+                    'hongyadong': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542accfd5d9bf8a08c3f1da61938f03.mp3?Expires=1760873297&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=JmLNS%2FUCbkkA22sMTmZe6iyifm4%3D',
+                    'jiefangbei': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acd2978348c234717d067fba61ca.mp3?Expires=1760873300&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=fl%2FIg4OWu8W3P0oFUwc0%2FN6lJi0%3D',
+                    'liziba': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acdb11f8a1634864472aad1d8063.mp3?Expires=1760873309&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=AQjdPXN%2FQD3eXvUfEkV6ExcSKDo%3D',
+                    'ciqikou': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acd57b1cb345c667815317afbf32.mp3?Expires=1760873304&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=S1%2BSs0xSj2%2FwoWWf6RECPhCgylw%3D',
+                    'wulong': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542ace2028971612704c495c887fcb9.mp3?Expires=1760873316&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=sNAC7jk%2Bgud3Guo4LvJpnlx2EnE%3D',
+                    'suodao': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acdf795500f2a82143206587b8e9.mp3?Expires=1760873313&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=VqoRZNmpxBy03FY8eofzNPdMDMY%3D',
+                    'baigongguan': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acf748f0f6448b832dd971c09176.mp3?Expires=1760873337&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=IdvH3rHJuK%2BSYz3Xvj4SH59NS0g%3D',
+                    'dazu': 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F0542acedf5d22d7de7c895efe9ac5472.mp3?Expires=1760873327&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=7AO%2F2Doh0v0FbfvFVnFjfEm9EsU%3D'
+                },
+                
+                // 初始化
+                init() {
+                    this.setupAudioPlayer();
+                },
+                
+                // 设置音频播放器
+                setupAudioPlayer() {
+                    this.audioPlayer = document.getElementById('audioPlayer');
+                    
+                    // 监听音频播放结束
+                    this.audioPlayer.addEventListener('ended', () => {
+                        this.currentAudio = null;
+                        this.isPaused = false;
+                    });
+                    
+                    // 监听音频暂停
+                    this.audioPlayer.addEventListener('pause', () => {
+                        this.isPaused = true;
+                    });
+                    
+                    // 监听音频播放
+                    this.audioPlayer.addEventListener('play', () => {
+                        this.isPaused = false;
+                    });
+                },
+                
+                // 切换音频播放
+                toggleAudio(audioId) {
+                    const audioUrl = this.audioUrls[audioId];
+                    
+                    if (!audioUrl) {
+                        console.error('音频URL不存在:', audioId);
+                        return;
+                    }
+                    
+                    // 如果当前正在播放同一个音频
+                    if (this.currentAudio === audioId && !this.isPaused) {
+                        this.audioPlayer.pause();
+                        return;
+                    }
+                    
+                    // 如果当前正在播放同一个音频且已暂停
+                    if (this.currentAudio === audioId && this.isPaused) {
+                        this.audioPlayer.play();
+                        return;
+                    }
+                    
+                    // 播放新的音频
+                    this.currentAudio = audioId;
+                    this.audioPlayer.src = audioUrl;
+                    this.audioPlayer.play();
+                },
+                
+                // 切换内容展开/收缩
+                toggleContent(contentId) {
+                    if (this.expandedContent === contentId) {
+                        this.expandedContent = null;
+                    } else {
+                        this.expandedContent = contentId;
+                    }
+                },
+                
+                // 滚动到顶部
+                scrollToTop() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
