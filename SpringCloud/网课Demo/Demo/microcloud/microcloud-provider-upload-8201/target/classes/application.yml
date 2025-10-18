@@ -1,0 +1,29 @@
+server:
+  port: 8201
+spring: 
+  http:
+    multipart:
+      enabled: true   # 启用http上传处理
+      max-file-size: 100MB # 设置单个文件的最大长度
+      max-request-size: 100MB # 设置最大的请求文件的大小
+      file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
+      location: /  # 上传的临时目录
+  application: 
+    name: microcloud-provider-upload
+
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://edmin:mldnjava@eureka-7001.com:7001/eureka,http://edmin:mldnjava@eureka-7002.com:7002/eureka,http://edmin:mldnjava@eureka-7003.com:7003/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+    instance-id: dept-8001.com  # 在信息列表时显示主机名称
+    prefer-ip-address: true     # 访问的路径变为IP地址
+
+info:
+  app.name: mldn-microcloud
+  company.name: www.mldn.cn
+  build.artifactId: microcloud-provider-upload-8201
+  build.version: $project.verson$
+

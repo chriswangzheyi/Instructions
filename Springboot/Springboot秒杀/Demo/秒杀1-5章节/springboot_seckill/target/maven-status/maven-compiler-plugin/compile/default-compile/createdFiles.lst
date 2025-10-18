@@ -1,0 +1,14 @@
+com\wzy\springboot_seckill\entity\GoodsParam.class
+com\wzy\springboot_seckill\scheduler\StaticTask.class
+com\wzy\springboot_seckill\entity\GoodsDetail.class
+com\wzy\springboot_seckill\entity\GoodsCover.class
+com\wzy\springboot_seckill\dao\EvaluateDAO.class
+com\wzy\springboot_seckill\dao\GoodsDetailDAO.class
+com\wzy\springboot_seckill\service\GoodsService.class
+com\wzy\springboot_seckill\dao\GoodsCoverDAO.class
+com\wzy\springboot_seckill\SpringbootSeckillApplication.class
+com\wzy\springboot_seckill\entity\Evaluate.class
+com\wzy\springboot_seckill\controller\GoodsController.class
+com\wzy\springboot_seckill\dao\GoodsDAO.class
+com\wzy\springboot_seckill\dao\GoodsParamDAO.class
+com\wzy\springboot_seckill\entity\Goods.class

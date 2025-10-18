@@ -1,0 +1,10 @@
+server:
+  port: 7101
+spring: 
+  application:
+    name: microcloud-config
+  cloud:  # 进行SpringCloud的相关配置
+    config: # 进行SpringCloudConfig的相关配置
+      server: # 设置服务的连接地址
+        git:  # 本次使用的是GIT作为仓库的管理，所以需要设置GIT的连接地址
+          uri: https://github.com/chriswangzheyi/microconfig.git
