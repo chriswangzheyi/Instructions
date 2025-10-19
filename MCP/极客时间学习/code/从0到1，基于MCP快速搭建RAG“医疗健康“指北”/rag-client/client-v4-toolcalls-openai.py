@@ -18,9 +18,14 @@ class RagClient:
         self.tools = None  # 将在 connect 时从服务器获取
 
     async def connect(self, server_script: str):
-        # 1) 构造参数对象
+        # 1) 构造参数对象 - 动态获取Python路径
+        import os
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(current_dir)
+        python_path = os.path.join(project_root, ".venv", "bin", "python")
+        
         params = StdioServerParameters(
-            command="/opt/homebrew/bin/python3",  # 解释器位置
+            command=python_path,  # 使用动态计算的Python路径
             args=[server_script],
         )
         # 2) 保存上下文管理器

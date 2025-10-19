@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "启动 RAG 服务器",
+            "type": "python",
+            "request": "launch",
+            "program": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-server/server.py","python": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/.venv/bin/python","console": "integratedTerminal",
+            "cwd": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"","env": {
+                "PYTHONPATH": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北""
+            },
+            "envFile": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/.env"
+        },
+        {
+            "name": "启动 RAG 客户端",
+            "type": "python",
+            "request": "launch",
+            "program": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-client/client-v4-toolcalls-openai.py","args": [
+                "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-server/server.py"
+            ],
+            "python": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/.venv/bin/python","console": "integratedTerminal",
+            "cwd": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北"","env": {
+                "PYTHONPATH": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/从0到1，基于MCP快速搭建RAG"医疗健康"指北""
+            },
+            "envFile": "/Users/zheyiwang/Documents/GitHub/Instructions/MCP/极客时间学习/code/.env"
+        }
+    ]
+}

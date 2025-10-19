@@ -1,0 +1,55 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/.venv/bin/python","python.terminal.activateEnvironment": true,
+        "python.envFile": "${workspaceFolder}/.env",
+        "python.analysis.extraPaths": [
+            "${workspaceFolder}"
+        ],
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "basic",
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            ".venv": false
+        },
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.flake8Enabled": true,
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "启动 RAG 服务器",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-server/server.py","python": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/.venv/bin/python","console": "integratedTerminal",
+                "cwd": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"","env": {
+                    "PYTHONPATH": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北""
+                },
+                "envFile": "${workspaceFolder}/.env"
+            },
+            {
+                "name": "启动 RAG 客户端",
+                "type": "python",
+                "request": "launch",
+                "program": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-client/client-v4-toolcalls-openai.py","args": [
+                    "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/rag-server/server.py"],"python": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"/.venv/bin/python","console": "integratedTerminal",
+                    "cwd": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北"","env": {
+                        "PYTHONPATH": "${workspaceFolder}/从0到1，基于MCP快速搭建RAG"医疗健康"指北""
+                    },
+                    "envFile": "${workspaceFolder}/.env"
+                }
+            ]
+        }
+    }
