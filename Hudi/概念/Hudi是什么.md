@@ -60,3 +60,29 @@ Instant重要的Action有以下几个：
 * REQUESTED:表示已经被准备调度执行，但还未启动
 * INFLIGHT:表示正在执行操作
 * COMPLETED:表示在timeline已经完成Action
+
+
+
+
+
+##  Hudi 和 Hive / Delta Lake / Iceberg 区别？
+
+| 对比       | Hudi   | Iceberg  | Delta Lake |
+| ---------- | ------ | -------- | ---------- |
+| 主导公司   | Uber   | Netflix  | Databricks |
+| 实时写入   | 强     | 中       | 强         |
+| 增量能力   | 很强   | 强       | 强         |
+| Flink 支持 | 非常好 | 好       | 一般       |
+| 国内生态   | 最多   | 越来越多 | 较少       |
+
+
+
+## Hudi 表类型有哪些？
+
+| 类型                | 特点                       | 场景     |
+| ------------------- | -------------------------- | -------- |
+| COW (Copy On Write) | 更新时重写文件             | 读多写少 |
+| MOR (Merge On Read) | 更新写 delta log，读时合并 | 写多读多 |
+
+
+
